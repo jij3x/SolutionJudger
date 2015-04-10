@@ -45,13 +45,13 @@ with open("Solution.java", "w") as final_solution:
 # Compile all java classes, and run solution
 #
 subprocess.call(["javac", "Driver.java"])
-with open("{}/{}".format(test_dir, "user.new.in")) as test_data, open("user.out", "w") as result:
+with open("{}/{}".format(test_dir, "user.in")) as test_data, open("user.out", "w") as result:
     subprocess.call(["java", "Driver"], stdin=test_data, stdout=result)
 
 #
 # Print out testing result
 #
 print(test_dir + " - ", end="")
-print("passed" if filecmp.cmp("user.out", "{}/{}".format(test_dir, "user.new.out")) else "failed!!!")
+print("passed" if filecmp.cmp("user.out", "{}/{}".format(test_dir, "user.out")) else "failed!!!")
 
 cleanup_currdir()
