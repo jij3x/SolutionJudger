@@ -1,6 +1,8 @@
 # Generated files
-*.out
-*.in
+*.out/
+*.in/
+Solution.java/
+Driver.java/
 
 # Mac junk
 .DS_Store
