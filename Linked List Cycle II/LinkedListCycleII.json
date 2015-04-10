@@ -1,0 +1,47 @@
+{
+  "input": [
+    {
+      "name": "head",
+      "type": ":sllist<:int>"
+    },
+    {
+      "name": "x",
+      "type": ":int",
+      "transient": "true"
+    }
+  ],
+  "inProcr": [
+    {
+      "actionName": "cyclizeIntSLList",
+      "params": [
+        "input[0]",
+        "input[1]"
+      ],
+      "return": {
+        "type": ":sllist<:int>"
+      }
+    }
+  ],
+  "solution": {
+    "actionName": "detectCycle",
+    "params": [
+      "inProcr[0].return"
+    ],
+    "return": {
+      "type": ":sllist<:int>"
+    }
+  },
+  "outProcr": [
+    {
+      "actionName": "findIntSLListNodeIndex",
+      "params": [
+        "input[0]",
+        "solution.return"
+      ],
+      "return": {
+        "type": ":text"
+      }
+    }
+  ],
+  "output": "outProcr[0].return"
+}
