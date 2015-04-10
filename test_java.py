@@ -4,31 +4,31 @@ import os
 import filecmp
 
 test_dir = sys.argv[1]
-pythoncmd = "python"
+pythoncmd = "python3"
 
 
-def clean_up_currdir():
+def cleanup_currdir():
     for file in os.listdir("."):
-        if file.endswith(".class") or file == "Driver.java" or file == "Solution.java" or file == "user.out":
+        if file.endswith(".class") or file in ("Driver.java", "Solution.java", "user.out"):
             os.remove(file)
 
 
-clean_up_currdir()
+cleanup_currdir()
 
 #
 # Find problem metadata
 #
-json_file = ""
+metadata_fname = ""
 for file in os.listdir(test_dir):
     if file.endswith(".json"):
-        json_file = "{}/{}".format(test_dir, file)
+        metadata_fname = "{}/{}".format(test_dir, file)
         break
 
 #
 # Generate Driver.java
 #
-with open("Driver.java", "w") as driver:
-    subprocess.call([pythoncmd, "gen_java_driver.py", json_file], stdout=driver)
+with open("Driver.java", "w") as driver, open(metadata_fname, "r") as metadata:
+    subprocess.call([pythoncmd, "gen_java_driver.py"], stdin=metadata, stdout=driver)
 
 #
 # Compose Solution.java
@@ -44,7 +44,7 @@ with open("Solution.java", "w") as final_solution:
 #
 # Compile all java classes, and run solution
 #
-subprocess.call(["javac", "*.java"])
+subprocess.call(["javac", "Driver.java"])
 with open("{}/{}".format(test_dir, "user.new.in")) as test_data, open("user.out", "w") as result:
     subprocess.call(["java", "Driver"], stdin=test_data, stdout=result)
 
@@ -54,4 +54,4 @@ with open("{}/{}".format(test_dir, "user.new.in")) as test_data, open("user.out"
 print(test_dir + " - ", end="")
 print("passed" if filecmp.cmp("user.out", "{}/{}".format(test_dir, "user.new.out")) else "failed!!!")
 
-clean_up_currdir()
+cleanup_currdir()

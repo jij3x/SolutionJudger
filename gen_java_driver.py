@@ -24,8 +24,7 @@ ERROR_S_POS = "// error serialization code inject here"
 #
 # Read problem description, and compose metadata
 #
-with open(sys.argv[1]) as metadata_file:
-    metadata = json.load(metadata_file)
+metadata = json.loads(sys.stdin.read())
 
 for i in range(len(metadata[m.INP])):
     metadata[m.INP][i][CODE_NAME] = PARAM_CN.format(str(i))
