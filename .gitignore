@@ -1,3 +1,7 @@
+# Generated files
+*.out
+*.in
+
 # Mac junk
 .DS_Store
 
