@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "words",
+      "type": "+array<:string>"
+    },
+    {
+      "name": "L",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "fullJustify",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": "+vector<:string>"
+    }
+  },
+  "output": "solution.return"
+}

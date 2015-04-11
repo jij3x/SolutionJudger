@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "matrix",
+      "type": "+array<+array<:char>>"
+    }
+  ],
+  "solution": {
+    "actionName": "maximalRectangle",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}
