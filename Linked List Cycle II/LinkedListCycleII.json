@@ -2,7 +2,7 @@
   "input": [
     {
       "name": "head",
-      "type": ":sllist<:int>"
+      "type": "+sllist<:int>"
     },
     {
       "name": "x",
@@ -18,7 +18,7 @@
         "input[1]"
       ],
       "return": {
-        "type": ":sllist<:int>"
+        "type": "+sllist<:int>"
       }
     }
   ],
@@ -28,7 +28,7 @@
       "inProcr[0].return"
     ],
     "return": {
-      "type": ":sllist<:int>"
+      "type": "+sllist<:int>"
     }
   },
   "outProcr": [

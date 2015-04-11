@@ -2,7 +2,7 @@
   "input": [
     {
       "name": "numbers",
-      "type": ":array<:int>"
+      "type": "+array<:int>"
     },
     {
       "name": "target",
@@ -16,7 +16,7 @@
       "input[1]"
     ],
     "return": {
-      "type": ":array<:int>"
+      "type": "+array<:int>"
     }
   },
   "output": "solution.return"

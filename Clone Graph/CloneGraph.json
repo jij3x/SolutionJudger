@@ -2,7 +2,7 @@
   "input": [
     {
       "name": "grahp",
-      "type": ":udgraph<:int>"
+      "type": "+udgraph<:int>"
     }
   ],
   "solution": {
@@ -11,7 +11,7 @@
       "input[0]"
     ],
     "return": {
-      "type": ":udgraph<:int>"
+      "type": "+udgraph<:int>"
     }
   },
   "outProcr": [

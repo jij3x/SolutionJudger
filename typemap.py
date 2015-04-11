@@ -1,12 +1,16 @@
 VOID = ":void"
 INT = ":int"
 TEXT = ":text"
-INT_ARR = ":array<:int>"
-INT_VEC = ":vector<:int>"
-INT_SLLIST = ":sllist<:int>"
-INT_UDGRAPH = ":udgraph<:int>"
-CHAR_ARR = ":array<:char>"
-CHAR_2D_ARR = ":array<:array<:char>>"
+STRING = ":string"
+INT_ARR = "+array<:int>"
+INT_VEC = "+vector<:int>"
+INT_SLLIST = "+sllist<:int>"
+INT_UDGRAPH = "+udgraph<:int>"
+CHAR_ARR = "+array<:char>"
+CHAR_2D_ARR = "+array<+array<:char>>"
+STRING_ARR = "+array<:string>"
+STRING_VEC = "+vector<:string>"
+
 P_JAVA_T = "javaType"
 P_SER = "serializer"
 P_DES = "deserializer"
@@ -24,6 +28,11 @@ type_map = {
         P_JAVA_T: "String",
         P_SER: "serializeText",
         P_DES: "deserializeText"
+    },
+    STRING: {
+        P_JAVA_T: "String",
+        P_SER: "serializeString",
+        P_DES: "deserializeString"
     },
     INT_ARR: {
         P_JAVA_T: "int[]",
@@ -44,6 +53,16 @@ type_map = {
         P_JAVA_T: "char[][]",
         P_SER: "serializeChar2DArray",
         P_DES: "deserializeChar2DArray"
+    },
+    STRING_ARR: {
+        P_JAVA_T: "String[]",
+        P_SER: "serializeStringArray",
+        P_DES: "deserializeStringArray"
+    },
+    STRING_VEC: {
+        P_JAVA_T: "List<String>",
+        P_SER: "serializeStringVector",
+        P_DES: "deserializeStringVector"
     },
     INT_SLLIST: {
         P_JAVA_T: "ListNode",
