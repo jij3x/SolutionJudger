@@ -35,7 +35,7 @@ public class Serializer {
 
         StringBuffer r = new StringBuffer();
         for (String str : vector) {
-            r.append(" \"").append(str).append("\"");
+            r.append(",\"").append(str).append("\"");
         }
         r.setCharAt(0, '[');
         r.append("]");

@@ -9,10 +9,11 @@ for line in lines:
     i = 1
     while i < len(parts) - 1:
         if parts[i] == "0":
+            pass
             print(' ""', end="")
         else:
             i += 1
-            print(' "{}"'.format(parts[i]), end="")
+            print(' "{}"'.format(parts[i].replace('"', '\\"')), end="")
         i += 1
 
     print(" {}".format(parts[len(parts) - 1]))
