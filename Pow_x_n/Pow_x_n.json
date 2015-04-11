@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "x",
+      "type": ":double"
+    },
+    {
+      "name": "n",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "pow",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":double"
+    }
+  },
+  "output": "solution.return"
+}

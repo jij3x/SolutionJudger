@@ -13,6 +13,10 @@ public class Serializer {
         return Integer.toString(n);
     }
 
+    public static String serializeDouble(double n) {
+        return String.format("%.5f", n);
+    }
+
     public static String serializeString(String s) {
         return "\"" + s + "\"";
     }
@@ -148,6 +152,11 @@ public class Serializer {
     public static int deserializeInt(StreamTokenizer tokenizer) throws IOException {
         tokenizer.nextToken();
         return (int) tokenizer.nval;
+    }
+
+    public static double deserializeDouble(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        return tokenizer.nval;
     }
 
     public static String deserializeString(StreamTokenizer tokenizer) throws IOException {

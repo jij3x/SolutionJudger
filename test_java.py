@@ -7,13 +7,13 @@ test_dir = sys.argv[1]
 pythoncmd = "python3"
 
 
-def cleanup_currdir():
+def cleanup_dir():
     for file in os.listdir("."):
         if file.endswith(".class") or file in ("Driver.java", "Solution.java", "user.out"):
             os.remove(file)
 
 
-cleanup_currdir()
+cleanup_dir()
 
 #
 # Find problem metadata
@@ -54,4 +54,4 @@ with open("{}/{}".format(test_dir, "user.in")) as test_data, open("user.out", "w
 print(test_dir + " - ", end="")
 print("passed" if filecmp.cmp("user.out", "{}/{}".format(test_dir, "user.out")) else "failed!!!")
 
-cleanup_currdir()
+cleanup_dir()

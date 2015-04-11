@@ -14,6 +14,7 @@ SOL_RETURN_CN = "_RETURN_"
 IP_RETURN_CN = "_IP_RETURN_{}_"
 OP_RETURN_CN = "_OP_RETURN_{}_"
 PARAM_CN = "_PARAM_{}_"
+
 PARAM_DS_POS = "// param deserialization code inject here"
 INPUT_PROCR_POS = "// input processing code inject here"
 SOLVING_POS = "// solution invoking code inject here"
@@ -49,22 +50,13 @@ if m.OPR in metadata:
 else:
     metadata[m.OPR] = []
 
-#
-# Fetch inputs deserialization code
-#
-param_deser_code = ""
-for arg in metadata[m.INP]:
-    deser = tim[arg[m.TYP]][t.P_DES]
-    rtype = tim[arg[m.TYP]][t.P_JAVA_T]
-    param_deser_code += " " * 12 + "{} {} = Serializer.{}(tokenizer);\n".format(rtype, arg[CODE_NAME], deser)
-
 
 def eval_prop(s):
     prop = re.sub(r"\[\[\"(\w+)\"\]\]", "[\g<1>]", re.sub(r"\.", "", re.sub(r"(\w+)", "[\"\g<1>\"]", s)))
     return eval("metadata" + prop)
 
 
-def gen_invoking_code(fn_ret, fn_name, params, lspc, rt_tmpl, fn_tmpl):
+def gen_solution_invoking_code(fn_ret, fn_name, params, lspc, rt_tmpl, fn_tmpl):
     inputs = ""
     for i, par in enumerate(params):
         inputs += (", " if i > 0 else "") + eval_prop(par)[CODE_NAME]
@@ -72,50 +64,64 @@ def gen_invoking_code(fn_ret, fn_name, params, lspc, rt_tmpl, fn_tmpl):
     return " " * lspc + fn_tmpl.format(return_par, fn_name, inputs)
 
 
-def gen_serlizing_code(out, lspc, fn_tmpl):
-    inputs = eval_prop(out)[CODE_NAME]
-    serializer = tim[eval_prop(out)[m.TYP]][t.P_SER]
+def gen_output_serlizing_code(output, lspc, fn_tmpl):
+    inputs = eval_prop(output)[CODE_NAME]
+    serializer = tim[eval_prop(output)[m.TYP]][t.P_SER]
     return " " * lspc + fn_tmpl.format(serializer, inputs)
+
+
+def gen_input_deserlizing_code(input, lspc, fn_tmpl):
+    deser = tim[input[m.TYP]][t.P_DES]
+    rtype = tim[input[m.TYP]][t.P_JAVA_T]
+    return " " * lspc + fn_tmpl.format(rtype, input[CODE_NAME], deser)
+
+#
+# Fetch inputs deserialization code
+#
+param_deser_code = ""
+for param in metadata[m.INP]:
+    param_deser_code += gen_input_deserlizing_code(param, 12, "{} {} = Serializer.{}(tokenizer);\n")
 
 #
 # Compose the code to process input
 #
 input_proc_code = ""
 for procr in metadata[m.IPR]:
-    input_proc_code += gen_invoking_code(procr[m.RT], procr[m.FN], procr[m.PAR], 12,
-                                         "{} {} = ", "{} Helper.{}({});\n")
+    input_proc_code += gen_solution_invoking_code(procr[m.RT], procr[m.FN], procr[m.PAR], 12,
+                                                  "{} {} = ", "{} Helper.{}({});\n")
 
 #
 # Compose the code to call Solution
 #
-solving_code = gen_invoking_code(metadata[m.SOL][m.RT], metadata[m.SOL][m.FN], metadata[m.SOL][m.PAR], 12,
-                                 "{} {} = ", "{}(new Solution()).{}({});\n")
+solving_code = gen_solution_invoking_code(metadata[m.SOL][m.RT], metadata[m.SOL][m.FN], metadata[m.SOL][m.PAR], 12,
+                                          "{} {} = ", "{}(new Solution()).{}({});\n")
 
 #
 # Compose the code to process output
 #
 output_proc_code = ""
 for procr in metadata[m.OPR]:
-    output_proc_code += gen_invoking_code(procr[m.RT], procr[m.FN], procr[m.PAR], 12,
-                                          "{} {} = ", "{} Helper.{}({});\n")
+    output_proc_code += gen_solution_invoking_code(procr[m.RT], procr[m.FN], procr[m.PAR], 12,
+                                                   "{} {} = ", "{} Helper.{}({});\n")
 
 #
 # Compose the code to serialize the Solution return
 #
-result_ser_code = gen_serlizing_code(metadata[m.OUT], 12, "printWriter.println(Serializer.{}({}));\n")
+result_ser_code = gen_output_serlizing_code(metadata[m.OUT], 12, "printWriter.println(Serializer.{}({}));\n")
 
 #
 # Compose the code to serialize the error, which might be empty
 #
 error_ser_code = ""
 if m.ERR in metadata:
-    error_ser_code = gen_serlizing_code(metadata[m.ERR], 12, "errorWriter.println(Serializer.{}({}));\n")
+    error_ser_code = gen_output_serlizing_code(metadata[m.ERR], 12, "errorWriter.println(Serializer.{}({}));\n")
 
 #
 # Inject the code into Driver template
 #
 with open(DRVTML_FNM) as driver_template:
-    driver_code = re.sub(r"[ \t]*" + re.escape(PARAM_DS_POS) + r".*?\n", param_deser_code, driver_template.read())
+    driver_code = driver_template.read()
+    driver_code = re.sub(r"[ \t]*" + re.escape(PARAM_DS_POS) + r".*?\n", param_deser_code, driver_code)
     driver_code = re.sub(r"[ \t]*" + re.escape(INPUT_PROCR_POS) + r".*?\n", input_proc_code, driver_code)
     driver_code = re.sub(r"[ \t]*" + re.escape(SOLVING_POS) + r".*?\n", solving_code, driver_code)
     driver_code = re.sub(r"[ \t]*" + re.escape(OUTPUT_PROCR_POS) + r".*?\n", output_proc_code, driver_code)
