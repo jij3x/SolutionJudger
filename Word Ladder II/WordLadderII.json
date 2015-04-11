@@ -1,0 +1,36 @@
+{
+  "input": [
+    {
+      "name": "start",
+      "type": ":string"
+    },
+    {
+      "name": "end",
+      "type": ":string"
+    },
+    {
+      "name": "dict",
+      "type": "+set<:string>"
+    }
+  ],
+  "solution": {
+    "actionName": "findLadders",
+    "params": [
+      "input[0]",
+      "input[1]",
+      "input[2]"
+    ],
+    "return": {
+      "type": "+vector<+vector<:string>>"
+    }
+  },
+  "outProcr": [
+    {
+      "actionName": "sortStringVectors",
+      "params": [
+        "solution.return"
+      ]
+    }
+  ],
+  "output": "solution.return"
+}

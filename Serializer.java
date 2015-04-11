@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class Serializer {
     public static String serializeInt(int n) {
@@ -42,6 +43,38 @@ public class Serializer {
             r.append(",\"").append(str).append("\"");
         }
         r.setCharAt(0, '[');
+        r.append("]");
+        return r.toString();
+    }
+
+    public static String serializeString2DVector(List<List<String>> vector) {
+        if (vector == null || vector.size() == 0)
+            return "[]";
+
+        StringBuffer r = new StringBuffer("[");
+        int i = 0;
+        for (List<String> v : vector) {
+            r.append(i++ > 0 ? "," : "").append(serializeStringVector(v));
+        }
+        r.append("]");
+        return r.toString();
+    }
+
+    public static String serializeStringSet(Set<String> set) {
+        if (set.size() == 0)
+            return "[]";
+
+        ArrayList<String> words = new ArrayList<String>();
+        for (String str : set) {
+            words.add(str);
+        }
+        Collections.sort(words);
+
+        StringBuffer r = new StringBuffer("[");
+        int i = 0;
+        for (String word : words) {
+            r.append(i++ > 0 ? ",\"" : "\"").append(word).append("\"");
+        }
         r.append("]");
         return r.toString();
     }
@@ -96,8 +129,7 @@ public class Serializer {
         StringBuffer r = new StringBuffer();
         int i = 0;
         for (List<Integer> v : vector) {
-            r.append(i > 0 ? "," : "").append(serializeIntVector(v));
-            i++;
+            r.append(i++ > 0 ? "," : "").append(serializeIntVector(v));
         }
         r.setCharAt(0, '[');
         r.append("]");
@@ -160,6 +192,7 @@ public class Serializer {
         for (UndirectedGraphNode node : visited)
             nodes.add(node);
         Collections.sort(nodes, new Comparator<UndirectedGraphNode>() {
+            @Override
             public int compare(UndirectedGraphNode o1, UndirectedGraphNode o2) {
                 return o1.label - o2.label;
             }
@@ -204,7 +237,7 @@ public class Serializer {
         return array;
     }
 
-    public static ArrayList<String> deserializeStringVector(StreamTokenizer tokenizer) throws IOException {
+    public static List<String> deserializeStringVector(StreamTokenizer tokenizer) throws IOException {
         tokenizer.nextToken();
         int size = (int) tokenizer.nval;
         ArrayList<String> array = new ArrayList<String>();
@@ -213,6 +246,27 @@ public class Serializer {
             array.add(tokenizer.sval);
         }
         return array;
+    }
+
+    public static List<List<String>> deserializeString2DVector(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        int size = (int) tokenizer.nval;
+        ArrayList<List<String>> array = new ArrayList<List<String>>();
+        for (int i = 0; i < size; i++) {
+            array.add(deserializeStringVector(tokenizer));
+        }
+        return array;
+    }
+
+    public static Set<String> deserializeStringSet(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        int size = (int) tokenizer.nval;
+        HashSet<String> set = new HashSet<String>();
+        for (int i = 0; i < size; i++) {
+            tokenizer.nextToken();
+            set.add(tokenizer.sval);
+        }
+        return set;
     }
 
     public static String deserializeText(StreamTokenizer tokenizer) throws IOException {

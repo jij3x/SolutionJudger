@@ -4,7 +4,7 @@ DOUBLE = ":double"
 TEXT = ":text"
 STRING = ":string"
 INT_ARR = "+array<:int>"
-INT_2DARR = "+array<+array<:int>>"
+INT_2D_ARR = "+array<+array<:int>>"
 INT_VEC = "+vector<:int>"
 INT_SLLIST = "+sllist<:int>"
 INT_UDGRAPH = "+udgraph<:int>"
@@ -12,6 +12,8 @@ CHAR_ARR = "+array<:char>"
 CHAR_2D_ARR = "+array<+array<:char>>"
 STRING_ARR = "+array<:string>"
 STRING_VEC = "+vector<:string>"
+STRING_2D_VEC = "+vector<+vector<:string>>"
+STRING_SET = "+set<:string>"
 
 P_JAVA_T = "javaType"
 P_SER = "serializer"
@@ -46,7 +48,7 @@ type_map = {
         P_SER: "serializeIntArray",
         P_DES: "deserializeIntArray"
     },
-    INT_2DARR: {
+    INT_2D_ARR: {
         P_JAVA_T: "int[][]",
         P_SER: "serializeInt2DArray",
         P_DES: "deserializeInt2DArray"
@@ -75,6 +77,16 @@ type_map = {
         P_JAVA_T: "List<String>",
         P_SER: "serializeStringVector",
         P_DES: "deserializeStringVector"
+    },
+    STRING_2D_VEC: {
+        P_JAVA_T: "List<List<String>>",
+        P_SER: "serializeString2DVector",
+        P_DES: "deserializeString2DVector"
+    },
+    STRING_SET: {
+        P_JAVA_T: "Set<String>",
+        P_SER: "serializeStringSet",
+        P_DES: "deserializeStringSet"
     },
     INT_SLLIST: {
         P_JAVA_T: "ListNode",
