@@ -4,6 +4,7 @@ DOUBLE = ":double"
 TEXT = ":text"
 STRING = ":string"
 INT_ARR = "+array<:int>"
+INT_2DARR = "+array<+array<:int>>"
 INT_VEC = "+vector<:int>"
 INT_SLLIST = "+sllist<:int>"
 INT_UDGRAPH = "+udgraph<:int>"
@@ -45,8 +46,13 @@ type_map = {
         P_SER: "serializeIntArray",
         P_DES: "deserializeIntArray"
     },
+    INT_2DARR: {
+        P_JAVA_T: "int[][]",
+        P_SER: "serializeInt2DArray",
+        P_DES: "deserializeInt2DArray"
+    },
     INT_VEC: {
-        P_JAVA_T: "ArrayList<Integer>",
+        P_JAVA_T: "List<Integer>",
         P_SER: "serializeIntVector",
         P_DES: "deserializeIntVector"
     },

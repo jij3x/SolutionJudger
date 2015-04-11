@@ -63,6 +63,47 @@ public class Serializer {
         return r.toString();
     }
 
+    public static String serializeInt2DArray(int[][] array) {
+        if (array == null || array.length == 0)
+            return "[]";
+
+        StringBuffer r = new StringBuffer("[");
+        r.append(serializeIntArray(array[0]));
+        for (int i = 1; i < array.length; i++) {
+            r.append(",").append(serializeIntArray(array[i]));
+        }
+        r.append("]");
+        return r.toString();
+    }
+
+    public static String serializeIntVector(List<Integer> vector) {
+        if (vector == null || vector.size() == 0)
+            return "[]";
+
+        StringBuffer r = new StringBuffer();
+        for (int n : vector) {
+            r.append(",").append(Integer.toString(n));
+        }
+        r.setCharAt(0, '[');
+        r.append("]");
+        return r.toString();
+    }
+
+    public static String serializeInt2DVector(List<List<Integer>> vector) {
+        if (vector == null || vector.size() == 0)
+            return "[]";
+
+        StringBuffer r = new StringBuffer();
+        int i = 0;
+        for (List<Integer> v : vector) {
+            r.append(i > 0 ? "," : "").append(serializeIntVector(v));
+            i++;
+        }
+        r.setCharAt(0, '[');
+        r.append("]");
+        return r.toString();
+    }
+
     public static String serializeCharArray(char[] array) {
         if (array == null || array.length == 0)
             return "\"\"";
@@ -77,21 +118,9 @@ public class Serializer {
             return "[]";
 
         StringBuffer r = new StringBuffer("[");
-        for (int i = 0; i < array.length; i++)
-            r.append(i > 0 ? "," : "").append(serializeCharArray(array[i]));
-        r.append("]");
-        return r.toString();
-    }
-
-    public static String serializeIntVector(List<Integer> vector) {
-        if (vector == null || vector.size() == 0)
-            return "[]";
-
-        StringBuffer r = new StringBuffer();
-        for (int i : vector) {
-            r.append(",").append(Integer.toString(vector.get(i)));
-        }
-        r.setCharAt(0, '[');
+        r.append(serializeCharArray(array[0]));
+        for (int i = 1; i < array.length; i++)
+            r.append(",").append(serializeCharArray(array[i]));
         r.append("]");
         return r.toString();
     }
@@ -201,6 +230,16 @@ public class Serializer {
         return array;
     }
 
+    public static int[][] deserializeInt2DArray(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        int size = (int) tokenizer.nval;
+        int[][] array = new int[size][];
+        for (int i = 0; i < size; i++) {
+            array[i] = deserializeIntArray(tokenizer);
+        }
+        return array;
+    }
+
     public static List<Integer> deserializeIntVector(StreamTokenizer tokenizer) throws IOException {
         tokenizer.nextToken();
         int size = (int) tokenizer.nval;
@@ -208,6 +247,16 @@ public class Serializer {
         for (int i = 0; i < size; i++) {
             tokenizer.nextToken();
             vector.add((int) tokenizer.nval);
+        }
+        return vector;
+    }
+
+    public static List<List<Integer>> deserializeInt2DVector(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        int size = (int) tokenizer.nval;
+        List<List<Integer>> vector = new ArrayList<List<Integer>>();
+        for (int i = 0; i < size; i++) {
+            vector.add(deserializeIntVector(tokenizer));
         }
         return vector;
     }

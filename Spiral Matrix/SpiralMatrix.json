@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "matrix",
+      "type": "+array<+array<:int>>"
+    }
+  ],
+  "solution": {
+    "actionName": "spiralOrder",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:int>"
+    }
+  },
+  "output": "solution.return"
+}
