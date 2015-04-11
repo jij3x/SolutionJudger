@@ -34,6 +34,26 @@ public class Serializer {
         return r.toString();
     }
 
+    public static String serializeCharArray(char[] array) {
+        if (array == null || array.length == 0)
+            return "\"\"";
+
+        StringBuffer r = new StringBuffer(new String(array));
+        r.insert(0, "\"").append("\"");
+        return r.toString();
+    }
+
+    public static String serializeChar2DArray(char[][] array) {
+        if (array == null || array.length == 0)
+            return "[]";
+
+        StringBuffer r = new StringBuffer("[");
+        for (int i = 0; i < array.length; i++)
+            r.append(i > 0 ? "," : "").append(serializeCharArray(array[i]));
+        r.append("]");
+        return r.toString();
+    }
+
     public static String serializeIntVector(ArrayList<Integer> vector) {
         if (vector == null || vector.size() == 0)
             return "[]";
@@ -137,6 +157,22 @@ public class Serializer {
             vector.add((int) tokenizer.nval);
         }
         return vector;
+    }
+
+    public static char[] deserializeCharArray(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        return tokenizer.sval.toCharArray();
+    }
+
+    public static char[][] deserializeChar2DArray(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        int size = (int) tokenizer.nval;
+
+        char[][] arr = new char[size][];
+        for (int i = 0; i < size; i++) {
+            arr[i] = deserializeCharArray(tokenizer);
+        }
+        return arr;
     }
 
     public static ListNode deserializeIntSLList(StreamTokenizer tokenizer) throws IOException {
