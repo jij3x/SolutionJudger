@@ -1,13 +1,14 @@
 import sys
 import json
 import re
+import os
 
 import intfdesc as m
 import typemap as t
 
 tim = t.type_map
 
-DRVTML_FNM = "java.driver.template"
+DRVTML_FNM = os.path.join(os.path.dirname(os.path.realpath(__file__)), "java.driver.template")
 
 CODE_NAME = "codeName"
 SOL_RETURN_CN = "_RETURN_"
