@@ -5,6 +5,7 @@
 
 <dir>  Test the problem inside provided directory
 -all   Test all problems in all problem directories
+-quick Use existing compiled class, instead of starting from scratch.
 -debug Leave Driver, and, Solution.
 """
 
@@ -99,6 +100,10 @@ if "-s" in sys.argv:
     setup_stage()
     exit()
 
+
+if "-quick" not in sys.argv:
+    setup_stage()
+
 if "-all" in sys.argv:
     for dir in os.listdir(P1PROB_PATH):
         if os.path.isdir(os.path.join(P1PROB_PATH, dir)):
@@ -107,7 +112,7 @@ if "-all" in sys.argv:
         if os.path.isdir(os.path.join(PROB_PATH, dir)):
             test_problem(os.path.join(PROB_PATH, dir))
 else:
-    path_list = [p for p in sys.argv[1:] if p not in ["-all", "-debug"]]
+    path_list = [p for p in sys.argv[1:] if p not in ["-all", "-quick", "-debug"]]
     if len(path_list) == 0:
         for dir in os.listdir(P1PROB_PATH):
             if os.path.isdir(os.path.join(P1PROB_PATH, dir)):
