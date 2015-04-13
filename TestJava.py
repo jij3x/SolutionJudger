@@ -64,22 +64,21 @@ def test_problem(problem_path, debug):
         subprocess.call([PYCMD, os.path.join(GENR_PATH, "gen_java_driver.py")], stdin=metadata, stdout=driver)
         metadata.seek(0, 0)
         problem_md = json.load(metadata)
-        if "judge" in problem_md and problem_md["judge"] == "clonegraph":
+        if "judge" in problem_md and problem_md["judge"] == "clonegraph_judge":
             judge_in_duty = judges.clonegraph
-        elif "judge" in problem_md and problem_md["judge"] == "wordladders":
-            judge_in_duty = judges.wordladders()
+        elif "judge" in problem_md and problem_md["judge"] == "wordladders_judge":
+            judge_in_duty = judges.wordladders
         else:
             judge_in_duty = judges.general
 
     #
     # Compose Solution.java
     #
-    with open(os.path.join(problem_path, "Solution.java"), "r") as solution_file:
-        solution_src = solution_file.read() + "\n"
-    with open(os.path.join(GENR_PATH, "java.solution.imports"), "r") as sol_imports:
-        solution_src = sol_imports.read() + solution_src
-    with open("Solution.java", "w") as final_solution:
-        final_solution.write(solution_src)
+    with open(os.path.join(GENR_PATH, "java.solution.imports"), "r") as sol_imports, \
+            open(os.path.join(problem_path, "Solution.java"), "r") as sol_code, \
+            open("Solution.java", "w") as final_solution:
+        final_solution.write(sol_imports.read())
+        final_solution.write(sol_code.read())
 
     #
     # Compile Driver and Solution, then run solution
@@ -90,11 +89,13 @@ def test_problem(problem_path, debug):
             open(os.path.join(problem_path, "user.out"), "r") as answer:
         sp = subprocess.Popen(["java", "Driver"], stdin=test_data, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         sol_out, sol_err = sp.communicate()
-        judgement = judge_in_duty(sol_out.decode("utf-8"), sol_err.decode("utf-8"), answer.read())
+        user_out = sol_out.decode("utf-8")
+        user_err = sol_err.decode("utf-8")
+        judgement = judge_in_duty(user_out.splitlines(), user_err.splitlines(), answer.read().splitlines())
         if debug:
             with open("user.out", "w") as out_file, open("user.err", "w") as err_file:
-                out_file.write(sol_out.decode("utf-8"))
-                err_file.write(sol_err.decode("utf-8"))
+                out_file.write(user_out)
+                err_file.write(user_err)
 
     #
     # Print out testing result
@@ -121,21 +122,21 @@ if "-quick" not in sys.argv:
     setup_stage()
 
 if "-all" in sys.argv:
-    for dir in os.listdir(P1PROB_PATH):
-        if os.path.isdir(os.path.join(P1PROB_PATH, dir)):
-            test_problem(os.path.join(P1PROB_PATH, dir), "-debug" in sys.argv)
-    for dir in os.listdir(PROB_PATH):
-        if os.path.isdir(os.path.join(PROB_PATH, dir)):
-            test_problem(os.path.join(PROB_PATH, dir), "-debug" in sys.argv)
+    for directory in os.listdir(P1PROB_PATH):
+        if os.path.isdir(os.path.join(P1PROB_PATH, directory)):
+            test_problem(os.path.join(P1PROB_PATH, directory), "-debug" in sys.argv)
+    for directory in os.listdir(PROB_PATH):
+        if os.path.isdir(os.path.join(PROB_PATH, directory)):
+            test_problem(os.path.join(PROB_PATH, directory), "-debug" in sys.argv)
 else:
     path_list = [p for p in sys.argv[1:] if p not in ["-all", "-quick", "-debug"]]
     if len(path_list) == 0:
-        for dir in os.listdir(P1PROB_PATH):
-            if os.path.isdir(os.path.join(P1PROB_PATH, dir)):
-                test_problem(os.path.join(P1PROB_PATH, dir), "-debug" in sys.argv)
+        for directory in os.listdir(P1PROB_PATH):
+            if os.path.isdir(os.path.join(P1PROB_PATH, directory)):
+                test_problem(os.path.join(P1PROB_PATH, directory), "-debug" in sys.argv)
     else:
-        for problem_path in path_list:
-            test_problem(problem_path, "-debug" in sys.argv)
+        for path in path_list:
+            test_problem(path, "-debug" in sys.argv)
 
 if "-debug" not in sys.argv:
     cleanup_gens()

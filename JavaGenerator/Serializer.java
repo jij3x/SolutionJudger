@@ -190,7 +190,7 @@ public class Serializer {
         StringBuffer r = new StringBuffer("[");
         int i = 0;
         for (UndirectedGraphNode node : visited) {
-            r.append(i > 0 ? "," : "").append("[").append(node.label);
+            r.append(i++ > 0 ? "," : "").append("[").append(node.label);
             for (UndirectedGraphNode neighbor : node.neighbors)
                 r.append(",").append(neighbor.label);
             r.append("]");
