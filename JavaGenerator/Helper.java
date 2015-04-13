@@ -7,25 +7,6 @@ import java.util.List;
 
 public class Helper {
 
-    public static void sortStringVectors(List<List<String>> vectors) {
-        Collections.sort(vectors, new Comparator<List<String>>() {
-            @Override
-            public int compare(List<String> v1, List<String> v2) {
-                Iterator<String> it1 = v1.iterator();
-                Iterator<String> it2 = v2.iterator();
-                while (it1.hasNext() && it2.hasNext()) {
-                    String str1 = it1.next();
-                    String str2 = it2.next();
-                    if (str1.compareTo(str2) < 0)
-                        return -1;
-                    else if (str1.compareTo(str2) > 0)
-                        return 1;
-                }
-                return v1.size() == v2.size() ? 0 : (v1.size() < v2.size() ? -1 : 1);
-            }
-        });
-    }
-
     /**
      * "Detect Cycle" input processor
      */

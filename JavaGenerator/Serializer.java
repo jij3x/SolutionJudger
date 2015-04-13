@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.io.StreamTokenizer;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -172,7 +171,7 @@ public class Serializer {
 
     public static String serializeIntUDGraph(UndirectedGraphNode graph) {
         if (graph == null)
-            return "{}";
+            return "[]";
 
         HashSet<UndirectedGraphNode> visited = new HashSet<UndirectedGraphNode>();
         visited.add(graph);
@@ -188,26 +187,15 @@ public class Serializer {
             }
         }
 
-        ArrayList<UndirectedGraphNode> nodes = new ArrayList<UndirectedGraphNode>();
-        for (UndirectedGraphNode node : visited)
-            nodes.add(node);
-        Collections.sort(nodes, new Comparator<UndirectedGraphNode>() {
-            @Override
-            public int compare(UndirectedGraphNode o1, UndirectedGraphNode o2) {
-                return o1.label - o2.label;
-            }
-        });
-
-        StringBuffer r = new StringBuffer("{");
-        for (int i = 0; i < nodes.size(); i++) {
-            if (i > 0)
-                r.append("#");
-
-            r.append(nodes.get(i).label);
-            for (UndirectedGraphNode neighbor : nodes.get(i).neighbors)
+        StringBuffer r = new StringBuffer("[");
+        int i = 0;
+        for (UndirectedGraphNode node : visited) {
+            r.append(i > 0 ? "," : "").append("[").append(node.label);
+            for (UndirectedGraphNode neighbor : node.neighbors)
                 r.append(",").append(neighbor.label);
+            r.append("]");
         }
-        r.append("}");
+        r.append("]");
         return r.toString();
     }
 

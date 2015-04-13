@@ -13,8 +13,10 @@ import subprocess
 import sys
 import os
 import os.path
-import filecmp
 import shutil
+import json
+import judges
+
 
 PYCMD = "python3"
 P1PROB_PATH = "_p1_problems"
@@ -24,7 +26,7 @@ GENR_PATH = "JavaGenerator"
 
 def cleanup_gens():
     for fname in os.listdir("."):
-        if fname in ("Driver.java", "Solution.java", "Driver.class", "Solution.class", "user.out"):
+        if fname in ("Driver.java", "Solution.java", "Driver.class", "Solution.class", "user.out", "user.err"):
             os.remove(fname)
 
 
@@ -45,7 +47,7 @@ def setup_stage():
             subprocess.call(["javac", fname])
 
 
-def test_problem(problem_path):
+def test_problem(problem_path, debug):
     #
     # Find problem metadata
     #
@@ -56,17 +58,25 @@ def test_problem(problem_path):
             break
 
     #
-    # Generate Driver.java
+    # Generate Driver.java, and decide on judge
     #
     with open("Driver.java", "w") as driver, open(metadata_fname, "r") as metadata:
         subprocess.call([PYCMD, os.path.join(GENR_PATH, "gen_java_driver.py")], stdin=metadata, stdout=driver)
+        metadata.seek(0, 0)
+        problem_md = json.load(metadata)
+        if "judge" in problem_md and problem_md["judge"] == "clonegraph":
+            judge_in_duty = judges.clonegraph
+        elif "judge" in problem_md and problem_md["judge"] == "wordladders":
+            judge_in_duty = judges.wordladders()
+        else:
+            judge_in_duty = judges.general
 
     #
     # Compose Solution.java
     #
-    with open(os.path.join(problem_path, "Solution.java")) as solution_file:
+    with open(os.path.join(problem_path, "Solution.java"), "r") as solution_file:
         solution_src = solution_file.read() + "\n"
-    with open(os.path.join(GENR_PATH, "java.solution.imports")) as sol_imports:
+    with open(os.path.join(GENR_PATH, "java.solution.imports"), "r") as sol_imports:
         solution_src = sol_imports.read() + solution_src
     with open("Solution.java", "w") as final_solution:
         final_solution.write(solution_src)
@@ -76,8 +86,15 @@ def test_problem(problem_path):
     #
     subprocess.call(["javac", "Solution.java"])
     subprocess.call(["javac", "Driver.java"])
-    with open(os.path.join(problem_path, "user.in")) as test_data, open("user.out", "w") as result:
-        subprocess.call(["java", "Driver"], stdin=test_data, stdout=result)
+    with open(os.path.join(problem_path, "user.in"), "r") as test_data, \
+            open(os.path.join(problem_path, "user.out"), "r") as answer:
+        sp = subprocess.Popen(["java", "Driver"], stdin=test_data, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        sol_out, sol_err = sp.communicate()
+        judgement = judge_in_duty(sol_out.decode("utf-8"), sol_err.decode("utf-8"), answer.read())
+        if debug:
+            with open("user.out", "w") as out_file, open("user.err", "w") as err_file:
+                out_file.write(sol_out.decode("utf-8"))
+                err_file.write(sol_err.decode("utf-8"))
 
     #
     # Print out testing result
@@ -85,7 +102,7 @@ def test_problem(problem_path):
     passed = "\033[92m" + "Passed" + "\033[0m"
     failed = "\033[91m" + "Failed" + "\033[0m"
     print(problem_path + " - ", end="")
-    print(passed if filecmp.cmp("user.out", os.path.join(problem_path, "user.out")) else failed)
+    print(passed if judgement == "Accepted" else failed)
 
 
 if "-c" in sys.argv:
@@ -100,26 +117,25 @@ if "-s" in sys.argv:
     setup_stage()
     exit()
 
-
 if "-quick" not in sys.argv:
     setup_stage()
 
 if "-all" in sys.argv:
     for dir in os.listdir(P1PROB_PATH):
         if os.path.isdir(os.path.join(P1PROB_PATH, dir)):
-            test_problem(os.path.join(P1PROB_PATH, dir))
+            test_problem(os.path.join(P1PROB_PATH, dir), "-debug" in sys.argv)
     for dir in os.listdir(PROB_PATH):
         if os.path.isdir(os.path.join(PROB_PATH, dir)):
-            test_problem(os.path.join(PROB_PATH, dir))
+            test_problem(os.path.join(PROB_PATH, dir), "-debug" in sys.argv)
 else:
     path_list = [p for p in sys.argv[1:] if p not in ["-all", "-quick", "-debug"]]
     if len(path_list) == 0:
         for dir in os.listdir(P1PROB_PATH):
             if os.path.isdir(os.path.join(P1PROB_PATH, dir)):
-                test_problem(os.path.join(P1PROB_PATH, dir))
+                test_problem(os.path.join(P1PROB_PATH, dir), "-debug" in sys.argv)
     else:
         for problem_path in path_list:
-            test_problem(problem_path)
+            test_problem(problem_path, "-debug" in sys.argv)
 
 if "-debug" not in sys.argv:
     cleanup_gens()

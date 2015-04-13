@@ -24,13 +24,6 @@
       "type": "+vector<+vector<:string>>"
     }
   },
-  "outProcr": [
-    {
-      "actionName": "sortStringVectors",
-      "params": [
-        "solution.return"
-      ]
-    }
-  ],
-  "output": "solution.return"
+  "output": "solution.return",
+  "judge": "wordladders_judge"
 }
