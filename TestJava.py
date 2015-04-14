@@ -18,7 +18,7 @@ import json
 import judges
 
 
-PYCMD = "python3"
+PYCMD = "python"
 P1PROB_PATH = "_p1_problems"
 PROB_PATH = "_problems"
 GENR_PATH = "JavaGenerator"

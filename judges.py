@@ -3,7 +3,6 @@ import json
 
 def general(user_out, user_err, answer):
     if len(user_out) != len(answer) or (len(user_err) > 0 and len(user_err) != len(user_out)):
-        print("size mismatch")
         return "Failed!"
     for i in range(0, len(user_out)):
         if user_out[i] != answer[i] or (len(user_err) > 0 and user_err[i] != ""):

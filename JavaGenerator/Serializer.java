@@ -6,9 +6,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 
 public class Serializer {
+    public static String serializeBool(boolean b) {
+        return b ? "true" : "false";
+    }
+
     public static String serializeInt(int n) {
         return Integer.toString(n);
     }
@@ -25,7 +30,7 @@ public class Serializer {
         if (array == null || array.length == 0)
             return "[]";
 
-        StringBuffer r = new StringBuffer("[");
+        StringBuilder r = new StringBuilder("[");
         for (int i = 0; i < array.length; i++) {
             r.append(i > 0 ? ",\"" : "\"").append(array[i]).append("\"");
         }
@@ -37,7 +42,7 @@ public class Serializer {
         if (vector == null || vector.size() == 0)
             return "[]";
 
-        StringBuffer r = new StringBuffer();
+        StringBuilder r = new StringBuilder();
         for (String str : vector) {
             r.append(",\"").append(str).append("\"");
         }
@@ -50,7 +55,7 @@ public class Serializer {
         if (vector == null || vector.size() == 0)
             return "[]";
 
-        StringBuffer r = new StringBuffer("[");
+        StringBuilder r = new StringBuilder("[");
         int i = 0;
         for (List<String> v : vector) {
             r.append(i++ > 0 ? "," : "").append(serializeStringVector(v));
@@ -69,7 +74,7 @@ public class Serializer {
         }
         Collections.sort(words);
 
-        StringBuffer r = new StringBuffer("[");
+        StringBuilder r = new StringBuilder("[");
         int i = 0;
         for (String word : words) {
             r.append(i++ > 0 ? ",\"" : "\"").append(word).append("\"");
@@ -86,7 +91,7 @@ public class Serializer {
         if (array == null || array.length == 0)
             return "[]";
 
-        StringBuffer r = new StringBuffer("[");
+        StringBuilder r = new StringBuilder("[");
         r.append(Integer.toString(array[0]));
         for (int i = 1; i < array.length; i++) {
             r.append(",").append(Integer.toString(array[i]));
@@ -99,7 +104,7 @@ public class Serializer {
         if (array == null || array.length == 0)
             return "[]";
 
-        StringBuffer r = new StringBuffer("[");
+        StringBuilder r = new StringBuilder("[");
         r.append(serializeIntArray(array[0]));
         for (int i = 1; i < array.length; i++) {
             r.append(",").append(serializeIntArray(array[i]));
@@ -112,7 +117,7 @@ public class Serializer {
         if (vector == null || vector.size() == 0)
             return "[]";
 
-        StringBuffer r = new StringBuffer();
+        StringBuilder r = new StringBuilder();
         for (int n : vector) {
             r.append(",").append(Integer.toString(n));
         }
@@ -125,7 +130,7 @@ public class Serializer {
         if (vector == null || vector.size() == 0)
             return "[]";
 
-        StringBuffer r = new StringBuffer();
+        StringBuilder r = new StringBuilder();
         int i = 0;
         for (List<Integer> v : vector) {
             r.append(i++ > 0 ? "," : "").append(serializeIntVector(v));
@@ -139,7 +144,7 @@ public class Serializer {
         if (array == null || array.length == 0)
             return "\"\"";
 
-        StringBuffer r = new StringBuffer(new String(array));
+        StringBuilder r = new StringBuilder(new String(array));
         r.insert(0, "\"").append("\"");
         return r.toString();
     }
@@ -148,7 +153,7 @@ public class Serializer {
         if (array == null || array.length == 0)
             return "[]";
 
-        StringBuffer r = new StringBuffer("[");
+        StringBuilder r = new StringBuilder("[");
         r.append(serializeCharArray(array[0]));
         for (int i = 1; i < array.length; i++)
             r.append(",").append(serializeCharArray(array[i]));
@@ -160,12 +165,40 @@ public class Serializer {
         if (node == null)
             return "{}";
 
-        StringBuffer r = new StringBuffer("{");
+        StringBuilder r = new StringBuilder("{");
         r.append(Integer.toString(node.val));
         while ((node = node.next) != null) {
             r.append(",").append(Integer.toString(node.val));
         }
         r.append("}");
+        return r.toString();
+    }
+
+    public static String serializeIntBinaryTree(TreeNode node) {
+        if (node == null)
+            return "[]";
+
+        StringBuilder r = new StringBuilder("[");
+        Queue<TreeNode> que = new LinkedList<TreeNode>();
+        que.add(node);
+        r.append(Integer.toString(node.val));
+        while (!que.isEmpty()) {
+            TreeNode curr = que.poll();
+            if (curr.left == null) {
+                r.append(",#");
+            } else {
+                que.add(curr.left);
+                r.append(",").append(Integer.toString(node.left.val));
+            }
+
+            if (curr.right == null) {
+                r.append(",#");
+            } else {
+                que.add(curr.right);
+                r.append(",").append(Integer.toString(node.right.val));
+            }
+        }
+        r.append("]");
         return r.toString();
     }
 
@@ -175,7 +208,7 @@ public class Serializer {
 
         HashSet<UndirectedGraphNode> visited = new HashSet<UndirectedGraphNode>();
         visited.add(graph);
-        LinkedList<UndirectedGraphNode> que = new LinkedList<UndirectedGraphNode>();
+        Queue<UndirectedGraphNode> que = new LinkedList<UndirectedGraphNode>();
         que.add(graph);
         while (!que.isEmpty()) {
             UndirectedGraphNode curr = que.poll();
@@ -187,7 +220,7 @@ public class Serializer {
             }
         }
 
-        StringBuffer r = new StringBuffer("[");
+        StringBuilder r = new StringBuilder("[");
         int i = 0;
         for (UndirectedGraphNode node : visited) {
             r.append(i++ > 0 ? "," : "").append("[").append(node.label);
@@ -197,6 +230,11 @@ public class Serializer {
         }
         r.append("]");
         return r.toString();
+    }
+
+    public static boolean deserializeBoo(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        return tokenizer.sval.equals("true") ? true : false;
     }
 
     public static int deserializeInt(StreamTokenizer tokenizer) throws IOException {
@@ -331,6 +369,29 @@ public class Serializer {
             tail = node;
         }
         return start.next;
+    }
+
+    public static TreeNode deserializeIntBinaryTree(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        int size = (int) tokenizer.nval;
+        if (size == 0)
+            return null;
+
+        String nullNode = "#";
+        ArrayList<TreeNode> list = new ArrayList<TreeNode>();
+        list.add(new TreeNode(0));
+        for (int i = 0, f = 1, ptr = 0; i < size; i++) {
+            TreeNode newNode = null;
+            tokenizer.nextToken();
+            if (!nullNode.equals(tokenizer.sval)) {
+                newNode = new TreeNode((int) tokenizer.nval);
+                list.add(newNode);
+            }
+            list.get(ptr).left = (f == 0) ? newNode : list.get(ptr).left;
+            list.get(ptr).right = (f == 1) ? newNode : list.get(ptr).right;
+            ptr += (f = f ^ 1) == 0 ? 1 : 0;
+        }
+        return list.get(1);
     }
 
     public static UndirectedGraphNode deserializeIntUDGraph(StreamTokenizer tokenizer) throws IOException {
