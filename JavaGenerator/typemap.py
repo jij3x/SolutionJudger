@@ -10,10 +10,12 @@ INT_SLLIST = "+sllist<:int>"
 INT_UDGRAPH = "+udgraph<:int>"
 CHAR_ARR = "+array<:char>"
 CHAR_2D_ARR = "+array<+array<:char>>"
+BOOL = ":bool"
 STRING_ARR = "+array<:string>"
 STRING_VEC = "+vector<:string>"
 STRING_2D_VEC = "+vector<+vector<:string>>"
 STRING_SET = "+set<:string>"
+INT_BINARYTREE = "+binarytree<:int>"
 
 P_JAVA_T = "javaType"
 P_SER = "serializer"
@@ -22,6 +24,11 @@ P_DES = "deserializer"
 type_map = {
     VOID: {
         P_JAVA_T: "void"
+    },
+    BOOL: {
+        P_JAVA_T: "boolean",
+        P_SER: "serializeBool",
+        P_DES: "deserializeBool"
     },
     INT: {
         P_JAVA_T: "int",
@@ -97,5 +104,10 @@ type_map = {
         P_JAVA_T: "UndirectedGraphNode",
         P_SER: "serializeIntUDGraph",
         P_DES: "deserializeIntUDGraph"
+    },
+    INT_BINARYTREE: {
+        P_JAVA_T: "TreeNode",
+        P_SER: "serializeIntBinaryTree",
+        P_DES: "deserializeIntBinaryTree"
     }
 }

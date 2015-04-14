@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "p",
+      "type": "+binarytree<:int>"
+    },
+    {
+      "name": "q",
+      "type": "+binarytree<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "isSameTree",
+    "params": [
+      "input[0]",
+      "input[0]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}
