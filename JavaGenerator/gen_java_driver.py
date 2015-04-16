@@ -19,8 +19,9 @@ PARAM_CN = "_PARAM_{}_"
 PARAM_DS_POS = "// param deserialization code inject here"
 INPUT_PROCR_POS = "// input processing code inject here"
 SOLVING_POS = "// solution invoking code inject here"
+OUTPUT_PROCR_POS = "// output processing code inject here"
 OUTPUT_S_POS = "// result serialization code inject here"
-ADD_OUTPUT_S_POS = "// additional output serialization code inject here"
+ERROR_S_POS = "// error serialization code inject here"
 
 #
 # Read problem description, and compose metadata
@@ -42,8 +43,13 @@ if m.RT not in metadata[m.SOL]:
     metadata[m.SOL][m.RT] = {m.TYP: t.VOID}
 metadata[m.SOL][m.RT][CODE_NAME] = SOL_RETURN_CN
 
-if m.ADO not in metadata:
-    metadata[m.ADO] = []
+if m.OPR in metadata:
+    for i in range(len(metadata[m.OPR])):
+        if m.RT not in metadata[m.OPR][i]:
+            metadata[m.OPR][i][m.RT] = {m.TYP: t.VOID}
+        metadata[m.OPR][i][m.RT][CODE_NAME] = OP_RETURN_CN.format(str(i))
+else:
+    metadata[m.OPR] = []
 
 
 def eval_prop(s):
@@ -92,16 +98,24 @@ solving_code = gen_solution_invoking_code(metadata[m.SOL][m.RT], metadata[m.SOL]
                                           "{} {} = ", "{}(new Solution()).{}({});\n")
 
 #
+# Compose the code to process output
+#
+output_proc_code = ""
+for procr in metadata[m.OPR]:
+    output_proc_code += gen_solution_invoking_code(procr[m.RT], procr[m.FN], procr[m.PAR], 12,
+                                                   "{} {} = ", "{} Helper.{}({});\n")
+
+#
 # Compose the code to serialize the Solution return
 #
 result_ser_code = gen_output_serlizing_code(metadata[m.OUT], 12, "printWriter.println(Serializer.{}({}));\n")
 
 #
-# Compose the code to serialize additional output
+# Compose the code to serialize the error, which might be empty
 #
-add_output_ser_code = ""
-for additional_out in metadata[m.ADO]:
-    add_output_ser_code = gen_output_serlizing_code(additional_out, 12, "printWriter.println(Serializer.{}({}));\n")
+error_ser_code = ""
+if m.ERR in metadata:
+    error_ser_code = gen_output_serlizing_code(metadata[m.ERR], 12, "errorWriter.println(Serializer.{}({}));\n")
 
 #
 # Inject the code into Driver template
@@ -111,8 +125,9 @@ with open(DRVTML_FNM) as driver_template:
     driver_code = re.sub(r"[ \t]*" + re.escape(PARAM_DS_POS) + r".*?\n", param_deser_code, driver_code)
     driver_code = re.sub(r"[ \t]*" + re.escape(INPUT_PROCR_POS) + r".*?\n", input_proc_code, driver_code)
     driver_code = re.sub(r"[ \t]*" + re.escape(SOLVING_POS) + r".*?\n", solving_code, driver_code)
+    driver_code = re.sub(r"[ \t]*" + re.escape(OUTPUT_PROCR_POS) + r".*?\n", output_proc_code, driver_code)
     driver_code = re.sub(r"[ \t]*" + re.escape(OUTPUT_S_POS) + r".*?\n", result_ser_code, driver_code)
-    if add_output_ser_code:
-        driver_code = re.sub(r"[ \t]*" + re.escape(ADD_OUTPUT_S_POS) + r".*?\n", add_output_ser_code, driver_code)
+    if error_ser_code:
+        driver_code = re.sub(r"[ \t]*" + re.escape(ERROR_S_POS) + r".*?\n", error_ser_code, driver_code)
 
 print(driver_code)

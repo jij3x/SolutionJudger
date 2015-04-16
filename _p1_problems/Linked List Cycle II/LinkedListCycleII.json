@@ -31,6 +31,17 @@
       "type": "+sllist<:int>"
     }
   },
-  "output": "solution.return",
-  "judge": "linkedlistcycle_judge"
+  "outProcr": [
+    {
+      "actionName": "findIntSLListNodeIndex",
+      "params": [
+        "input[0]",
+        "solution.return"
+      ],
+      "return": {
+        "type": ":text"
+      }
+    }
+  ],
+  "output": "outProcr[0].return"
 }

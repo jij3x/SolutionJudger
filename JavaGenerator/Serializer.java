@@ -163,14 +163,14 @@ public class Serializer {
 
     public static String serializeIntSLList(ListNode node) {
         if (node == null)
-            return "[]";
+            return "{}";
 
-        StringBuilder r = new StringBuilder("[");
-        r.append(node._seqNo).append(",").append(node.val);
+        StringBuilder r = new StringBuilder("{");
+        r.append(Integer.toString(node.val));
         while ((node = node.next) != null) {
             r.append(",").append(Integer.toString(node.val));
         }
-        r.append("]");
+        r.append("}");
         return r.toString();
     }
 
@@ -360,13 +360,11 @@ public class Serializer {
     public static ListNode deserializeIntSLList(StreamTokenizer tokenizer) throws IOException {
         ListNode start = new ListNode(0), tail = start;
 
-        int seq = 0;
         tokenizer.nextToken();
         int size = (int) tokenizer.nval;
         for (int i = 0; i < size; i++) {
             tokenizer.nextToken();
             ListNode node = new ListNode((int) tokenizer.nval);
-            node._seqNo = seq++;
             tail.next = node;
             tail = node;
         }

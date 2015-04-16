@@ -64,13 +64,12 @@ def test_problem(problem_path, debug):
         subprocess.call([PYCMD, os.path.join(GENR_PATH, "gen_java_driver.py")], stdin=metadata, stdout=driver)
         metadata.seek(0, 0)
         problem_md = json.load(metadata)
-
-        judge_tbl = {"clonegraph_judge": judges.clonegraph,
-                     "wordladders_judge": judges.wordladders,
-                     "linkedlistcycle_judge": judges.linkedlistcycle}
-        judge_in_duty = judges.general
-        if "judge" in problem_md and problem_md["judge"] in judge_tbl:
-            judge_in_duty = judge_tbl.get(problem_md["judge"])
+        if "judge" in problem_md and problem_md["judge"] == "clonegraph_judge":
+            judge_in_duty = judges.clonegraph
+        elif "judge" in problem_md and problem_md["judge"] == "wordladders_judge":
+            judge_in_duty = judges.wordladders
+        else:
+            judge_in_duty = judges.general
 
     #
     # Compose Solution.java

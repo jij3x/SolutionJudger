@@ -18,7 +18,9 @@ def clonegraph(user_out, user_err, answer):
             node[1:] = sorted(node[1:])
         arr.sort()
         sorted_out.append(json.dumps(arr, separators=(",", ":")))
-    return general(sorted_out, user_err, answer)
+    result = general(sorted_out, user_err, answer)
+    if result != "Accept":
+        return result
 
 
 def wordladders(user_out, user_err, answer):
@@ -27,14 +29,6 @@ def wordladders(user_out, user_err, answer):
         arr = json.loads(line)
         arr.sort()
         sorted_out.append(json.dumps(arr, separators=(",", ":")))
-    return general(sorted_out, user_err, answer)
-
-
-def linkedlistcycle(user_out, user_err, answer):
-    translated_out = []
-    for line in user_out:
-        if line == "":
-            translated_out.append("no cycle")
-        else:
-            translated_out.append("no cycle")
-    return general(translated_out, user_err, answer)
+    result = general(sorted_out, user_err, answer)
+    if result != "Accept":
+        return result
