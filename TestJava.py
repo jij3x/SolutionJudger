@@ -106,7 +106,7 @@ def test_problem(problem_path, debug):
     passed = "\033[92m" + "Passed" + "\033[0m"
     failed = "\033[91m" + "Failed" + "\033[0m"
     print(problem_path + " - ", end="")
-    print(passed if judgement["rc"] == 0 else failed)
+    print("runtime: %.5fms %s" % (judgement["execTime"], passed if judgement["rc"] == 0 else failed))
 
 
 if "-c" in sys.argv:
