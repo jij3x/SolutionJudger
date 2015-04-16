@@ -11,7 +11,6 @@ public class Driver {
     public static void main(String[] args) throws IOException {
         PrintWriter printWriter = new PrintWriter(System.out, true);
         Reader reader = new BufferedReader(new InputStreamReader(System.in));
-        PrintWriter errorWriter = new PrintWriter(System.err, true);
         StreamTokenizer tokenizer = new StreamTokenizer(reader);
 
         tokenizer.nextToken();
@@ -24,14 +23,11 @@ public class Driver {
 
             // solution invoking code inject here
 
-            // output processing code inject here
-
             // result serialization code inject here
 
-            // error serialization code inject here
+            // additional output serialization code inject here
 
         }
         printWriter.close();
-        errorWriter.close();
     }
 }

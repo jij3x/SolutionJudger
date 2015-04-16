@@ -14,19 +14,6 @@
       "type": "+udgraph<:int>"
     }
   },
-  "outProcr": [
-    {
-      "actionName": "checkDeepClonedIntUDGraph",
-      "params": [
-        "input[0]",
-        "solution.return"
-      ],
-      "return": {
-        "type": ":text"
-      }
-    }
-  ],
   "output": "solution.return",
-  "error": "outProcr[0].return",
   "judge": "clonegraph_judge"
 }
