@@ -21,7 +21,7 @@ INPUT_PROCR_POS = "// input processing code inject here"
 SOLVING_POS = "// solution invoking code inject here"
 OUTPUT_PROCR_POS = "// output processing code inject here"
 OUTPUT_S_POS = "// result serialization code inject here"
-ERROR_S_POS = "// error serialization code inject here"
+ADDOUT_S_POS = "// additional output serialization code inject here"
 
 #
 # Read problem description, and compose metadata
@@ -51,6 +51,9 @@ if m.OPR in metadata:
 else:
     metadata[m.OPR] = []
 
+if m.ADO not in metadata:
+    metadata[m.ADO] = []
+
 
 def eval_prop(s):
     prop = re.sub(r"\[\[\"(\w+)\"\]\]", "[\g<1>]", re.sub(r"\.", "", re.sub(r"(\w+)", "[\"\g<1>\"]", s)))
@@ -71,10 +74,10 @@ def gen_output_serlizing_code(output, lspc, fn_tmpl):
     return " " * lspc + fn_tmpl.format(serializer, inputs)
 
 
-def gen_input_deserlizing_code(input, lspc, fn_tmpl):
-    deser = tim[input[m.TYP]][t.P_DES]
-    rtype = tim[input[m.TYP]][t.P_JAVA_T]
-    return " " * lspc + fn_tmpl.format(rtype, input[CODE_NAME], deser)
+def gen_input_deserlizing_code(param, lspc, fn_tmpl):
+    deser = tim[param[m.TYP]][t.P_DES]
+    rtype = tim[param[m.TYP]][t.P_JAVA_T]
+    return " " * lspc + fn_tmpl.format(rtype, param[CODE_NAME], deser)
 
 #
 # Fetch inputs deserialization code
@@ -111,11 +114,11 @@ for procr in metadata[m.OPR]:
 result_ser_code = gen_output_serlizing_code(metadata[m.OUT], 12, "printWriter.println(Serializer.{}({}));\n")
 
 #
-# Compose the code to serialize the error, which might be empty
+# Compose the code to serialize additional output, which might be empty
 #
-error_ser_code = ""
-if m.ERR in metadata:
-    error_ser_code = gen_output_serlizing_code(metadata[m.ERR], 12, "errorWriter.println(Serializer.{}({}));\n")
+addout_ser_code = ""
+for addout in metadata[m.ADO]:
+    addout_ser_code = gen_output_serlizing_code(addout, 12, "printWriter.println(Serializer.{}({}));\n")
 
 #
 # Inject the code into Driver template
@@ -127,7 +130,7 @@ with open(DRVTML_FNM) as driver_template:
     driver_code = re.sub(r"[ \t]*" + re.escape(SOLVING_POS) + r".*?\n", solving_code, driver_code)
     driver_code = re.sub(r"[ \t]*" + re.escape(OUTPUT_PROCR_POS) + r".*?\n", output_proc_code, driver_code)
     driver_code = re.sub(r"[ \t]*" + re.escape(OUTPUT_S_POS) + r".*?\n", result_ser_code, driver_code)
-    if error_ser_code:
-        driver_code = re.sub(r"[ \t]*" + re.escape(ERROR_S_POS) + r".*?\n", error_ser_code, driver_code)
+    if addout_ser_code:
+        driver_code = re.sub(r"[ \t]*" + re.escape(ADDOUT_S_POS) + r".*?\n", addout_ser_code, driver_code)
 
 print(driver_code)

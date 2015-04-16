@@ -64,12 +64,13 @@ def test_problem(problem_path, debug):
         subprocess.call([PYCMD, os.path.join(GENR_PATH, "gen_java_driver.py")], stdin=metadata, stdout=driver)
         metadata.seek(0, 0)
         problem_md = json.load(metadata)
-        if "judge" in problem_md and problem_md["judge"] == "clonegraph_judge":
-            judge_in_duty = judges.clonegraph
-        elif "judge" in problem_md and problem_md["judge"] == "wordladders_judge":
-            judge_in_duty = judges.wordladders
-        else:
-            judge_in_duty = judges.general
+
+        judge_in_duty = judges.general
+        judge_board = {"clonegraph_judge": judges.clonegraph,
+                       "wordladders_judge": judges.wordladders,
+                       "sizedintarray_judge": judges.sizedintarray}
+        if "judge" in problem_md and problem_md["judge"] in judge_board:
+            judge_in_duty = judge_board[problem_md["judge"]]
 
     #
     # Compose Solution.java
@@ -91,7 +92,9 @@ def test_problem(problem_path, debug):
         sol_out, sol_err = sp.communicate()
         user_out = sol_out.decode("utf-8")
         user_err = sol_err.decode("utf-8")
-        judgement = judge_in_duty(user_out.splitlines(), user_err.splitlines(), answer.read().splitlines())
+        addout_cnt = len(problem_md["additionalOutput"]) if "additionalOutput" in problem_md else 0
+        judgement = judge_in_duty(0, addout_cnt, user_out.splitlines(), 0, user_err.splitlines(),
+                                  answer.read().splitlines(), 0)
         if debug:
             with open("user.out", "w") as out_file, open("user.err", "w") as err_file:
                 out_file.write(user_out)
@@ -103,7 +106,7 @@ def test_problem(problem_path, debug):
     passed = "\033[92m" + "Passed" + "\033[0m"
     failed = "\033[91m" + "Failed" + "\033[0m"
     print(problem_path + " - ", end="")
-    print(passed if judgement == "Accepted" else failed)
+    print(passed if judgement["rc"] == 0 else failed)
 
 
 if "-c" in sys.argv:

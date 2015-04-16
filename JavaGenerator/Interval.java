@@ -1,14 +1,17 @@
 public class Interval {
-	int start;
-	int end;
+    int _seqNo;
+    int start;
+    int end;
 
-	Interval() {
-		start = 0;
-		end = 0;
-	}
+    Interval() {
+        _seqNo = -1;
+        start = 0;
+        end = 0;
+    }
 
-	Interval(int s, int e) {
-		start = s;
-		end = e;
-	}
+    Interval(int start, int end) {
+        _seqNo = -1;
+        this.start = start;
+        this.end = end;
+    }
 }

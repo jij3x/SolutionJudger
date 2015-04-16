@@ -27,6 +27,5 @@
     }
   ],
   "output": "solution.return",
-  "error": "outProcr[0].return",
   "judge": "clonegraph_judge"
 }

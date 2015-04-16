@@ -1,8 +1,9 @@
 public class TreeLinkNode {
-	int val;
-	TreeLinkNode left, right, next;
+    int _seqNo;
+    int val;
+    TreeLinkNode left, right, next;
 
-	TreeLinkNode(int x) {
-	    val = x;
-	}
+    TreeLinkNode(int val) {
+        this.val = val;
+    }
 }
