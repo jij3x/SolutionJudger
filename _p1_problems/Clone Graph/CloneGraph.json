@@ -2,7 +2,7 @@
   "input": [
     {
       "name": "grahp",
-      "type": "+udgraph<:int>"
+      "type": "nochange +udgraph<:int>"
     }
   ],
   "solution": {
