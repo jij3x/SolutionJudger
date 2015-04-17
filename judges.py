@@ -1,8 +1,11 @@
 import json
 
 
-def general(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in):
-    result = {"rc": -1, "msg": "", "execTime": 0}
+def udgraphFilter(line):
+    return line
+
+def general(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in, problem_md):
+    result = {"rc": -1, "msg": "", "execTime": 0, "finalOut": []}
 
     i = 0
     j = 0
@@ -10,7 +13,9 @@ def general(imvar_num, addout_num, user_out, return_code, user_err, answer, user
         i += imvar_num
         result["execTime"] += float(user_out[i])
         i += 1
-        if user_out[i] != answer[j]:
+
+        result["finalOut"].append(eval("{}({})".format(filter, user_out[i])))
+        if result["finalOut"][i] != answer[j]:
             return result
         i += 1
         i += addout_num
@@ -21,7 +26,7 @@ def general(imvar_num, addout_num, user_out, return_code, user_err, answer, user
     return result
 
 
-def clonegraph(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in):
+def clonegraph(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in, problem_md):
     i = 0
     while i < len(user_out):
         i += imvar_num
@@ -37,10 +42,10 @@ def clonegraph(imvar_num, addout_num, user_out, return_code, user_err, answer, u
         i += addout_num
         i += imvar_num
 
-    return general(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in)
+    return general(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in, problem_md)
 
 
-def wordladders(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in):
+def wordladders(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in, problem_md):
     i = 0
     while i < len(user_out):
         i += imvar_num
@@ -54,10 +59,10 @@ def wordladders(imvar_num, addout_num, user_out, return_code, user_err, answer, 
         i += addout_num
         i += imvar_num
 
-    return general(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in)
+    return general(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in, problem_md)
 
 
-def sizedintarray(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in):
+def sizedintarray(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in, problem_md):
     i = 0
     while i < len(user_out):
         i += imvar_num
@@ -71,4 +76,4 @@ def sizedintarray(imvar_num, addout_num, user_out, return_code, user_err, answer
         i += addout_num
         i += imvar_num
 
-    return general(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in)
+    return general(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in, problem_md)

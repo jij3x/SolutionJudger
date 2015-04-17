@@ -3,6 +3,7 @@ INT = ":int"
 DOUBLE = ":double"
 TEXT = ":text"
 STRING = ":string"
+MUTABLE_STRING = ":mutable_string"
 INT_ARR = "+array<:int>"
 INT_2D_ARR = "+array<+array<:int>>"
 INT_VEC = "+vector<:int>"
@@ -17,9 +18,17 @@ STRING_2D_VEC = "+vector<+vector<:string>>"
 STRING_SET = "+set<:string>"
 INT_BINARYTREE = "+binarytree<:int>"
 
+NOCHANGE = "nochange"
+COL_CHANGEABLE = "colChangeable"
+
 P_JAVA_T = "javaType"
+P_C_T = "cType"
+P_CPP_T = "cplusplusType"
+P_CS_T = "csharpType"
+
 P_SER = "serializer"
 P_DES = "deserializer"
+P_OFLTR = "outputFilter"
 
 type_map = {
     VOID: {
@@ -44,6 +53,14 @@ type_map = {
         P_JAVA_T: "String",
         P_SER: "serializeText",
         P_DES: "deserializeText"
+    },
+    MUTABLE_STRING: {
+        P_JAVA_T: "StringBuilder",
+        P_C_T: "char *",
+        P_CPP_T: "string&",
+        P_CS_T: "ref string",
+        P_SER: "serializeString",
+        P_DES: "deserializeString"
     },
     STRING: {
         P_JAVA_T: "String",
@@ -103,7 +120,8 @@ type_map = {
     INT_UDGRAPH: {
         P_JAVA_T: "UndirectedGraphNode",
         P_SER: "serializeIntUDGraph",
-        P_DES: "deserializeIntUDGraph"
+        P_DES: "deserializeIntUDGraph",
+        P_OFLTR: "udgraphFilter"
     },
     INT_BINARYTREE: {
         P_JAVA_T: "TreeNode",

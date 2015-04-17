@@ -94,7 +94,7 @@ def test_problem(problem_path, debug):
         user_err = sol_err.decode("utf-8")
         addout_cnt = len(problem_md["additionalOutput"]) if "additionalOutput" in problem_md else 0
         judgement = judge_in_duty(0, addout_cnt, user_out.splitlines(), 0, user_err.splitlines(),
-                                  answer.read().splitlines(), 0)
+                                  answer.read().splitlines(), 0, problem_md)
         if debug:
             with open("user.out", "w") as out_file, open("user.err", "w") as err_file:
                 out_file.write(user_out)

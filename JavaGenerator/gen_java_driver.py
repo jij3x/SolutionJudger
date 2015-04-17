@@ -25,19 +25,30 @@ OUTPUT_PROCR_POS = "// output processing code inject here"
 OUTPUT_S_POS = "// result serialization code inject here"
 ADDOUT_S_POS = "// additional output serialization code inject here"
 
+
 #
 # Read problem description, and compose metadata
 #
 metadata = json.loads(sys.stdin.read())
 
+
+def add_changeable_flag(param):
+    if param[m.TYP].find(t.NOCHANGE) == 0:
+        param[m.TYP] = param[m.TYP].replace("{} ".format(t.NOCHANGE), "")
+        param[t.COL_CHANGEABLE] = False
+    else:
+        param[t.COL_CHANGEABLE] = True
+
 for i in range(len(metadata[m.INP])):
     metadata[m.INP][i][CODE_NAME] = PARAM_CN.format(str(i))
+    add_changeable_flag(metadata[m.INP][i])
 
 if m.IPR in metadata:
     for i in range(len(metadata[m.IPR])):
         if m.RT not in metadata[m.IPR][i]:
             metadata[m.IPR][i][m.RT] = {m.TYP: t.VOID}
         metadata[m.IPR][i][m.RT][CODE_NAME] = IP_RETURN_CN.format(str(i))
+        add_changeable_flag(metadata[m.INP][i])
 else:
     metadata[m.IPR] = []
 

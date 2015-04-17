@@ -163,14 +163,14 @@ public class Serializer {
 
     public static String serializeIntSLList(ListNode node) {
         if (node == null)
-            return "{}";
+            return "[]";
 
-        StringBuilder r = new StringBuilder("{");
-        r.append(Integer.toString(node.val));
+        StringBuilder r = new StringBuilder("[");
+        r.append(node._seqNo).append(",").append(node.val);
         while ((node = node.next) != null) {
-            r.append(",").append(Integer.toString(node.val));
+            r.append(",").append(node._seqNo).append(",").append(node.val);
         }
-        r.append("}");
+        r.append("]");
         return r.toString();
     }
 
@@ -181,21 +181,21 @@ public class Serializer {
         StringBuilder r = new StringBuilder("[");
         Queue<TreeNode> que = new LinkedList<TreeNode>();
         que.add(node);
-        r.append(Integer.toString(node.val));
+        r.append(node._seqNo).append(",").append(node.val);
         while (!que.isEmpty()) {
             TreeNode curr = que.poll();
             if (curr.left == null) {
                 r.append(",#");
             } else {
                 que.add(curr.left);
-                r.append(",").append(Integer.toString(node.left.val));
+                r.append(",").append(node.left._seqNo).append(",").append(node.left.val);
             }
 
             if (curr.right == null) {
                 r.append(",#");
             } else {
                 que.add(curr.right);
-                r.append(",").append(Integer.toString(node.right.val));
+                r.append(",").append(node.right._seqNo).append(",").append(node.right.val);
             }
         }
         r.append("]");
@@ -223,9 +223,9 @@ public class Serializer {
         StringBuilder r = new StringBuilder("[");
         int i = 0;
         for (UndirectedGraphNode node : visited) {
-            r.append(i++ > 0 ? "," : "").append("[").append(node.label);
+            r.append(i++ > 0 ? "," : "").append("[").append(node._seqNo).append(",").append(node.label);
             for (UndirectedGraphNode neighbor : node.neighbors)
-                r.append(",").append(neighbor.label);
+                r.append(",").append(neighbor._seqNo).append(",").append(neighbor.label);
             r.append("]");
         }
         r.append("]");
@@ -360,11 +360,13 @@ public class Serializer {
     public static ListNode deserializeIntSLList(StreamTokenizer tokenizer) throws IOException {
         ListNode start = new ListNode(0), tail = start;
 
+        int seqNo = 0;
         tokenizer.nextToken();
         int size = (int) tokenizer.nval;
         for (int i = 0; i < size; i++) {
             tokenizer.nextToken();
             ListNode node = new ListNode((int) tokenizer.nval);
+            node._seqNo = seqNo++;
             tail.next = node;
             tail = node;
         }
@@ -377,6 +379,7 @@ public class Serializer {
         if (size == 0)
             return null;
 
+        int seqNo = 0;
         String nullNode = "#";
         ArrayList<TreeNode> list = new ArrayList<TreeNode>();
         list.add(new TreeNode(0));
@@ -385,6 +388,7 @@ public class Serializer {
             tokenizer.nextToken();
             if (!nullNode.equals(tokenizer.sval)) {
                 newNode = new TreeNode((int) tokenizer.nval);
+                newNode._seqNo = seqNo++;
                 list.add(newNode);
             }
             list.get(ptr).left = (f == 0) ? newNode : list.get(ptr).left;
@@ -398,6 +402,7 @@ public class Serializer {
         UndirectedGraphNode graph = null;
         HashMap<Integer, UndirectedGraphNode> memo = new HashMap<Integer, UndirectedGraphNode>();
 
+        int seqNo = 0;
         tokenizer.nextToken();
         int size = (int) tokenizer.nval;
         for (int i = 0; i < size; i++) {
@@ -409,6 +414,7 @@ public class Serializer {
             UndirectedGraphNode node = memo.get(nodeLabel);
             if (node == null) {
                 node = new UndirectedGraphNode(nodeLabel);
+                node._seqNo = seqNo++;
                 memo.put(nodeLabel, node);
             }
             if (i == 0)
@@ -419,6 +425,7 @@ public class Serializer {
                 UndirectedGraphNode neighbor = memo.get(nodeLabel);
                 if (neighbor == null) {
                     neighbor = new UndirectedGraphNode(nodeLabel);
+                    neighbor._seqNo = seqNo++;
                     memo.put(nodeLabel, neighbor);
                 }
 
