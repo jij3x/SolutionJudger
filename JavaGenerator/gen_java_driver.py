@@ -3,6 +3,8 @@ import json
 import re
 import os
 
+lib_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', '_commons'))
+sys.path.append(lib_path)
 import intfdesc as m
 import typemap as t
 
