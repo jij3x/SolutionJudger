@@ -13,7 +13,11 @@ tim = t.type_map
 
 
 def udgraphFilter(line):
-    return line[1:][::2]
+    graph = json.loads(line)
+    for node in graph:
+        node[0:] = node[1::2]
+
+    return json.dumps(graph, separators=(",", ":"))
 
 
 def general(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in, problem_md):
@@ -27,7 +31,7 @@ def general(imvar_num, addout_num, user_out, return_code, user_err, answer, user
         i += 1
 
         output_filter = tim[m.get_prop(problem_md, problem_md[m.OUT])[m.TYP]][t.P_OFLTR]
-        result["finalOut"].append(eval("{}({})".format(output_filter, user_out[i])))
+        result["finalOut"].append(globals()[output_filter](user_out[i]))
         if result["finalOut"][j] != answer[j]:
             return result
         i += 1
@@ -40,16 +44,28 @@ def general(imvar_num, addout_num, user_out, return_code, user_err, answer, user
 
 
 def clonegraph(imvar_num, addout_num, user_out, return_code, user_err, answer, user_in, problem_md):
+    result = {"rc": -1, "msg": "", "execTime": 0, "finalOut": []}
+
     i = 0
     while i < len(user_out):
         i += imvar_num
         i += 1
 
-        arr = json.loads(user_out[i])
-        for node in arr:
-            node[1:] = sorted(node[1:])
-        arr.sort()
-        user_out[i] = json.dumps(arr, separators=(",", ":"))
+        graph = json.loads(user_out[i])
+        for node in graph:
+            seq_arr = node[0::2]
+            filtered_node = node[1::2]
+            if not (seq_arr[1:] == seq_arr[:-1] and seq_arr[0] == -1):
+                result["msg"] = "new nodes are tampered"
+                return result
+            node[0:] = filtered_node[0:1] + sorted(filtered_node[1:])
+
+        graph.sort()
+        for node in graph:
+            seq_arr = [-1] * len(node)
+            node[0:] = [x for t in zip(seq_arr, node) for x in t]
+
+        user_out[i] = json.dumps(graph, separators=(",", ":"))
 
         i += 1
         i += addout_num
