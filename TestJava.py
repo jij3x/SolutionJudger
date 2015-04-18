@@ -18,6 +18,14 @@ import json
 import judges
 
 
+lib_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '_commons'))
+sys.path.append(lib_path)
+import probdesc as m
+import metatypes as t
+
+
+tim = t.type_map
+
 PYCMD = "python"
 P1PROB_PATH = "_p1_problems"
 PROB_PATH = "_problems"
@@ -60,17 +68,18 @@ def test_problem(problem_path, debug):
     #
     # Generate Driver.java, and decide on judge
     #
-    with open("Driver.java", "w") as driver, open(metadata_fname, "r") as metadata:
-        subprocess.call([PYCMD, os.path.join(GENR_PATH, "gen_java_driver.py")], stdin=metadata, stdout=driver)
-        metadata.seek(0, 0)
-        problem_md = json.load(metadata)
+    with open("Driver.java", "w") as driver, open(metadata_fname, "r") as metadata_file:
+        subprocess.call([PYCMD, os.path.join(GENR_PATH, "gen_java_driver.py")], stdin=metadata_file, stdout=driver)
+        metadata_file.seek(0, 0)
+        metadata = json.load(metadata_file)
+        m.complete_metadata(metadata)
 
         judge_in_duty = judges.general
         judge_board = {"clonegraph_judge": judges.clonegraph,
                        "wordladders_judge": judges.wordladders,
                        "sizedintarray_judge": judges.sizedintarray}
-        if "judge" in problem_md and problem_md["judge"] in judge_board:
-            judge_in_duty = judge_board[problem_md["judge"]]
+        if "judge" in metadata and metadata["judge"] in judge_board:
+            judge_in_duty = judge_board[metadata["judge"]]
 
     #
     # Compose Solution.java
@@ -94,8 +103,11 @@ def test_problem(problem_path, debug):
         user_ans = {"return_code": 0,
                     "out": sol_out.decode("utf-8").splitlines(),
                     "err": sol_err.decode("utf-8").splitlines()}
+        ans_desc = {"imvar_cnt": m.unchangeable_param_cnt(metadata),
+                    "addout_cnt": len(metadata[m.ADO]) if m.ADO in metadata else 0,
+                    "out_filter": tim[m.get_prop(metadata, metadata[m.OUT])[m.TYP]][t.P_OFLTR]}
+        result = judge_in_duty(user_ans, ans_desc, answer.read().splitlines())
 
-        result = judge_in_duty(user_ans, answer.read().splitlines(), problem_md)
         if debug:
             with open("user.out", "w") as out_file, open("user.err", "w") as err_file:
                 out_file.write(user_ans["user_out"])

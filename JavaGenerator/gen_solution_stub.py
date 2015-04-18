@@ -1,8 +1,8 @@
 import sys
 import json
 
-import intfdesc as md
-import typemap as tm
+import probdesc as md
+import metatypes as tm
 
 tim = tm.type_map
 

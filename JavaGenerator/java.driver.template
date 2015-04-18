@@ -21,6 +21,8 @@ public class Driver {
 
             // input processing code inject here
 
+            // unchangeable variables serialization code before execution inject here
+
             long startTime = System.nanoTime();
             // solution invoking code inject here
             long stopTime = System.nanoTime();
@@ -31,6 +33,8 @@ public class Driver {
             // result serialization code inject here
 
             // additional output serialization code inject here
+
+            // unchangeable variables serialization code after execution inject here
 
         }
         printWriter.close();

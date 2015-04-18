@@ -41,6 +41,7 @@ IPR = "inProcr"
 OPR = "outProcr"
 ADO = "additionalOutput"
 VNM = "variableName"
+MC = "mutableCollection"
 
 tim = t.type_map
 
@@ -48,9 +49,9 @@ tim = t.type_map
 def add_changeable_flag(param):
     if param[TYP].find(t.NOCHANGE) == 0:
         param[TYP] = param[TYP].replace("{} ".format(t.NOCHANGE), "")
-        param[t.COL_CHANGEABLE] = False
+        param[MC] = False
     else:
-        param[t.COL_CHANGEABLE] = True
+        param[MC] = True
 
 
 def complete_metadata(metadata):
@@ -63,7 +64,7 @@ def complete_metadata(metadata):
             if RT not in metadata[IPR][i]:
                 metadata[IPR][i][RT] = {TYP: t.VOID}
             metadata[IPR][i][RT][VNM] = "_IP_RETURN_{}_".format(str(i))
-            add_changeable_flag(metadata[INP][i])
+            add_changeable_flag(metadata[IPR][i][RT])
     else:
         metadata[IPR] = []
 
@@ -81,6 +82,15 @@ def complete_metadata(metadata):
 
     if ADO not in metadata:
         metadata[ADO] = []
+
+
+def unchangeable_param_cnt(metadata):
+    cnt = 0
+    for param in metadata[INP]:
+        cnt += 1 if not param[MC] else 0
+    for param in metadata[IPR]:
+        cnt += 1 if not param[RT][MC] else 0
+    return cnt
 
 
 def get_prop(metadata, prop):
