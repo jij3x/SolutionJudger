@@ -19,17 +19,23 @@ def general(user_ans, ans_desc, answer):
     i = 0
     j = 0
     while i < len(user_ans["out"]):
+        for k in range(ans_desc["imvar_cnt"]):
+            dist = ans_desc["imvar_cnt"] + 2 + ans_desc["addout_cnt"]
+            if user_ans["out"][k] != user_ans["out"][k + dist]:
+                result["msg"] = "unchangeable input tampered"
+                return result
         i += ans_desc["imvar_cnt"]
+
         result["execTime"] += float(user_ans["out"][i])
         i += 1
 
         result["finalOut"].append(globals()[ans_desc["out_filter"]](user_ans["out"][i]))
         if result["finalOut"][j] != answer[j]:
+            result["msg"] = "answer is wrong"
             return result
 
-        i += 1
-        i += ans_desc["imvar_cnt"]
-        i += ans_desc["addout_cnt"]
+        i += 1 + ans_desc["addout_cnt"] + ans_desc["imvar_cnt"]
+
         j += 1
 
     result["rc"] = 0
@@ -41,8 +47,7 @@ def clonegraph(user_ans, ans_desc, answer):
 
     i = 0
     while i < len(user_ans["out"]):
-        i += ans_desc["imvar_cnt"]
-        i += 1
+        i += ans_desc["imvar_cnt"] + 1
 
         graph = json.loads(user_ans["out"][i])
         for node in graph:
@@ -60,9 +65,7 @@ def clonegraph(user_ans, ans_desc, answer):
 
         user_ans["out"][i] = json.dumps(graph, separators=(",", ":"))
 
-        i += 1
-        i += ans_desc["imvar_cnt"]
-        i += ans_desc["addout_cnt"]
+        i += 1 + ans_desc["addout_cnt"] + ans_desc["imvar_cnt"]
 
     return general(user_ans, ans_desc, answer)
 
@@ -70,16 +73,13 @@ def clonegraph(user_ans, ans_desc, answer):
 def wordladders(user_ans, ans_desc, answer):
     i = 0
     while i < len(user_ans["out"]):
-        i += ans_desc["imvar_cnt"]
-        i += 1
+        i += ans_desc["imvar_cnt"] + 1
 
         arr = json.loads(user_ans["out"][i])
         arr.sort()
         user_ans["out"][i] = json.dumps(arr, separators=(",", ":"))
 
-        i += 1
-        i += ans_desc["imvar_cnt"]
-        i += ans_desc["addout_cnt"]
+        i += 1 + ans_desc["addout_cnt"] + ans_desc["imvar_cnt"]
 
     return general(user_ans, ans_desc, answer)
 
@@ -87,15 +87,12 @@ def wordladders(user_ans, ans_desc, answer):
 def sizedintarray(user_ans, ans_desc, answer):
     i = 0
     while i < len(user_ans["out"]):
-        i += ans_desc["imvar_cnt"]
-        i += 1
+        i += ans_desc["imvar_cnt"] + 1
 
         arr = json.loads(user_ans["out"][i])
         arr = arr[:int(user_ans["out"][i + 1])]
         user_ans["out"][i] = json.dumps(arr, separators=(",", ":"))
 
-        i += 1
-        i += ans_desc["imvar_cnt"]
-        i += ans_desc["addout_cnt"]
+        i += 1 + ans_desc["addout_cnt"] + ans_desc["imvar_cnt"]
 
     return general(user_ans, ans_desc, answer)

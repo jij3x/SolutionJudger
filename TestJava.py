@@ -34,7 +34,8 @@ GENR_PATH = "JavaGenerator"
 
 def cleanup_gens():
     for fname in os.listdir("."):
-        if fname in ("Driver.java", "Solution.java", "Driver.class", "Solution.class", "user.out", "user.err"):
+        if fname in ("Driver.java", "Solution.java", "Driver.class", "Solution.class",
+                     "user.out", "user.out.unfiltered", "user.err"):
             os.remove(fname)
 
 
@@ -109,9 +110,11 @@ def test_problem(problem_path, debug):
         result = judge_in_duty(user_ans, ans_desc, answer.read().splitlines())
 
         if debug:
-            with open("user.out", "w") as out_file, open("user.err", "w") as err_file:
-                out_file.write(user_ans["user_out"])
-                err_file.write(user_ans["user_err"])
+            with open("user.out", "w") as userout_file, open("user.out.unfiltered", "w") as progout_file, \
+                    open("user.err", "w") as err_file:
+                userout_file.write("\n".join(result["finalOut"]) + "\n")
+                progout_file.write("\n".join(user_ans["out"]) + "\n")
+                err_file.write("\n".join(user_ans["err"]) + "\n")
 
     #
     # Print out testing result
