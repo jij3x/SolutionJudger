@@ -90,15 +90,16 @@ def test_problem(problem_path, debug):
             open(os.path.join(problem_path, "user.out"), "r") as answer:
         sp = subprocess.Popen(["java", "Driver"], stdin=test_data, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         sol_out, sol_err = sp.communicate()
-        user_out = sol_out.decode("utf-8")
-        user_err = sol_err.decode("utf-8")
-        addout_cnt = len(problem_md["additionalOutput"]) if "additionalOutput" in problem_md else 0
-        judgement = judge_in_duty(0, addout_cnt, user_out.splitlines(), 0, user_err.splitlines(),
-                                  answer.read().splitlines(), 0, problem_md)
+
+        user_ans = {"return_code": 0,
+                    "out": sol_out.decode("utf-8").splitlines(),
+                    "err": sol_err.decode("utf-8").splitlines()}
+
+        result = judge_in_duty(user_ans, answer.read().splitlines(), problem_md)
         if debug:
             with open("user.out", "w") as out_file, open("user.err", "w") as err_file:
-                out_file.write(user_out)
-                err_file.write(user_err)
+                out_file.write(user_ans["user_out"])
+                err_file.write(user_ans["user_err"])
 
     #
     # Print out testing result
@@ -106,7 +107,7 @@ def test_problem(problem_path, debug):
     passed = "\033[92m" + "Passed" + "\033[0m"
     failed = "\033[91m" + "Failed" + "\033[0m"
     print(problem_path + " - ", end="")
-    print("runtime: %.5fms %s" % (judgement["execTime"], passed if judgement["rc"] == 0 else failed))
+    print("runtime: %.5fms %s" % (result["execTime"], passed if result["rc"] == 0 else failed))
 
 
 if "-c" in sys.argv:

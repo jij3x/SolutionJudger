@@ -37,22 +37,26 @@ type_map = {
     BOOL: {
         P_JAVA_T: "boolean",
         P_SER: "serializeBool",
-        P_DES: "deserializeBool"
+        P_DES: "deserializeBool",
+        P_OFLTR: "noFilter"
     },
     INT: {
         P_JAVA_T: "int",
         P_SER: "serializeInt",
-        P_DES: "deserializeInt"
+        P_DES: "deserializeInt",
+        P_OFLTR: "noFilter"
     },
     DOUBLE: {
         P_JAVA_T: "double",
         P_SER: "serializeDouble",
-        P_DES: "deserializeDouble"
+        P_DES: "deserializeDouble",
+        P_OFLTR: "noFilter"
     },
     TEXT: {
         P_JAVA_T: "String",
         P_SER: "serializeText",
-        P_DES: "deserializeText"
+        P_DES: "deserializeText",
+        P_OFLTR: "noFilter"
     },
     MUTABLE_STRING: {
         P_JAVA_T: "StringBuilder",
@@ -60,37 +64,44 @@ type_map = {
         P_CPP_T: "string&",
         P_CS_T: "ref string",
         P_SER: "serializeString",
-        P_DES: "deserializeString"
+        P_DES: "deserializeString",
+        P_OFLTR: "noFilter"
     },
     STRING: {
         P_JAVA_T: "String",
         P_SER: "serializeString",
-        P_DES: "deserializeString"
+        P_DES: "deserializeString",
+        P_OFLTR: "noFilter"
     },
     INT_ARR: {
         P_JAVA_T: "int[]",
         P_SER: "serializeIntArray",
-        P_DES: "deserializeIntArray"
+        P_DES: "deserializeIntArray",
+        P_OFLTR: "noFilter"
     },
     INT_2D_ARR: {
         P_JAVA_T: "int[][]",
         P_SER: "serializeInt2DArray",
-        P_DES: "deserializeInt2DArray"
+        P_DES: "deserializeInt2DArray",
+        P_OFLTR: "noFilter"
     },
     INT_VEC: {
         P_JAVA_T: "List<Integer>",
         P_SER: "serializeIntVector",
-        P_DES: "deserializeIntVector"
+        P_DES: "deserializeIntVector",
+        P_OFLTR: "noFilter"
     },
     CHAR_ARR: {
         P_JAVA_T: "char[]",
         P_SER: "serializeCharArray",
-        P_DES: "deserializeCharArray"
+        P_DES: "deserializeCharArray",
+        P_OFLTR: "noFilter"
     },
     CHAR_2D_ARR: {
         P_JAVA_T: "char[][]",
         P_SER: "serializeChar2DArray",
-        P_DES: "deserializeChar2DArray"
+        P_DES: "deserializeChar2DArray",
+        P_OFLTR: "noFilter"
     },
     STRING_ARR: {
         P_JAVA_T: "String[]",
@@ -100,22 +111,26 @@ type_map = {
     STRING_VEC: {
         P_JAVA_T: "List<String>",
         P_SER: "serializeStringVector",
-        P_DES: "deserializeStringVector"
+        P_DES: "deserializeStringVector",
+        P_OFLTR: "noFilter"
     },
     STRING_2D_VEC: {
         P_JAVA_T: "List<List<String>>",
         P_SER: "serializeString2DVector",
-        P_DES: "deserializeString2DVector"
+        P_DES: "deserializeString2DVector",
+        P_OFLTR: "noFilter"
     },
     STRING_SET: {
         P_JAVA_T: "Set<String>",
         P_SER: "serializeStringSet",
-        P_DES: "deserializeStringSet"
+        P_DES: "deserializeStringSet",
+        P_OFLTR: "noFilter"
     },
     INT_SLLIST: {
         P_JAVA_T: "ListNode",
         P_SER: "serializeIntSLList",
-        P_DES: "deserializeIntSLList"
+        P_DES: "deserializeIntSLList",
+        P_OFLTR: "noFilter"
     },
     INT_UDGRAPH: {
         P_JAVA_T: "UndirectedGraphNode",
@@ -126,6 +141,7 @@ type_map = {
     INT_BINARYTREE: {
         P_JAVA_T: "TreeNode",
         P_SER: "serializeIntBinaryTree",
-        P_DES: "deserializeIntBinaryTree"
+        P_DES: "deserializeIntBinaryTree",
+        P_OFLTR: "noFilter"
     }
 }
