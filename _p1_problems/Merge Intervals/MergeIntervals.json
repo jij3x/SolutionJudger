@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "intervals",
+      "type": "+vector<:iinterval>"
+    }
+  ],
+  "solution": {
+    "actionName": "merge",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:iinterval>"
+    }
+  },
+  "output": "solution.return"
+}

@@ -20,6 +20,8 @@ STRING_SET = "+set<:string>"
 INT_BINARYTREE = "+binarytree<:int>"
 IPOINT = ":ipoint"
 IPOINT_ARR = "+array<:ipoint>"
+IINTERVAL = ":iinterval"
+IINTERVAL_VEC = "+vector<:iinterval>"
 
 NOCHANGE = "nochange"
 
@@ -163,5 +165,17 @@ type_map = {
         P_SER: "serializeIPointArray",
         P_DES: "deserializeIPointArray",
         P_OFLTR: "no_filter"
+    },
+    IINTERVAL: {
+        P_JAVA_T: "Interval",
+        P_SER: "serializeIInterval",
+        P_DES: "deserializeIInterval",
+        P_OFLTR: "no_filter"
+    },
+    IINTERVAL_VEC: {
+        P_JAVA_T: "List<Interval>",
+        P_SER: "serializeIIntervalVector",
+        P_DES: "deserializeIIntervalVector",
+        P_OFLTR: "iintervalvec_filter"
     }
 }

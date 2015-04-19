@@ -258,6 +258,25 @@ public class Serializer {
         return r.toString();
     }
 
+    public static String serializeIInterval(Interval interval) {
+        if (interval == null)
+            return "[]";
+
+        return String.format("[%d,%d,%d]", interval._seqNo, interval.start, interval.end);
+    }
+
+    public static String serializeIIntervalVector(List<Interval> vector) {
+        if (vector == null || vector.size() == 0)
+            return "[]";
+
+        StringBuilder r = new StringBuilder("[");
+        for (int i = 0; i < vector.size(); i++) {
+            r.append(i == 0 ? "" : ",").append(serializeIInterval(vector.get(i)));
+        }
+        r.append("]");
+        return r.toString();
+    }
+
     public static boolean deserializeBoo(StreamTokenizer tokenizer) throws IOException {
         tokenizer.nextToken();
         return tokenizer.sval.equals("true") ? true : false;
@@ -483,5 +502,25 @@ public class Serializer {
             array[i] = deserializeIPoint(tokenizer);
         }
         return array;
+    }
+
+    public static Interval deserializeIInterval(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        int start = (int) tokenizer.nval;
+        tokenizer.nextToken();
+        int end = (int) tokenizer.nval;
+
+        return new Interval(start, end);
+    }
+
+    public static List<Interval> deserializeIIntervalVector(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        int cnt = (int) tokenizer.nval;
+
+        ArrayList<Interval> vector = new ArrayList<Interval>();
+        for (int i = 0; i < cnt; i++) {
+            vector.add(deserializeIInterval(tokenizer));
+        }
+        return vector;
     }
 }

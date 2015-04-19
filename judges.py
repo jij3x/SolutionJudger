@@ -36,6 +36,14 @@ def binarytree_filter(line):
     return "[{}]".format(",".join(filtered))
 
 
+def iintervalvec_filter(line):
+    intervals = json.loads(line)
+    for interval in intervals:
+        interval[0:] = interval[1:]
+
+    return json.dumps(intervals, separators=(",", ":"))
+
+
 def general(user_ans, ans_desc, answer):
     result = {"rc": -1, "msg": "", "execTime": 0, "finalOut": []}
 
