@@ -379,13 +379,12 @@ public class Serializer {
             return null;
 
         int seqNo = 0;
-        String nullNode = "#";
         ArrayList<TreeNode> list = new ArrayList<TreeNode>();
         list.add(new TreeNode(0));
         for (int i = 0, f = 1, ptr = 0; i < size; i++) {
             TreeNode newNode = null;
             tokenizer.nextToken();
-            if (!nullNode.equals(tokenizer.sval)) {
+            if (tokenizer.ttype != '#') {
                 newNode = new TreeNode((int) tokenizer.nval);
                 newNode._seqNo = seqNo++;
                 list.add(newNode);
