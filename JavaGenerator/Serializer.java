@@ -26,6 +26,10 @@ public class Serializer {
         return "\"" + s + "\"";
     }
 
+    public static String serializeMutableString(StringBuilder s) {
+        return s.insert(0, "\"").append("\"").toString();
+    }
+
     public static String serializeStringArray(String[] array) {
         if (array == null || array.length == 0)
             return "[]";
@@ -249,6 +253,11 @@ public class Serializer {
     public static String deserializeString(StreamTokenizer tokenizer) throws IOException {
         tokenizer.nextToken();
         return tokenizer.sval;
+    }
+
+    public static StringBuilder deserializeMutableString(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        return new StringBuilder(tokenizer.sval);
     }
 
     public static String[] deserializeStringArray(StreamTokenizer tokenizer) throws IOException {

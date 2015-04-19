@@ -1,0 +1,15 @@
+{
+  "input": [
+    {
+      "name": "s",
+      "type": ":mutable_string"
+    }
+  ],
+  "solution": {
+    "actionName": "reverseWords",
+    "params": [
+      "input[0]"
+    ]
+  },
+  "output": "input[0]"
+}

@@ -63,8 +63,8 @@ type_map = {
         P_C_T: "char *",
         P_CPP_T: "string&",
         P_CS_T: "ref string",
-        P_SER: "serializeString",
-        P_DES: "deserializeString",
+        P_SER: "serializeMutableString",
+        P_DES: "deserializeMutableString",
         P_OFLTR: "no_filter"
     },
     STRING: {
