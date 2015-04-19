@@ -7,6 +7,7 @@ MUTABLE_STRING = ":mutable_string"
 INT_ARR = "+array<:int>"
 INT_2D_ARR = "+array<+array<:int>>"
 INT_VEC = "+vector<:int>"
+INT_2D_VEC = "+vector<+vector<:int>>"
 INT_SLLIST = "+sllist<:int>"
 INT_UDGRAPH = "+udgraph<:int>"
 CHAR_ARR = "+array<:char>"
@@ -90,6 +91,12 @@ type_map = {
         P_DES: "deserializeIntVector",
         P_OFLTR: "no_filter"
     },
+    INT_2D_VEC: {
+        P_JAVA_T: "List<List<Integer>>",
+        P_SER: "serializeInt2DVector",
+        P_DES: "deserializeInt2DVector",
+        P_OFLTR: "no_filter"
+    },
     CHAR_ARR: {
         P_JAVA_T: "char[]",
         P_SER: "serializeCharArray",
@@ -129,7 +136,7 @@ type_map = {
         P_JAVA_T: "ListNode",
         P_SER: "serializeIntSLList",
         P_DES: "deserializeIntSLList",
-        P_OFLTR: "no_filter"
+        P_OFLTR: "sllist_filter"
     },
     INT_UDGRAPH: {
         P_JAVA_T: "UndirectedGraphNode",
@@ -141,6 +148,6 @@ type_map = {
         P_JAVA_T: "TreeNode",
         P_SER: "serializeIntBinaryTree",
         P_DES: "deserializeIntBinaryTree",
-        P_OFLTR: "no_filter"
+        P_OFLTR: "binarytree_filter"
     }
 }

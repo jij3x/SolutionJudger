@@ -5,12 +5,23 @@ def no_filter(line):
     return line
 
 
+def sllist_filter(line):
+    sllist = json.loads(line)
+    sllist[0:] = sllist[1::2]
+
+    return json.dumps(sllist, separators=(",", ":"))
+
+
 def udgraph_filter(line):
     graph = json.loads(line)
     for node in graph:
         node[0:] = node[1::2]
 
     return json.dumps(graph, separators=(",", ":"))
+
+
+def binarytree_filter(line):
+    pass
 
 
 def general(user_ans, ans_desc, answer):

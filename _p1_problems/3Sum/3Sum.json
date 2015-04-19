@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "num",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "threeSum",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<+vector<:int>>"
+    }
+  },
+  "output": "solution.return"
+}

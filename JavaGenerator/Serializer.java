@@ -131,9 +131,8 @@ public class Serializer {
             return "[]";
 
         StringBuilder r = new StringBuilder();
-        int i = 0;
         for (List<Integer> v : vector) {
-            r.append(i++ > 0 ? "," : "").append(serializeIntVector(v));
+            r.append(",").append(serializeIntVector(v));
         }
         r.setCharAt(0, '[');
         r.append("]");
