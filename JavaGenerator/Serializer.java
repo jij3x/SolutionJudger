@@ -239,6 +239,25 @@ public class Serializer {
         return r.toString();
     }
 
+    public static String serializeIPoint(Point point) {
+        if (point == null)
+            return "[]";
+
+        return String.format("[%d,%d,%d]", point._seqNo, point.x, point.y);
+    }
+
+    public static String serializeIPointArray(Point[] array) {
+        if (array == null || array.length == 0)
+            return "[]";
+
+        StringBuilder r = new StringBuilder("[");
+        for (int i = 0; i < array.length; i++) {
+            r.append(i == 0 ? "" : ",").append(serializeIPoint(array[i]));
+        }
+        r.append("]");
+        return r.toString();
+    }
+
     public static boolean deserializeBoo(StreamTokenizer tokenizer) throws IOException {
         tokenizer.nextToken();
         return tokenizer.sval.equals("true") ? true : false;
@@ -444,5 +463,25 @@ public class Serializer {
             }
         }
         return graph;
+    }
+
+    public static Point deserializeIPoint(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        int x = (int) tokenizer.nval;
+        tokenizer.nextToken();
+        int y = (int) tokenizer.nval;
+
+        return new Point(x, y);
+    }
+
+    public static Point[] deserializeIPointArray(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        int cnt = (int) tokenizer.nval;
+
+        Point[] array = new Point[cnt];
+        for (int i = 0; i < cnt; i++) {
+            array[i] = deserializeIPoint(tokenizer);
+        }
+        return array;
     }
 }

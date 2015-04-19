@@ -18,6 +18,8 @@ STRING_VEC = "+vector<:string>"
 STRING_2D_VEC = "+vector<+vector<:string>>"
 STRING_SET = "+set<:string>"
 INT_BINARYTREE = "+binarytree<:int>"
+IPOINT = ":ipoint"
+IPOINT_ARR = "+array<:ipoint>"
 
 NOCHANGE = "nochange"
 
@@ -149,5 +151,17 @@ type_map = {
         P_SER: "serializeIntBinaryTree",
         P_DES: "deserializeIntBinaryTree",
         P_OFLTR: "binarytree_filter"
+    },
+    IPOINT: {
+        P_JAVA_T: "Point",
+        P_SER: "serializeIPoint",
+        P_DES: "deserializeIPoint",
+        P_OFLTR: "no_filter"
+    },
+    IPOINT_ARR: {
+        P_JAVA_T: "Point[]",
+        P_SER: "serializeIPointArray",
+        P_DES: "deserializeIPointArray",
+        P_OFLTR: "no_filter"
     }
 }

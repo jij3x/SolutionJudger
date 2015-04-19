@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "p",
+      "type": "+array<:ipoint>"
+    }
+  ],
+  "solution": {
+    "actionName": "maxPoints",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}
