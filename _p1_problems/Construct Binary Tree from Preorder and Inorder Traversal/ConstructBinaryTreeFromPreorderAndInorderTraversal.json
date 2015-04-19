@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "preorder",
+      "type": "+array<:int>"
+    },
+    {
+      "name": "inorder",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "buildTree",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": "+binarytree<:int>"
+    }
+  },
+  "output": "solution.return"
+}

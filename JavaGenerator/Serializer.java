@@ -191,16 +191,20 @@ public class Serializer {
                 r.append(",#");
             } else {
                 que.add(curr.left);
-                r.append(",").append(node.left._seqNo).append(",").append(node.left.val);
+                r.append(",").append(curr.left._seqNo).append(",").append(curr.left.val);
             }
 
             if (curr.right == null) {
                 r.append(",#");
             } else {
                 que.add(curr.right);
-                r.append(",").append(node.right._seqNo).append(",").append(node.right.val);
+                r.append(",").append(curr.right._seqNo).append(",").append(curr.right.val);
             }
         }
+        int len = r.length();
+        while (r.charAt(len - 1) == '#' && r.charAt(len - 2) == ',')
+            len -= 2;
+        r.setLength(len);
         r.append("]");
         return r.toString();
     }

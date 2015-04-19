@@ -21,7 +21,19 @@ def udgraph_filter(line):
 
 
 def binarytree_filter(line):
-    pass
+    tree = line[1:-1].split(",")
+    filtered = []
+    f = 0
+    for n in tree:
+        if n != "#":
+            if f == 1:
+                filtered.append(n)
+            f ^= 1
+        else:
+            f = 0
+            filtered.append(n)
+
+    return "[{}]".format(",".join(filtered))
 
 
 def general(user_ans, ans_desc, answer):
