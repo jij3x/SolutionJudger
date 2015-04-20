@@ -46,6 +46,18 @@ def binarytree_filter(line):
     return "[{}]".format(",".join(filtered))
 
 
+def binarytreevector_filter(line):
+    if line == "[]":
+        return line
+
+    trees = line[1:-1].split("],[")
+    for i in range(len(trees)):
+        trees[i] = ("" if trees[i].startswith("[") else "[") + trees[i] + ("" if trees[i].endswith("]") else "]")
+        trees[i] = binarytree_filter(trees[i])
+
+    return "[{}]".format(",".join(trees))
+
+
 def iintervalvec_filter(line):
     intervals = json.loads(line)
     for interval in intervals:

@@ -19,6 +19,7 @@ STRING_VEC = "+vector<:string>"
 STRING_2D_VEC = "+vector<+vector<:string>>"
 STRING_SET = "+set<:string>"
 INT_BINARYTREE = "+binarytree<:int>"
+INT_BINARYTREE_VEC = "+vector<:binarytree>"
 INT_LBINARYTREE = "+lbinarytree<:int>"
 IPOINT = ":ipoint"
 IPOINT_ARR = "+array<:ipoint>"
@@ -161,6 +162,12 @@ type_map = {
         P_SER: "serializeIntBinaryTree",
         P_DES: "deserializeIntBinaryTree",
         P_OFLTR: "binarytree_filter"
+    },
+    INT_BINARYTREE_VEC: {
+        P_JAVA_T: "List<TreeNode>",
+        P_SER: "serializeIntBinaryTreeVector",
+        P_DES: "deserializeIntBinaryTreeVector",
+        P_OFLTR: "binarytreevector_filter"
     },
     INT_LBINARYTREE: {
         P_JAVA_T: "TreeLinkNode",

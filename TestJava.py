@@ -125,6 +125,8 @@ def test_problem(problem_path, debug):
     print(problem_path + " - ", end="")
     print("runtime: %.5fms %s" % (result["execTime"], passed if result["rc"] == 0 else failed))
 
+    return 0 if result["rc"] == 0 else 1
+
 
 if "-c" in sys.argv:
     cleanup_gens()
@@ -141,22 +143,30 @@ if "-s" in sys.argv:
 if "-quick" not in sys.argv:
     setup_stage()
 
+total_problem = 0
+total_failed = 0
 if "-all" in sys.argv:
     for directory in os.listdir(P1PROB_PATH):
         if os.path.isdir(os.path.join(P1PROB_PATH, directory)):
-            test_problem(os.path.join(P1PROB_PATH, directory), "-debug" in sys.argv)
+            total_problem += 1
+            total_failed += test_problem(os.path.join(P1PROB_PATH, directory), "-debug" in sys.argv)
     for directory in os.listdir(PROB_PATH):
         if os.path.isdir(os.path.join(PROB_PATH, directory)):
-            test_problem(os.path.join(PROB_PATH, directory), "-debug" in sys.argv)
+            total_problem += 1
+            total_failed += test_problem(os.path.join(PROB_PATH, directory), "-debug" in sys.argv)
 else:
     path_list = [p for p in sys.argv[1:] if p not in ["-all", "-quick", "-debug"]]
     if len(path_list) == 0:
         for directory in os.listdir(P1PROB_PATH):
             if os.path.isdir(os.path.join(P1PROB_PATH, directory)):
-                test_problem(os.path.join(P1PROB_PATH, directory), "-debug" in sys.argv)
+                total_problem += 1
+                total_failed += test_problem(os.path.join(P1PROB_PATH, directory), "-debug" in sys.argv)
     else:
         for path in path_list:
-            test_problem(path, "-debug" in sys.argv)
+            total_problem += 1
+            total_failed += test_problem(path, "-debug" in sys.argv)
+print("\nTotal {} problems, ".format(total_problem), end="")
+print("all passed" if total_failed == 0 else "{} failed".format(total_failed))
 
 if "-debug" not in sys.argv:
     cleanup_gens()

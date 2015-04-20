@@ -225,6 +225,19 @@ public class Serializer {
         return r.toString();
     }
 
+    public static String serializeIntBinaryTreeVector(List<TreeNode> list) {
+        if (list == null || list.size() == 0)
+            return "[]";
+
+        StringBuilder r = new StringBuilder();
+        for (TreeNode tree : list) {
+            r.append(",").append(serializeIntBinaryTree(tree));
+        }
+        r.setCharAt(0, '[');
+        r.append("]");
+        return r.toString();
+    }
+
     public static String serializeIntLinkedBinaryTree(TreeLinkNode node) {
         if (node == null)
             return "[]";
@@ -505,6 +518,17 @@ public class Serializer {
             ptr += (f = f ^ 1) == 0 ? 1 : 0;
         }
         return list.get(1);
+    }
+
+    public static List<TreeNode> deserializeIntBinaryTreeVector(StreamTokenizer tokenizer) throws IOException {
+        ArrayList<TreeNode> list = new ArrayList<TreeNode>();
+
+        tokenizer.nextToken();
+        int size = (int) tokenizer.nval;
+        for (int i = 0; i < size; i++) {
+            list.add(deserializeIntBinaryTree(tokenizer));
+        }
+        return list;
     }
 
     public static TreeLinkNode deserializeIntLinkedBinaryTree(StreamTokenizer tokenizer) throws IOException {
