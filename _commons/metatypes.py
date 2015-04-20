@@ -9,6 +9,7 @@ INT_2D_ARR = "+array<+array<:int>>"
 INT_VEC = "+vector<:int>"
 INT_2D_VEC = "+vector<+vector<:int>>"
 INT_SLLIST = "+sllist<:int>"
+INT_SLRLIST = "+slrlist<:int>"
 INT_UDGRAPH = "+udgraph<:int>"
 CHAR_ARR = "+array<:char>"
 CHAR_2D_ARR = "+array<+array<:char>>"
@@ -18,6 +19,7 @@ STRING_VEC = "+vector<:string>"
 STRING_2D_VEC = "+vector<+vector<:string>>"
 STRING_SET = "+set<:string>"
 INT_BINARYTREE = "+binarytree<:int>"
+INT_LBINARYTREE = "+lbinarytree<:int>"
 IPOINT = ":ipoint"
 IPOINT_ARR = "+array<:ipoint>"
 IINTERVAL = ":iinterval"
@@ -142,6 +144,12 @@ type_map = {
         P_DES: "deserializeIntSLList",
         P_OFLTR: "sllist_filter"
     },
+    INT_SLRLIST: {
+        P_JAVA_T: "RandomListNode",
+        P_SER: "serializeIntSLRList",
+        P_DES: "deserializeIntSLRList",
+        P_OFLTR: "slrlist_filter"
+    },
     INT_UDGRAPH: {
         P_JAVA_T: "UndirectedGraphNode",
         P_SER: "serializeIntUDGraph",
@@ -152,6 +160,12 @@ type_map = {
         P_JAVA_T: "TreeNode",
         P_SER: "serializeIntBinaryTree",
         P_DES: "deserializeIntBinaryTree",
+        P_OFLTR: "binarytree_filter"
+    },
+    INT_LBINARYTREE: {
+        P_JAVA_T: "TreeLinkNode",
+        P_SER: "serializeIntLinkedBinaryTree",
+        P_DES: "deserializeIntLinkedBinaryTree",
         P_OFLTR: "binarytree_filter"
     },
     IPOINT: {

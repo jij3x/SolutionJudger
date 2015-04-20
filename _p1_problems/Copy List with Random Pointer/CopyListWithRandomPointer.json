@@ -1,0 +1,19 @@
+{
+  "input": [
+    {
+      "name": "head",
+      "type": "nochange +slrlist<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "copyRandomList",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+slrlist<:int>"
+    }
+  },
+  "output": "solution.return",
+  "judge": "copyrandomlist_judge"
+}

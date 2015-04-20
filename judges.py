@@ -12,6 +12,16 @@ def sllist_filter(line):
     return json.dumps(sllist, separators=(",", ":"))
 
 
+def slrlist_filter(line):
+    if line == "[]":
+        return line
+
+    nodes = line[1:-1].split(",")
+    finallist = nodes[:- len(nodes) // 3][1::2] + nodes[- len(nodes) // 3:]
+
+    return "[{}]".format(",".join(finallist))
+
+
 def udgraph_filter(line):
     graph = json.loads(line)
     for node in graph:
@@ -69,6 +79,10 @@ def general(user_ans, ans_desc, answer):
 
         j += 1
 
+    if j != len(answer):
+        result["msg"] = "solution stopped at case #{}".format(j)
+        return result
+
     result["rc"] = 0
     return result
 
@@ -95,6 +109,27 @@ def clonegraph(user_ans, ans_desc, answer):
             node[0:] = [x for t in zip(seq_arr, node) for x in t]
 
         user_ans["out"][i] = json.dumps(graph, separators=(",", ":"))
+
+        i += 1 + ans_desc["addout_cnt"] + ans_desc["imvar_cnt"]
+
+    return general(user_ans, ans_desc, answer)
+
+
+def copyrandomlist(user_ans, ans_desc, answer):
+    result = {"rc": -1, "msg": "", "execTime": 0, "finalOut": []}
+
+    i = 0
+    while i < len(user_ans["out"]):
+        i += ans_desc["imvar_cnt"] + 1
+
+        line = user_ans["out"][i][1:-1]
+        if line:
+            slrlist = line.split(",")
+            nodes = slrlist[:- len(slrlist) // 3]
+            seq_arr = nodes[0::2]
+            if not (seq_arr[1:] == seq_arr[:-1] and seq_arr[0] == "-1"):
+                result["msg"] = "new nodes are tampered"
+                return result
 
         i += 1 + ans_desc["addout_cnt"] + ans_desc["imvar_cnt"]
 

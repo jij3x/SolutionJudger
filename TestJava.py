@@ -78,7 +78,8 @@ def test_problem(problem_path, debug):
         judge_in_duty = judges.general
         judge_board = {"clonegraph_judge": judges.clonegraph,
                        "wordladders_judge": judges.wordladders,
-                       "sizedintarray_judge": judges.sizedintarray}
+                       "sizedintarray_judge": judges.sizedintarray,
+                       "copyrandomlist_judge": judges.copyrandomlist}
         if "judge" in metadata and metadata["judge"] in judge_board:
             judge_in_duty = judge_board[metadata["judge"]]
 

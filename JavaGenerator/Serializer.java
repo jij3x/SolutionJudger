@@ -177,6 +177,22 @@ public class Serializer {
         return r.toString();
     }
 
+    public static String serializeIntSLRList(RandomListNode node) {
+        if (node == null)
+            return "[]";
+
+        StringBuilder r = new StringBuilder();
+        for (RandomListNode ptr = node; ptr != null; ptr = ptr.next) {
+            r.append(",").append(ptr._seqNo).append(",").append(ptr.label);
+        }
+        for (RandomListNode ptr = node; ptr != null; ptr = ptr.next) {
+            r.append(",").append(ptr.random == null ? "#" : ptr.random.label);
+        }
+        r.setCharAt(0, '[');
+        r.append("]");
+        return r.toString();
+    }
+
     public static String serializeIntBinaryTree(TreeNode node) {
         if (node == null)
             return "[]";
@@ -206,6 +222,25 @@ public class Serializer {
             len -= 2;
         r.setLength(len);
         r.append("]");
+        return r.toString();
+    }
+
+    public static String serializeIntLinkedBinaryTree(TreeLinkNode node) {
+        if (node == null)
+            return "[]";
+
+        StringBuilder r = new StringBuilder();
+        while (node != null) {
+            TreeLinkNode ptr = node;
+            while (ptr != null) {
+                r.append(',').append(ptr._seqNo).append(',').append(ptr.val);
+                ptr = ptr.next;
+            }
+            r.append(',').append('#');
+            node = node.left;
+        }
+        r.setCharAt(0, '[');
+        r.append(']');
         return r.toString();
     }
 
@@ -423,6 +458,31 @@ public class Serializer {
         return start.next;
     }
 
+    public static RandomListNode deserializeIntSLRList(StreamTokenizer tokenizer) throws IOException {
+        RandomListNode start = new RandomListNode(0), tail = start;
+        HashMap<Integer, RandomListNode> memo = new HashMap<Integer, RandomListNode>();
+
+        int seqNo = 0;
+        tokenizer.nextToken();
+        int size = (int) tokenizer.nval;
+        for (int i = 0; i < size / 2; i++) {
+            tokenizer.nextToken();
+            RandomListNode node = new RandomListNode((int) tokenizer.nval);
+            memo.put(node.label, node);
+            node._seqNo = seqNo++;
+            tail.next = node;
+            tail = node;
+        }
+
+        for (RandomListNode ptr = start.next; ptr != null; ptr = ptr.next) {
+            tokenizer.nextToken();
+            if (tokenizer.ttype != '#') {
+                ptr.random = memo.get((int) tokenizer.nval);
+            }
+        }
+        return start.next;
+    }
+
     public static TreeNode deserializeIntBinaryTree(StreamTokenizer tokenizer) throws IOException {
         tokenizer.nextToken();
         int size = (int) tokenizer.nval;
@@ -437,6 +497,30 @@ public class Serializer {
             tokenizer.nextToken();
             if (tokenizer.ttype != '#') {
                 newNode = new TreeNode((int) tokenizer.nval);
+                newNode._seqNo = seqNo++;
+                list.add(newNode);
+            }
+            list.get(ptr).left = (f == 0) ? newNode : list.get(ptr).left;
+            list.get(ptr).right = (f == 1) ? newNode : list.get(ptr).right;
+            ptr += (f = f ^ 1) == 0 ? 1 : 0;
+        }
+        return list.get(1);
+    }
+
+    public static TreeLinkNode deserializeIntLinkedBinaryTree(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        int size = (int) tokenizer.nval;
+        if (size == 0)
+            return null;
+
+        int seqNo = 0;
+        ArrayList<TreeLinkNode> list = new ArrayList<TreeLinkNode>();
+        list.add(new TreeLinkNode(0));
+        for (int i = 0, f = 1, ptr = 0; i < size; i++) {
+            TreeLinkNode newNode = null;
+            tokenizer.nextToken();
+            if (tokenizer.ttype != '#') {
+                newNode = new TreeLinkNode((int) tokenizer.nval);
                 newNode._seqNo = seqNo++;
                 list.add(newNode);
             }
