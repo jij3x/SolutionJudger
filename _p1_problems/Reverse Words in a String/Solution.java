@@ -13,9 +13,9 @@ public class Solution {
             }
         }
 
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < reversed.length(); i++) {
             s.setCharAt(i, reversed.charAt(i));
         }
-        reversed.toString();
+        s.setLength(reversed.length());
     }
 }
