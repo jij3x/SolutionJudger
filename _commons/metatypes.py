@@ -9,6 +9,7 @@ INT_2D_ARR = "+array<+array<:int>>"
 INT_VEC = "+vector<:int>"
 INT_2D_VEC = "+vector<+vector<:int>>"
 INT_SLLIST = "+sllist<:int>"
+INT_SLLIST_VEC = "+vector<+sllist<:int>>"
 INT_SLRLIST = "+slrlist<:int>"
 INT_UDGRAPH = "+udgraph<:int>"
 CHAR_ARR = "+array<:char>"
@@ -144,6 +145,12 @@ type_map = {
         P_SER: "serializeIntSLList",
         P_DES: "deserializeIntSLList",
         P_OFLTR: "sllist_filter"
+    },
+    INT_SLLIST_VEC: {
+        P_JAVA_T: "List<ListNode>",
+        P_SER: "serializeIntSLListVector",
+        P_DES: "deserializeIntSLListVector",
+        P_OFLTR: "no_filter"
     },
     INT_SLRLIST: {
         P_JAVA_T: "RandomListNode",

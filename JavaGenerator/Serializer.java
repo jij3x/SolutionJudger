@@ -177,6 +177,19 @@ public class Serializer {
         return r.toString();
     }
 
+    public static String serializeIntSLListVector(List<ListNode> vector) {
+        if (vector == null || vector.size() == 0)
+            return "[]";
+
+        StringBuilder r = new StringBuilder("[");
+        for (ListNode node : vector) {
+            r.append(",").append(serializeIntSLList(node));
+        }
+        r.setCharAt(0, '[');
+        r.append("]");
+        return r.toString();
+    }
+
     public static String serializeIntSLRList(RandomListNode node) {
         if (node == null)
             return "[]";
@@ -469,6 +482,17 @@ public class Serializer {
             tail = node;
         }
         return start.next;
+    }
+
+    public static List<ListNode> deserializeIntSLListVector(StreamTokenizer tokenizer) throws IOException {
+        ArrayList<ListNode> vector = new ArrayList<ListNode>();
+
+        tokenizer.nextToken();
+        int size = (int) tokenizer.nval;
+        for (int i = 0; i < size; i++) {
+            vector.add(deserializeIntSLList(tokenizer));
+        }
+        return vector;
     }
 
     public static RandomListNode deserializeIntSLRList(StreamTokenizer tokenizer) throws IOException {

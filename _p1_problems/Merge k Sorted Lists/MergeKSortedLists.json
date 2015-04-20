@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "lists",
+      "type": "+vector<+sllist<:int>>"
+    }
+  ],
+  "solution": {
+    "actionName": "mergeKLists",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+sllist<:int>"
+    }
+  },
+  "output": "solution.return"
+}
