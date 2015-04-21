@@ -262,3 +262,4 @@ def evaluate(problem_path, debug):
     print("runtime: %.5fms %s" % (result["execTime"], passed if result["rc"] == 0 else failed))
 
     return 0 if result["rc"] == 0 else 1
+
