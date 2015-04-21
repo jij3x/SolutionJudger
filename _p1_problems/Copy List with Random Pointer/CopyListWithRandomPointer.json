@@ -15,5 +15,5 @@
     }
   },
   "output": "solution.return",
-  "judge": "copyrandomlist_judge"
+  "grader": "copyrandomlist_grader"
 }

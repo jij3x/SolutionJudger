@@ -18,5 +18,5 @@
   "additionalOutput": [
     "solution.return"
   ],
-  "judge": "sizedintarray_judge"
+  "grader": "sizedintarray_grader"
 }

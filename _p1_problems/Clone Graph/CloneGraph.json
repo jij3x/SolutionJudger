@@ -15,5 +15,5 @@
     }
   },
   "output": "solution.return",
-  "judge": "clonegraph_judge"
+  "grader": "clonegraph_grader"
 }

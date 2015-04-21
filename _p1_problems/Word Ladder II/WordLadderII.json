@@ -25,5 +25,5 @@
     }
   },
   "output": "solution.return",
-  "judge": "wordladders_judge"
+  "grader": "wordladders_grader"
 }
