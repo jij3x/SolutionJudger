@@ -192,7 +192,42 @@ def sizedintarray_grader(user_ans, ans_desc, answer):
     return general_grader(user_ans, ans_desc, answer)
 
 
-def evaluate(problem_path, debug):
+RC = "return_code"
+OUT = "user_out"
+ERR = "user_err"
+IVC = "immutable_var_cnt"
+AOC = "additional_out_cnt"
+AO = "additional_out"
+OF = "out_filter"
+ET = "execution_time"
+BIV = "immutable_var_before_exec"
+AIV = "immutable_var_after_exec"
+
+
+def get_user_ans(sol_out, metadata):
+    user_ans = {RC: 0,
+                IVC: m.unchangeable_param_cnt(metadata),
+                AOC: len(metadata[m.ADO]) if m.ADO in metadata else 0,
+                OF: tim[m.get_prop(metadata, metadata[m.OUT])[m.TYP]][t.P_OFLTR],
+                BIV: [],
+                ET: [],
+                OUT: [],
+                AO: [],
+                AIV: []}
+
+    segment = user_ans[IVC] * 2 + 2 + user_ans[AOC]
+    sol_out += [""] * (segment - len(sol_out) % segment)
+    for i in range(0, len(sol_out), segment):
+        user_ans[BIV].append(sol_out[i: i + user_ans[IVC]])
+        user_ans[ET].append(sol_out[i + user_ans[IVC]: i + user_ans[IVC] + 1])
+        user_ans[OUT].append(sol_out[i + user_ans[IVC] + 1: i + user_ans[IVC] + 2])
+        user_ans[AO].append(sol_out[i + user_ans[IVC] + 2: i + user_ans[IVC] + 2 + user_ans[AOC]])
+        user_ans[AIV].append(sol_out[i + user_ans[IVC] + 2 + user_ans[AOC]:])
+
+    return user_ans
+
+
+def evaluate(problem_path):
     #
     # Find problem metadata
     #
@@ -210,14 +245,6 @@ def evaluate(problem_path, debug):
         metadata_file.seek(0, 0)
         metadata = json.load(metadata_file)
         m.complete_metadata(metadata)
-
-        grader = general_grader
-        grader_board = {"clonegraph_judge": clonegraph_grader,
-                        "wordladders_judge": wordladders_grader,
-                        "sizedintarray_judge": sizedintarray_grader,
-                        "copyrandomlist_judge": copyrandomlist_grader}
-        if "judge" in metadata and metadata["judge"] in grader_board:
-            grader = grader_board[metadata["judge"]]
 
     #
     # Compose Solution.java
@@ -238,28 +265,7 @@ def evaluate(problem_path, debug):
         sp = subprocess.Popen(["java", "Driver"], stdin=test_data, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         sol_out, sol_err = sp.communicate()
 
-        user_ans = {"return_code": 0,
-                    "out": sol_out.decode("utf-8").splitlines(),
-                    "err": sol_err.decode("utf-8").splitlines()}
-        ans_desc = {"imvar_cnt": m.unchangeable_param_cnt(metadata),
-                    "addout_cnt": len(metadata[m.ADO]) if m.ADO in metadata else 0,
-                    "out_filter": tim[m.get_prop(metadata, metadata[m.OUT])[m.TYP]][t.P_OFLTR]}
-        result = grader(user_ans, ans_desc, answer.read().splitlines())
+        user_ans = get_user_ans(sol_out.decode("utf-8").splitlines())
+        user_ans["err"] = sol_err.decode("utf-8")
 
-        if debug:
-            with open("user.out", "w") as userout_file, open("user.out.unfiltered", "w") as progout_file, \
-                    open("user.err", "w") as err_file:
-                userout_file.write("\n".join(result["finalOut"]) + "\n")
-                progout_file.write("\n".join(user_ans["out"]) + "\n")
-                err_file.write("\n".join(user_ans["err"]) + "\n")
-
-    #
-    # Print out testing result
-    #
-    passed = "\033[92m" + "Passed" + "\033[0m"
-    failed = "\033[91m" + "Failed" + "\033[0m"
-    print(problem_path + " - ", end="")
-    print("runtime: %.5fms %s" % (result["execTime"], passed if result["rc"] == 0 else failed))
-
-    return 0 if result["rc"] == 0 else 1
-
+        return grader(user_ans, ans_desc, answer.read().splitlines())

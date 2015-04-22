@@ -42,6 +42,7 @@ OPR = "outProcr"
 ADO = "additionalOutput"
 VNM = "variableName"
 MC = "mutableCollection"
+GDR = "g"
 
 tim = t.type_map
 
@@ -82,6 +83,9 @@ def complete_metadata(metadata):
 
     if ADO not in metadata:
         metadata[ADO] = []
+
+    if GDR not in metadata:
+        metadata[GDR] = "general_grader"
 
 
 def unchangeable_param_cnt(metadata):
