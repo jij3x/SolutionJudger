@@ -136,7 +136,7 @@ def clonegraph_grader(user_ans, formatted_in, answer):
     result = {R_RC: RC_AC, R_ERR: "", R_CI: "", R_EXP: "", R_WA: "", R_ANS: [],  R_ET: 0}
 
     for i in range(user_ans[ANS_OUT]):
-        graph = json.loads(user_ans["out"][i])
+        graph = json.loads(user_ans[ANS_OUT][i])
         for node in graph:
             seq_arr = node[0::2]
             filtered_node = node[1::2]
