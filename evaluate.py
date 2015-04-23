@@ -109,11 +109,14 @@ def general_grader(user_ans, formatted_in, answer):
         result[R_CI] = formatted_in[len(user_ans[ANS_OUT])]
         return result
 
-    for i in range(len(user_ans[ANS_OUT])):
-        if user_ans[ANS_OUT][i] != answer[i]:
+    for line in user_ans[ANS_OUT]:
+        result[R_ANS].append(globals()[user_ans[ANS_OF]](line))
+
+    for i in range(len(result[R_ANS])):
+        if result[R_ANS][i] != answer[i]:
             result[R_RC] = RC_WA
             result[R_EXP] = answer[i]
-            result[R_WA] = user_ans[ANS_OUT][i]
+            result[R_WA] = result[R_ANS][i]
             result[R_CI] = formatted_in[i]
             return result
 
@@ -123,10 +126,7 @@ def general_grader(user_ans, formatted_in, answer):
                 result[R_RC] = RC_IC
                 return result
 
-    result[R_ET] = functools.reduce(lambda x, y: x + int(y), user_ans[ANS_ET], 0)
-
-    for line in user_ans[ANS_OUT]:
-        result[R_ANS].append(globals()[user_ans[ANS_OF]](line))
+    result[R_ET] = functools.reduce(lambda x, y: x + float(y), user_ans[ANS_ET], 0)
 
     result[R_RC] = RC_AC
     return result
@@ -135,7 +135,7 @@ def general_grader(user_ans, formatted_in, answer):
 def clonegraph_grader(user_ans, formatted_in, answer):
     result = {R_RC: RC_AC, R_ERR: "", R_CI: "", R_EXP: "", R_WA: "", R_ANS: [],  R_ET: 0}
 
-    for i in range(user_ans[ANS_OUT]):
+    for i in range(len(user_ans[ANS_OUT])):
         graph = json.loads(user_ans[ANS_OUT][i])
         for node in graph:
             seq_arr = node[0::2]
@@ -158,7 +158,7 @@ def clonegraph_grader(user_ans, formatted_in, answer):
 def copyrandomlist_grader(user_ans, formatted_in, answer):
     result = {R_RC: RC_AC, R_ERR: "", R_CI: "", R_EXP: "", R_WA: "", R_ANS: [],  R_ET: 0}
 
-    for i in range(user_ans[ANS_OUT]):
+    for i in range(len(user_ans[ANS_OUT])):
         line = user_ans[ANS_OUT][i][1:-1]
         if line:
             slrlist = line.split(",")
@@ -172,7 +172,7 @@ def copyrandomlist_grader(user_ans, formatted_in, answer):
 
 
 def wordladders_grader(user_ans, formatted_in, answer):
-    for i in range(user_ans[ANS_OUT]):
+    for i in range(len(user_ans[ANS_OUT])):
         arr = json.loads(user_ans[ANS_OUT][i])
         arr.sort()
         user_ans[ANS_OUT][i] = json.dumps(arr, separators=(",", ":"))
@@ -181,7 +181,7 @@ def wordladders_grader(user_ans, formatted_in, answer):
 
 
 def sizedintarray_grader(user_ans, formatted_in, answer):
-    for i in range(user_ans[ANS_OUT]):
+    for i in range(len(user_ans[ANS_OUT])):
         arr = json.loads(user_ans[ANS_OUT][i])
         arr = arr[:int(user_ans[ANS_AO][i])]
         user_ans[ANS_OUT][i] = json.dumps(arr, separators=(",", ":"))
@@ -216,11 +216,11 @@ def get_user_ans(sol_out, metadata):
     if len(sol_out) % segment != 0:
         sol_out += [""] * (segment - len(sol_out) % segment)
     for i in range(0, len(sol_out), segment):
-        user_ans[ANS_BIV].append(sol_out[i: i + user_ans[ANS_IVC]])
-        user_ans[ANS_ET].append(sol_out[i + user_ans[ANS_IVC]: i + user_ans[ANS_IVC] + 1])
-        user_ans[ANS_OUT].append(sol_out[i + user_ans[ANS_IVC] + 1: i + user_ans[ANS_IVC] + 2])
-        user_ans[ANS_AO].append(sol_out[i + user_ans[ANS_IVC] + 2: i + user_ans[ANS_IVC] + 2 + user_ans[ANS_AOC]])
-        user_ans[ANS_AIV].append(sol_out[i + user_ans[ANS_IVC] + 2 + user_ans[ANS_AOC]:])
+        user_ans[ANS_BIV].extend(sol_out[i: i + user_ans[ANS_IVC]])
+        user_ans[ANS_ET].extend(sol_out[i + user_ans[ANS_IVC]: i + user_ans[ANS_IVC] + 1])
+        user_ans[ANS_OUT].extend(sol_out[i + user_ans[ANS_IVC] + 1: i + user_ans[ANS_IVC] + 2])
+        user_ans[ANS_AO].extend(sol_out[i + user_ans[ANS_IVC] + 2: i + user_ans[ANS_IVC] + 2 + user_ans[ANS_AOC]])
+        user_ans[ANS_AIV].extend(sol_out[i + user_ans[ANS_IVC] + 2 + user_ans[ANS_AOC]: i + segment])
 
     return user_ans
 
@@ -258,5 +258,5 @@ def eval_java_sol(problem_path):
         user_ans = get_user_ans(sol_out.decode("utf-8").splitlines(), metadata)
         user_ans[ANS_ERR] = sol_err.decode("utf-8")
 
-        formatted_in = ""
-        return globals()[metadata[m.GDR]](user_ans, formatted_in, answer)
+        formatted_in = len(user_ans[ANS_OUT]) * [""]
+        return globals()[metadata[m.GDR]](user_ans, formatted_in, answer.read().splitlines())

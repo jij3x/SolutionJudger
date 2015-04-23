@@ -42,7 +42,7 @@ OPR = "outProcr"
 ADO = "additionalOutput"
 VNM = "variableName"
 MC = "mutableCollection"
-GDR = "g"
+GDR = "grader"
 
 tim = t.type_map
 
