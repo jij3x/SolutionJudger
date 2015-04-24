@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "num",
+      "type": "+array<:int>"
+    },
+    {
+      "name": "target",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "fourSum",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": "+vector<+vector<:int>>"
+    }
+  },
+  "output": "solution.return"
+}

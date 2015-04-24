@@ -101,11 +101,12 @@ OT = "Return object has been tampered"
 
 
 def general_grader(user_ans, formatted_in, answer):
-    result = {R_USEROUT: []}
+    result = {R_USEROUT: [], R_EXECTIME: 0}
 
     if user_ans[UA_ERR]:
         result[R_RC] = RE
-        result[R_PROBIN] = formatted_in[len(user_ans[UA_OUT])]
+        result[R_ERR] = user_ans[UA_ERR]
+        result[R_PROBIN] = formatted_in[len(user_ans[UA_OUT]) - 1]
         return result
 
     for line in user_ans[UA_OUT]:
