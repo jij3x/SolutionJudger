@@ -31,8 +31,8 @@ NOCHANGE = "nochange"
 
 P_JAVA_T = "javaType"
 P_C_T = "cType"
-P_CPP_T = "cplusplusType"
-P_CS_T = "csharpType"
+P_CPP_T = "cppType"
+P_CS_T = "csType"
 
 P_SER = "serializer"
 P_DES = "deserializer"
