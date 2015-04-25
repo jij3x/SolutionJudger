@@ -171,7 +171,7 @@ def copyrandomlist_grader(user_ans, formatted_in, answer):
     return general_grader(user_ans, formatted_in, answer)
 
 
-def wordladders_grader(user_ans, formatted_in, answer):
+def unsorted_strvec_grader(user_ans, formatted_in, answer):
     for i in range(len(user_ans[UA_OUT])):
         arr = json.loads(user_ans[UA_OUT][i])
         arr.sort()

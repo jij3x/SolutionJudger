@@ -1,27 +1,22 @@
 {
   "input": [
     {
-      "name": "start",
+      "name": "s",
       "type": ":string"
     },
     {
-      "name": "end",
-      "type": ":string"
-    },
-    {
-      "name": "dict",
+      "name": "wordDict",
       "type": "+set<:string>"
     }
   ],
   "solution": {
-    "actionName": "findLadders",
+    "actionName": "wordBreak",
     "params": [
       "input[0]",
-      "input[1]",
-      "input[2]"
+      "input[1]"
     ],
     "return": {
-      "type": "+vector<+vector<:string>>"
+      "type": "+vector<:string>"
     }
   },
   "output": "solution.return",

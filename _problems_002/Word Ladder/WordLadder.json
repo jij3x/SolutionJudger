@@ -14,16 +14,15 @@
     }
   ],
   "solution": {
-    "actionName": "findLadders",
+    "actionName": "ladderLength",
     "params": [
       "input[0]",
       "input[1]",
       "input[2]"
     ],
     "return": {
-      "type": "+vector<+vector<:string>>"
+      "type": ":int"
     }
   },
-  "output": "solution.return",
-  "grader": "unsorted_strvec_grader"
+  "output": "solution.return"
 }

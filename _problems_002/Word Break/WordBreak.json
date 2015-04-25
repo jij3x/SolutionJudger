@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "s",
+      "type": ":string"
+    },
+    {
+      "name": "wordDict",
+      "type": "+set<:string>"
+    }
+  ],
+  "solution": {
+    "actionName": "wordBreak",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}
