@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "l1",
+      "type": "+sllist<:int>"
+    },
+    {
+      "name": "l2",
+      "type": "+sllist<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "addTwoNumbers",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": "+sllist<:int>"
+    }
+  },
+  "output": "solution.return"
+}

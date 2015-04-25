@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "A",
+      "type": "+array<:int>"
+    },
+    {
+      "name": "B",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "findMedianSortedArrays",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":double"
+    }
+  },
+  "output": "solution.return"
+}
