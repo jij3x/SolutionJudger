@@ -1,0 +1,19 @@
+{
+  "input": [
+    {
+      "name": "s",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "partition",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<+vector<:string>>"
+    }
+  },
+  "output": "solution.return",
+  "grader": "unsorted_strvec_grader"
+}
