@@ -1,0 +1,35 @@
+{
+  "input": [
+    {
+      "name": "head",
+      "type": "+sllist<:int>"
+    },
+    {
+      "name": "x",
+      "type": ":int",
+      "transient": "true"
+    }
+  ],
+  "inProcr": [
+    {
+      "actionName": "cyclizeIntSLList",
+      "params": [
+        "input[0]",
+        "input[1]"
+      ],
+      "return": {
+        "type": "+sllist<:int>"
+      }
+    }
+  ],
+  "solution": {
+    "actionName": "hasCycle",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}
