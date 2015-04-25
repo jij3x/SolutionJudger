@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "intervals",
+      "type": "+vector<:iinterval>"
+    },
+    {
+      "name": "newInterval",
+      "type": ":iinterval"
+    }
+  ],
+  "solution": {
+    "actionName": "insert",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": "+vector<:iinterval>"
+    }
+  },
+  "output": "solution.return"
+}

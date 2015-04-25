@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "tokens",
+      "type": "+vector<:string>"
+    }
+  ],
+  "solution": {
+    "actionName": "evalRPN",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}
