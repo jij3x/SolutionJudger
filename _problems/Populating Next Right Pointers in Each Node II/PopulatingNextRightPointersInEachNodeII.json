@@ -1,0 +1,15 @@
+{
+  "input": [
+    {
+      "name": "root",
+      "type": "+lbinarytree<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "connect",
+    "params": [
+      "input[0]"
+    ]
+  },
+  "output": "input[0]"
+}

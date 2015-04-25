@@ -258,12 +258,14 @@ public class Serializer {
         StringBuilder r = new StringBuilder();
         while (node != null) {
             TreeLinkNode ptr = node;
+            node = null;
             while (ptr != null) {
+                if ((ptr.left != null || ptr.right != null) && node == null)
+                    node = ptr.left == null ? ptr.right : ptr.left;
                 r.append(',').append(ptr._seqNo).append(',').append(ptr.val);
                 ptr = ptr.next;
             }
             r.append(',').append('#');
-            node = node.left;
         }
         r.setCharAt(0, '[');
         r.append(']');
