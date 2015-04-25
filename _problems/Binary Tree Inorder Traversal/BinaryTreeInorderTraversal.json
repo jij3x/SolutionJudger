@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "root",
+      "type": "+binarytree<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "inorderTraversal",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:int>"
+    }
+  },
+  "output": "solution.return"
+}
