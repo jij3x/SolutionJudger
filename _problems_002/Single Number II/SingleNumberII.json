@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "nums",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "singleNumber",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}

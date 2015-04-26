@@ -1,0 +1,15 @@
+{
+  "input": [
+    {
+      "name": "matrix",
+      "type": "+array<+array<:int>>"
+    }
+  ],
+  "solution": {
+    "actionName": "setZeroes",
+    "params": [
+      "input[0]"
+    ]
+  },
+  "output": "input[0]"
+}

@@ -1,0 +1,15 @@
+{
+  "input": [
+    {
+      "name": "matrix",
+      "type": "+array<+array<:char>>"
+    }
+  ],
+  "solution": {
+    "actionName": "solve",
+    "params": [
+      "input[0]"
+    ]
+  },
+  "output": "input[0]"
+}

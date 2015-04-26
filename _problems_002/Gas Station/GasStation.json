@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "gas",
+      "type": "+array<:int>"
+    },
+    {
+      "name": "cost",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "canCompleteCircuit",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}

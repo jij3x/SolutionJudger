@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "ratings",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "candy",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}

@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "word1",
+      "type": ":string"
+    },
+    {
+      "name": "word2",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "minDistance",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}
