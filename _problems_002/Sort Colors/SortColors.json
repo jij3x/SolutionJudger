@@ -1,0 +1,15 @@
+{
+  "input": [
+    {
+      "name": "A",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "sortColors",
+    "params": [
+      "input[0]"
+    ]
+  },
+  "output": "input[0]"
+}

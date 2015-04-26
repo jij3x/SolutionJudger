@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "s",
+      "type": ":string"
+    },
+    {
+      "name": "5",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "minWindow",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":string"
+    }
+  },
+  "output": "solution.return"
+}
