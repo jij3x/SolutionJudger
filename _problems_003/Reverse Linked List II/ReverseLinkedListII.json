@@ -1,0 +1,28 @@
+{
+  "input": [
+    {
+      "name": "head",
+      "type": "+sllist<:int>"
+    },
+    {
+      "name": "m",
+      "type": ":int"
+    },
+    {
+      "name": "n",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "reverseBetween",
+    "params": [
+      "input[0]",
+      "input[1]",
+      "input[2]"
+    ],
+    "return": {
+      "type": "+sllist<:int>"
+    }
+  },
+  "output": "solution.return"
+}

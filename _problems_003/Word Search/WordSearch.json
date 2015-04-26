@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "board",
+      "type": "+array<+array<:char>>"
+    },
+    {
+      "name": "word",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "exist",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}
