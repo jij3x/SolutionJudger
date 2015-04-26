@@ -1,19 +1,14 @@
 {
   "input": [
     {
-      "name": "s1",
-      "type": ":string"
-    },
-    {
-      "name": "s2",
+      "name": "s",
       "type": ":string"
     }
   ],
   "solution": {
-    "actionName": "isScramble",
+    "actionName": "isPalindrome",
     "params": [
-      "input[0]",
-      "input[1]"
+      "input[0]"
     ],
     "return": {
       "type": ":bool"

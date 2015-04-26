@@ -1,22 +1,22 @@
 {
   "input": [
     {
-      "name": "s",
-      "type": ":string"
+      "name": "n",
+      "type": ":int"
     },
     {
-      "name": "wordDict",
-      "type": "+set<:string>"
+      "name": "k",
+      "type": ":int"
     }
   ],
   "solution": {
-    "actionName": "wordBreak",
+    "actionName": "combine",
     "params": [
       "input[0]",
       "input[1]"
     ],
     "return": {
-      "type": "+vector<:string>"
+      "type": "+vector<+vector<:int>>"
     }
   },
   "output": "solution.return",

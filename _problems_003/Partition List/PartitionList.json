@@ -1,22 +1,22 @@
 {
   "input": [
     {
-      "name": "s1",
-      "type": ":string"
+      "name": "head",
+      "type": "+sllist<:int>"
     },
     {
-      "name": "s2",
-      "type": ":string"
+      "name": "x",
+      "type": ":int"
     }
   ],
   "solution": {
-    "actionName": "isScramble",
+    "actionName": "partition",
     "params": [
       "input[0]",
       "input[1]"
     ],
     "return": {
-      "type": ":bool"
+      "type": "+sllist<:int>"
     }
   },
   "output": "solution.return"

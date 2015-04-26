@@ -1,17 +1,17 @@
 {
   "input": [
     {
-      "name": "s",
-      "type": ":string"
+      "name": "S",
+      "type": "+array<:int>"
     }
   ],
   "solution": {
-    "actionName": "partition",
+    "actionName": "subsetsWithDup",
     "params": [
       "input[0]"
     ],
     "return": {
-      "type": "+vector<+vector<:string>>"
+      "type": "+vector<+vector<:int>>"
     }
   },
   "output": "solution.return",

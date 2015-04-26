@@ -98,7 +98,7 @@ RE = "Runtime Error"
 CE = "Compile Error"
 IC = "Input has been changed"
 OT = "Return object has been tampered"
-
+ML = "Memory Leaked"
 
 def general_grader(user_ans, formatted_in, answer):
     result = {R_USEROUT: [], R_EXECTIME: 0}
@@ -171,7 +171,7 @@ def copyrandomlist_grader(user_ans, formatted_in, answer):
     return general_grader(user_ans, formatted_in, answer)
 
 
-def unsorted_strvec_grader(user_ans, formatted_in, answer):
+def unsorted_vec_grader(user_ans, formatted_in, answer):
     for i in range(len(user_ans[UA_OUT])):
         arr = json.loads(user_ans[UA_OUT][i])
         arr.sort()

@@ -1,0 +1,30 @@
+{
+  "input": [
+    {
+      "name": "A",
+      "type": "+array<:int>"
+    },
+    {
+      "name": "m",
+      "type": ":int"
+    },
+    {
+      "name": "B",
+      "type": "+array<:int>"
+    },
+    {
+      "name": "n",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "merge",
+    "params": [
+      "input[0]",
+      "input[1]",
+      "input[2]",
+      "input[3]"
+    ]
+  },
+  "output": "input[0]"
+}

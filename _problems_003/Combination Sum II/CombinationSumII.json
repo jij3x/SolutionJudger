@@ -1,22 +1,22 @@
 {
   "input": [
     {
-      "name": "s",
-      "type": ":string"
+      "name": "num",
+      "type": "+array<:int>"
     },
     {
-      "name": "wordDict",
-      "type": "+set<:string>"
+      "name": "target",
+      "type": ":int"
     }
   ],
   "solution": {
-    "actionName": "wordBreak",
+    "actionName": "combinationSum2",
     "params": [
       "input[0]",
       "input[1]"
     ],
     "return": {
-      "type": "+vector<:string>"
+      "type": "+vector<+vector<:int>>"
     }
   },
   "output": "solution.return",

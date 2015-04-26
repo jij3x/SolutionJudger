@@ -6,14 +6,13 @@
     }
   ],
   "solution": {
-    "actionName": "partition",
+    "actionName": "numDecodings",
     "params": [
       "input[0]"
     ],
     "return": {
-      "type": "+vector<+vector<:string>>"
+      "type": ":int"
     }
   },
-  "output": "solution.return",
-  "grader": "unsorted_vec_grader"
+  "output": "solution.return"
 }

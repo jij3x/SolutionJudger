@@ -5,9 +5,8 @@
       "type": "+sllist<:int>"
     },
     {
-      "name": "x",
-      "type": ":int",
-      "transient": "true"
+      "name": "cycleStart",
+      "type": ":int"
     }
   ],
   "inProcr": [

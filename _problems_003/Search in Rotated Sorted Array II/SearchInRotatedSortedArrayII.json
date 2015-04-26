@@ -1,16 +1,16 @@
 {
   "input": [
     {
-      "name": "s1",
-      "type": ":string"
+      "name": "nums",
+      "type": "+array<:int>"
     },
     {
-      "name": "s2",
-      "type": ":string"
+      "name": "target",
+      "type": ":int"
     }
   ],
   "solution": {
-    "actionName": "isScramble",
+    "actionName": "search",
     "params": [
       "input[0]",
       "input[1]"
