@@ -1,0 +1,22 @@
+{
+  "input": [
+    {
+      "name": "s1",
+      "type": ":string"
+    },
+    {
+      "name": "s2",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "isScramble",
+    "params": [
+      "input[0]",
+      "input[1]"    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}
