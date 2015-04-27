@@ -1,0 +1,19 @@
+{
+  "input": [
+    {
+      "name": "head",
+      "type": "+sllist<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "sortedListToBST",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+binarytree<:int>"
+    }
+  },
+  "output": "solution.return",
+  "grader": "unnormbst_grader"
+}

@@ -1,0 +1,19 @@
+{
+  "input": [
+    {
+      "name": "num",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "sortedArrayToBST",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+binarytree<:int>"
+    }
+  },
+  "output": "solution.return",
+  "grader": "unnormbst_grader"
+}

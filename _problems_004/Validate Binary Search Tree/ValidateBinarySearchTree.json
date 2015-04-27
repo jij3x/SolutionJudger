@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "root",
+      "type": "+binarytree<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "isValidBST",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}

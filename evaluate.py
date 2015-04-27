@@ -100,6 +100,7 @@ IC = "Input has been changed"
 OT = "Return object has been tampered"
 ML = "Memory Leaked"
 
+
 def general_grader(user_ans, formatted_in, answer):
     result = {R_USEROUT: [], R_EXECTIME: 0}
 
@@ -185,6 +186,86 @@ def sizedintarray_grader(user_ans, formatted_in, answer):
         arr = json.loads(user_ans[UA_OUT][i])
         arr = arr[:int(user_ans[UA_ADDOUT][i])]
         user_ans[UA_OUT][i] = json.dumps(arr, separators=(",", ":"))
+
+    return general_grader(user_ans, formatted_in, answer)
+
+
+def unnormbst_grader(user_ans, formatted_in, answer):
+    class BinaryTreeNode:
+        def __init__(self, val):
+            self.val = val
+            self.left = None
+            self.right = None
+
+    def inordertraversal(root):
+        if not root:
+            return []
+        result = inordertraversal(root.left)
+        result.extend([root.val])
+        result.extend(inordertraversal(root.right))
+        return result
+
+    def buildnormbst(nums, left, right):
+        if left > right:
+            return None
+        mid = round((left + right) / 2 + 0.01)
+        root = BinaryTreeNode(nums[mid])
+        root.left = buildnormbst(nums, left, mid - 1)
+        root.right = buildnormbst(nums, mid + 1, right)
+        return root
+
+    def serbst(root):
+        if not root:
+            return "[]"
+
+        q = [root]
+        ser = ["-1", root.val]
+        while q:
+            curr = q.pop(0)
+            if not curr.left:
+                ser.append("#")
+            else:
+                q.append(curr.left)
+                ser.extend(["-1", curr.left.val])
+
+            if not curr.right:
+                ser.append("#")
+            else:
+                q.append(curr.right)
+                ser.extend(["-1", curr.right.val])
+
+        while ser[-1] == "#":
+            ser = ser[:-1]
+        return "[{}]".format(",".join(ser))
+
+    def deserbst(line):
+        if not line:
+            return None
+        parts = line.split(",")
+        buff = [BinaryTreeNode(0)]
+        curr = 0
+        flag = 1
+        while parts:
+            if parts.pop(0) == "#":
+                newnode = None
+            else:
+                newnode = BinaryTreeNode(parts.pop(0))
+                buff.append(newnode)
+
+            if flag == 1:
+                buff[curr].right = newnode
+                curr += 1
+                flag = 0
+            else:
+                buff[curr].left = newnode
+                flag = 1
+
+        return buff[1]
+
+    for i in range(len(user_ans[UA_OUT])):
+        bst = deserbst(user_ans[UA_OUT][i][1:-1])
+        vals = inordertraversal(bst)
+        user_ans[UA_OUT][i] = serbst(buildnormbst(vals, 0, len(vals) - 1))
 
     return general_grader(user_ans, formatted_in, answer)
 

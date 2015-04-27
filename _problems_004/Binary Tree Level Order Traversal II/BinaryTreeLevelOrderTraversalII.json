@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "root",
+      "type": "+binarytree<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "levelOrderBottom",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<+vector<:int>>"
+    }
+  },
+  "output": "solution.return"
+}

@@ -1,0 +1,24 @@
+{
+  "input": [
+    {
+      "name": "root",
+      "type": "+binarytree<:int>"
+    },
+    {
+      "name": "sum",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "pathSum",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": "+vector<+vector<:int>>"
+    }
+  },
+  "output": "solution.return",
+  "grader": "unsorted_vec_grader"
+}
