@@ -4,6 +4,7 @@ import os
 import os.path
 import json
 import functools
+import math
 
 lib_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '_commons'))
 sys.path.append(lib_path)
@@ -208,7 +209,8 @@ def unnormbst_grader(user_ans, formatted_in, answer):
     def buildnormbst(nums, left, right):
         if left > right:
             return None
-        mid = round((left + right) / 2 + 0.01)
+        mid = (left + right) / 2
+        mid = int(mid + math.copysign(0.5, mid))
         root = BinaryTreeNode(nums[mid])
         root.left = buildnormbst(nums, left, mid - 1)
         root.right = buildnormbst(nums, mid + 1, right)
