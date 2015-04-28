@@ -212,6 +212,20 @@ def balancedbst_grader(user_ans, formatted_in, answer):
         return True
 
     def isbalanced(root):
+        prev, stack, heights = None, [], {}
+        while root is not None or stack:
+            if root is not None:
+                stack.append(root)
+                root = root.left
+            elif stack[-1].right is None or stack[-1].right == prev:
+                prev = stack.pop()
+                lh = 0 if prev.left is None else heights[prev.left]
+                rh = 0 if prev.right is None else heights[prev.right]
+                if abs(lh - rh) > 1:
+                    return False
+                heights[prev] = max(lh, rh) + 1
+            else:
+                root = stack[-1].right
         return True
 
     def deserbst(line):
