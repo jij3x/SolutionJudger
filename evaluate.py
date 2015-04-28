@@ -14,7 +14,7 @@ import metatypes as t
 
 TIM = t.type_map
 PYCMD = "python"
-GENR_PATH = "JavaGenerator"
+GENR_PATH = "java_generator"
 
 
 def no_filter(line):

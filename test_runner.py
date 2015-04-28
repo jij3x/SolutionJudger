@@ -5,7 +5,7 @@ import os.path
 import evaluate as ev
 
 PYCMD = "python"
-GENR_PATH = "JavaGenerator"
+GENR_PATH = "java_generator"
 JUDGE = "judge.py"
 
 

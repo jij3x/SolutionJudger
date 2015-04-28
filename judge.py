@@ -16,7 +16,7 @@ import evaluate
 import pprint
 
 PYCMD = "python"
-GENR_PATH = "JavaGenerator"
+GENR_PATH = "java_generator"
 
 
 def cleanup_gens():
