@@ -191,83 +191,57 @@ def sizedintarray_grader(user_ans, formatted_in, answer):
     return general_grader(user_ans, formatted_in, answer)
 
 
-def unnormbst_grader(user_ans, formatted_in, answer):
+def balancedbst_grader(user_ans, formatted_in, answer):
     class BinaryTreeNode:
         def __init__(self, val):
-            self.val = val
-            self.left = None
-            self.right = None
+            self.val, self.left, self.right = val, None, None
 
-    def inordertraversal(root):
-        if not root:
-            return []
-        result = inordertraversal(root.left)
-        result.extend([root.val])
-        result.extend(inordertraversal(root.right))
-        return result
-
-    def buildnormbst(nums, left, right):
-        if left > right:
-            return None
-        mid = (left + right) / 2
-        mid = int(mid + math.copysign(0.5, mid))
-        root = BinaryTreeNode(nums[mid])
-        root.left = buildnormbst(nums, left, mid - 1)
-        root.right = buildnormbst(nums, mid + 1, right)
-        return root
-
-    def serbst(root):
-        if not root:
-            return "[]"
-
-        q = [root]
-        ser = ["-1", root.val]
-        while q:
-            curr = q.pop(0)
-            if not curr.left:
-                ser.append("#")
+    def isvalidbst(root):
+        prev, stack = None, []
+        while root is not None or stack:
+            if root is None:
+                root = stack.pop()
+                if prev is not None and prev >= int(root.val):
+                    return False
+                prev = int(root.val)
+                root = root.right
             else:
-                q.append(curr.left)
-                ser.extend(["-1", curr.left.val])
+                while root is not None:
+                    stack.append(root)
+                    root = root.left
+        return True
 
-            if not curr.right:
-                ser.append("#")
-            else:
-                q.append(curr.right)
-                ser.extend(["-1", curr.right.val])
-
-        while ser[-1] == "#":
-            ser = ser[:-1]
-        return "[{}]".format(",".join(ser))
+    def isbalanced(root):
+        return True
 
     def deserbst(line):
         if not line:
             return None
-        parts = line.split(",")
-        buff = [BinaryTreeNode(0)]
-        curr = 0
-        flag = 1
+
+        parts, buff, curr, flag = line.split(","), [BinaryTreeNode(0)], 0, 1
         while parts:
-            if parts.pop(0) == "#":
-                newnode = None
-            else:
-                newnode = BinaryTreeNode(parts.pop(0))
-                buff.append(newnode)
+            newnode = None if parts.pop(0) == "#" else BinaryTreeNode(parts.pop(0))
+            buff.extend([] if newnode is None else [newnode])
 
-            if flag == 1:
-                buff[curr].right = newnode
-                curr += 1
-                flag = 0
-            else:
-                buff[curr].left = newnode
-                flag = 1
-
+            buff[curr].right = newnode if flag == 1 else buff[curr].right
+            buff[curr].left = newnode if flag == 0 else buff[curr].left
+            curr += flag
+            flag ^= 1
         return buff[1]
 
+    def addseqno(line):
+        if line == "[]":
+            return line
+
+        r, nodes = [], line[1:-1].split(",")
+        for node in nodes:
+            r.extend(["-1", node] if node != "#" else ["#"])
+        return "[{}]".format(",".join(r))
+
     for i in range(len(user_ans[UA_OUT])):
-        bst = deserbst(user_ans[UA_OUT][i][1:-1])
-        vals = inordertraversal(bst)
-        user_ans[UA_OUT][i] = serbst(buildnormbst(vals, 0, len(vals) - 1))
+        tree = deserbst(user_ans[UA_OUT][i][1:-1])
+        if isvalidbst(tree) and isbalanced(tree):
+            user_ans[UA_OUT][i] = addseqno(answer[i])
 
     return general_grader(user_ans, formatted_in, answer)
 

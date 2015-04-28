@@ -15,5 +15,5 @@
     }
   },
   "output": "solution.return",
-  "grader": "unnormbst_grader"
+  "grader": "balancedbst_grader"
 }
