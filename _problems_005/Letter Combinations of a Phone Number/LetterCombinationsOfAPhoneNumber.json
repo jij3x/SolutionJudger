@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "digits",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "letterCombinations",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:string>"
+    }
+  },
+  "output": "solution.return"
+}

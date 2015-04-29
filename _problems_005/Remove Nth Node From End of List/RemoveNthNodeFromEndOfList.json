@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "head",
+      "type": "+sllist<:int>"
+    },
+    {
+      "name": "n",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "removeNthFromEnd",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": "+sllist<:int>"
+    }
+  },
+  "output": "solution.return"
+}

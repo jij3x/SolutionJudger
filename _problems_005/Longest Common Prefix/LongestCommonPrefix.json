@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "strs",
+      "type": "+array<:string>"
+    }
+  ],
+  "solution": {
+    "actionName": "longestCommonPrefix",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":string"
+    }
+  },
+  "output": "solution.return"
+}

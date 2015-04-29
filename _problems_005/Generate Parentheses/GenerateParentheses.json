@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "n",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "generateParenthesis",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:string>"
+    }
+  },
+  "output": "solution.return"
+}

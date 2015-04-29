@@ -1,0 +1,27 @@
+{
+  "input": [
+    {
+      "name": "A",
+      "type": "+array<:int>"
+    },
+    {
+      "name": "elem",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "removeElement",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "input[0]",
+  "additionalOutput": [
+    "solution.return"
+  ],
+  "grader": "sizedintarray_grader"
+}
