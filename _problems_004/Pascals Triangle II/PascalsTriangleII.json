@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "rowIndex",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "getRow",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:int>"
+    }
+  },
+  "output": "solution.return"
+}

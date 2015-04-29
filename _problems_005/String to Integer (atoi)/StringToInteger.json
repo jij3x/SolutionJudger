@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "str",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "atoi",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}

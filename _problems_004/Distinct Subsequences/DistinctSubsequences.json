@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "s1",
+      "type": ":string"
+    },
+    {
+      "name": "s2",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "numDistinct",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}

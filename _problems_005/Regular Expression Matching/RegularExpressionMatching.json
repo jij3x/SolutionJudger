@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "s",
+      "type": ":string"
+    },
+    {
+      "name": "p",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "isMatch",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}

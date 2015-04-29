@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "x",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "isPalindrome",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}

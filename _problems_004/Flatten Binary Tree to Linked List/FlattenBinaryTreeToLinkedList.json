@@ -1,0 +1,15 @@
+{
+  "input": [
+    {
+      "name": "root",
+      "type": "+binarytree<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "flatten",
+    "params": [
+      "input[0]"
+    ]
+  },
+  "output": "input[0]"
+}

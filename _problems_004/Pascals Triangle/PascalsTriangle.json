@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "numRows",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "generate",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<+vector<:int>>"
+    }
+  },
+  "output": "solution.return"
+}
