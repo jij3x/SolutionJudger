@@ -5,20 +5,19 @@
       "type": ":string"
     },
     {
-      "name": "words",
-      "type": "+array<:string>"
+      "name": "p",
+      "type": ":string"
     }
   ],
   "solution": {
-    "actionName": "findSubstring",
+    "actionName": "isMatch",
     "params": [
       "input[0]",
       "input[1]"
     ],
     "return": {
-      "type": "+vector<:int>"
+      "type": ":bool"
     }
   },
-  "output": "solution.return",
-  "grader": "unsorted_vec_grader"
+  "output": "solution.return"
 }

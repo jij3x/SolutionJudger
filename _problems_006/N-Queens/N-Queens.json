@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "n",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "solveNQueens",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<+vector<:string>>"
+    }
+  },
+  "output": "solution.return"
+}

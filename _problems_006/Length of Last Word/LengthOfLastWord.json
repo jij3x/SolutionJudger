@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "s",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "lengthOfLastWord",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}
