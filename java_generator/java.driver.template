@@ -17,6 +17,16 @@ public class Driver {
 
             // unchangeable variables serialization code before execution inject here
 
+            /*
+             * Warm up JVM
+             */
+            if (i == 0) {
+                for (int j = 0; j < 2; j++) {
+                    @SuppressWarnings("unused")
+                    // solution invoking code inject here
+                }
+            }
+
             long startTime = System.nanoTime();
             // solution invoking code inject here
             long stopTime = System.nanoTime();
