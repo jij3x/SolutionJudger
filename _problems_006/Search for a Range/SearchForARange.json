@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "nums",
+      "type": "+array<:int>"
+    },
+    {
+      "name": "target",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "searchRange",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": "+array<:int>"
+    }
+  },
+  "output": "solution.return"
+}

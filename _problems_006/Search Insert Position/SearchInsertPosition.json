@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "nums",
+      "type": "+array<:int>"
+    },
+    {
+      "name": "target",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "searchInsert",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}

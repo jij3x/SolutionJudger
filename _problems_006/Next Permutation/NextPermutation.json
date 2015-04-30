@@ -1,0 +1,15 @@
+{
+  "input": [
+    {
+      "name": "num",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "nextPermutation",
+    "params": [
+      "input[0]"
+    ]
+  },
+  "output": "input[0]"
+}

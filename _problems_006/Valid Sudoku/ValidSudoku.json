@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "board",
+      "type": "+array<+array<:char>>"
+    }
+  ],
+  "solution": {
+    "actionName": "isValidSudoku",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}

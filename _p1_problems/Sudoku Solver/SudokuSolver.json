@@ -1,0 +1,15 @@
+{
+  "input": [
+    {
+      "name": "board",
+      "type": "+array<+array<:char>>"
+    }
+  ],
+  "solution": {
+    "actionName": "solveSudoku",
+    "params": [
+      "input[0]"
+    ]
+  },
+  "output": "input[0]"
+}
