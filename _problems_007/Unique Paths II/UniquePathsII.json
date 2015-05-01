@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "obstacleGrid",
+      "type": "+array<+array<:int>>"
+    }
+  ],
+  "solution": {
+    "actionName": "uniquePathsWithObstacles",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}

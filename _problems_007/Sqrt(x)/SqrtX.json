@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "x",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "sqrt",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}

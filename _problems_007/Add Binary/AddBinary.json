@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "a",
+      "type": ":string"
+    },
+    {
+      "name": "b",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "addBinary",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":string"
+    }
+  },
+  "output": "solution.return"
+}

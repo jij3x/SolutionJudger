@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "s",
+      "type": ":string"
+    },
+    {
+      "name": "t",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "isOneEditDistance",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}

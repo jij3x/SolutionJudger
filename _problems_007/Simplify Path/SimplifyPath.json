@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "path",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "simplifyPath",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":string"
+    }
+  },
+  "output": "solution.return"
+}
