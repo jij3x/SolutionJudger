@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "n",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "convertToTitle",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":string"
+    }
+  },
+  "output": "solution.return"
+}

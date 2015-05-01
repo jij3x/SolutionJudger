@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "numerator",
+      "type": ":int"
+    },
+    {
+      "name": "denominator",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "fractionToDecimal",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":string"
+    }
+  },
+  "output": "solution.return"
+}

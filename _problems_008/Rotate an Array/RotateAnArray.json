@@ -1,0 +1,20 @@
+{
+  "input": [
+    {
+      "name": "nums",
+      "type": "+array<:int>"
+    },
+    {
+      "name": "k",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "rotate",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ]
+  },
+  "output": "input[0]"
+}

@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "board",
+      "type": "+array<+array<:char>>"
+    }
+  ],
+  "solution": {
+    "actionName": "numIslands",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}

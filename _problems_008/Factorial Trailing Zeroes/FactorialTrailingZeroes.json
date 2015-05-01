@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "n",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "trailingZeroes",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}

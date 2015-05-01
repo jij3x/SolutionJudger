@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "s",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "findRepeatedDnaSequences",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:string>"
+    }
+  },
+  "output": "solution.return"
+}

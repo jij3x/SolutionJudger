@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "version1",
+      "type": ":string"
+    },
+    {
+      "name": "version2",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "compareVersion",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}
