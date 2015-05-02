@@ -18,6 +18,10 @@ public class Serializer {
         return Integer.toString(n);
     }
 
+    public static String serializeUnsignedInt(int n) {
+        return Long.toString(n & (-1L >>> 32));
+    }
+
     public static String serializeDouble(double n) {
         return String.format("%.5f", n);
     }
@@ -348,6 +352,11 @@ public class Serializer {
     public static int deserializeInt(StreamTokenizer tokenizer) throws IOException {
         tokenizer.nextToken();
         return (int) tokenizer.nval;
+    }
+
+    public static int deserializeUnsignedInt(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        return (int) ((long) tokenizer.nval);
     }
 
     public static double deserializeDouble(StreamTokenizer tokenizer) throws IOException {

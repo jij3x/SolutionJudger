@@ -1,5 +1,6 @@
 VOID = ":void"
 INT = ":int"
+UINT = ":uint"
 DOUBLE = ":double"
 TEXT = ":text"
 STRING = ":string"
@@ -52,6 +53,12 @@ type_map = {
         P_JAVA_T: "int",
         P_SER: "serializeInt",
         P_DES: "deserializeInt",
+        P_OFLTR: "no_filter"
+    },
+    UINT: {
+        P_JAVA_T: "int",
+        P_SER: "serializeUnsignedInt",
+        P_DES: "deserializeUnsignedInt",
         P_OFLTR: "no_filter"
     },
     DOUBLE: {
