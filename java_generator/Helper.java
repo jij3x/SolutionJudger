@@ -1,9 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Helper {
 
@@ -40,6 +35,36 @@ public class Helper {
                 return String.format("tail connects to node index %d", idx);
         }
         return "output node is not in the linked list";
+    }
+
+    /**
+     * "Intersection of Two Linked Lists" input processor
+     */
+    public static void connectIntSLList(ListNode headA, ListNode headB, int aIdx, int bIdx) {
+        ListNode nodeA = headA, prevA = headA;
+        for (int i = 0; i < aIdx; i++) {
+            prevA = nodeA;
+            nodeA = nodeA.next;
+        }
+
+        ListNode nodeB = headB;
+        for (int i = 0; i < bIdx; i++)
+            nodeB = nodeB.next;
+
+        if (nodeA == null || nodeB == null)
+            return;
+
+        prevA.next = nodeB;
+    }
+
+    /**
+     * "Intersection of Two Linked Lists" output processor
+     */
+    public static String findIntersectionNode(ListNode node) {
+        if (node == null)
+            return "No intersection";
+
+        return String.format("Intersected at '%d'", node.val);
     }
 
     /**
