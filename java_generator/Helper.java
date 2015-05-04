@@ -109,4 +109,8 @@ public class Helper {
         return "";
     }
 
+    public static void intVectorAppend(List<Integer> vector, int x) {
+        vector.add(x);
+    }
+
 }

@@ -1,0 +1,49 @@
+{
+  "input": [
+    {
+      "name": "num",
+      "type": "+array<:int>"
+    }
+  ],
+  "class": {
+    "name": "MinStack",
+    "ctor": {
+      "name": "create"
+    },
+    "dtor": {
+      "name": "destroy"
+    },
+    "streamOut": {
+      "type": "+vector<:int>"
+    },
+    "methods": [
+      {
+        "name": "push",
+        "params": [
+          {
+            "name": "x",
+            "type": ":int"
+          }
+        ]
+      },
+      {
+        "name": "pop"
+      },
+      {
+        "name": "top",
+        "return": {
+          "type": ":int",
+          "classOut": "true"
+        }
+      },
+      {
+        "name": "getMin",
+        "return": {
+          "type": ":int",
+          "classOut": "true"
+        }
+      }
+    ]
+  },
+  "output": "class.streamOut"
+}

@@ -11,7 +11,7 @@ import probdesc as m
 import metatypes as t
 
 
-TIM = t.type_map
+tim = t.type_map
 PYCMD = "python"
 GENR_PATH = "java_generator"
 
@@ -271,9 +271,10 @@ UA_POSTIMVAR = "immutable_var_after_exec"
 
 
 def get_user_ans(sol_out, metadata):
+    out_type = m.get_prop(metadata, metadata[m.OUT])[m.TYP]
     user_ans = {UA_IMVARCNT: m.unchangeable_param_cnt(metadata),
                 UA_ADDOUTCNT: len(metadata[m.ADO]) if m.ADO in metadata else 0,
-                UA_OUTF: TIM[m.get_prop(metadata, metadata[m.OUT])[m.TYP]][t.P_OFLTR],
+                UA_OUTF: tim[out_type][t.P_OFLTR] if t.P_OFLTR in tim[out_type] else "no_filter",
                 UA_PREIMVAR: [],
                 UA_EXECTIME: [],
                 UA_OUT: [],

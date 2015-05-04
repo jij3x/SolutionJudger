@@ -38,6 +38,7 @@ P_CS_T = "csType"
 P_SER = "serializer"
 P_DES = "deserializer"
 P_OFLTR = "outputFilter"
+P_ADD = "append"
 
 type_map = {
     VOID: {
@@ -46,32 +47,27 @@ type_map = {
     BOOL: {
         P_JAVA_T: "boolean",
         P_SER: "serializeBool",
-        P_DES: "deserializeBool",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeBool"
     },
     INT: {
         P_JAVA_T: "int",
         P_SER: "serializeInt",
-        P_DES: "deserializeInt",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeInt"
     },
     UINT: {
         P_JAVA_T: "int",
         P_SER: "serializeUnsignedInt",
-        P_DES: "deserializeUnsignedInt",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeUnsignedInt"
     },
     DOUBLE: {
         P_JAVA_T: "double",
         P_SER: "serializeDouble",
-        P_DES: "deserializeDouble",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeDouble"
     },
     TEXT: {
         P_JAVA_T: "String",
         P_SER: "serializeText",
-        P_DES: "deserializeText",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeText"
     },
     MUTABLE_STRING: {
         P_JAVA_T: "StringBuilder",
@@ -79,50 +75,43 @@ type_map = {
         P_CPP_T: "string&",
         P_CS_T: "ref string",
         P_SER: "serializeMutableString",
-        P_DES: "deserializeMutableString",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeMutableString"
     },
     STRING: {
         P_JAVA_T: "String",
         P_SER: "serializeString",
-        P_DES: "deserializeString",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeString"
     },
     INT_ARR: {
         P_JAVA_T: "int[]",
         P_SER: "serializeIntArray",
-        P_DES: "deserializeIntArray",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeIntArray"
     },
     INT_2D_ARR: {
         P_JAVA_T: "int[][]",
         P_SER: "serializeInt2DArray",
-        P_DES: "deserializeInt2DArray",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeInt2DArray"
     },
     INT_VEC: {
         P_JAVA_T: "List<Integer>",
         P_SER: "serializeIntVector",
         P_DES: "deserializeIntVector",
-        P_OFLTR: "no_filter"
+        P_ADD: "intVectorAppend"
     },
     INT_2D_VEC: {
         P_JAVA_T: "List<List<Integer>>",
         P_SER: "serializeInt2DVector",
-        P_DES: "deserializeInt2DVector",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeInt2DVector"
     },
     CHAR_ARR: {
         P_JAVA_T: "char[]",
         P_SER: "serializeCharArray",
-        P_DES: "deserializeCharArray",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeCharArray"
     },
     CHAR_2D_ARR: {
         P_JAVA_T: "char[][]",
         P_SER: "serializeChar2DArray",
-        P_DES: "deserializeChar2DArray",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeChar2DArray"
     },
     STRING_ARR: {
         P_JAVA_T: "String[]",
@@ -132,20 +121,17 @@ type_map = {
     STRING_VEC: {
         P_JAVA_T: "List<String>",
         P_SER: "serializeStringVector",
-        P_DES: "deserializeStringVector",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeStringVector"
     },
     STRING_2D_VEC: {
         P_JAVA_T: "List<List<String>>",
         P_SER: "serializeString2DVector",
-        P_DES: "deserializeString2DVector",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeString2DVector"
     },
     STRING_SET: {
         P_JAVA_T: "Set<String>",
         P_SER: "serializeStringSet",
-        P_DES: "deserializeStringSet",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeStringSet"
     },
     INT_SLLIST: {
         P_JAVA_T: "ListNode",
@@ -156,8 +142,7 @@ type_map = {
     INT_SLLIST_VEC: {
         P_JAVA_T: "List<ListNode>",
         P_SER: "serializeIntSLListVector",
-        P_DES: "deserializeIntSLListVector",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeIntSLListVector"
     },
     INT_SLRLIST: {
         P_JAVA_T: "RandomListNode",
@@ -192,20 +177,17 @@ type_map = {
     IPOINT: {
         P_JAVA_T: "Point",
         P_SER: "serializeIPoint",
-        P_DES: "deserializeIPoint",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeIPoint"
     },
     IPOINT_ARR: {
         P_JAVA_T: "Point[]",
         P_SER: "serializeIPointArray",
-        P_DES: "deserializeIPointArray",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeIPointArray"
     },
     IINTERVAL: {
         P_JAVA_T: "Interval",
         P_SER: "serializeIInterval",
-        P_DES: "deserializeIInterval",
-        P_OFLTR: "no_filter"
+        P_DES: "deserializeIInterval"
     },
     IINTERVAL_VEC: {
         P_JAVA_T: "List<Interval>",
