@@ -5,7 +5,12 @@
       "type": ":string"
     },
     {
-      "procedure": "classes[0]"
+      "type": "~procedure"
+    }
+  ],
+  "outStream": [
+    {
+      "type": "+vector<:string>"
     }
   ],
   "inProcr": [
@@ -19,40 +24,29 @@
       }
     }
   ],
-  "classes": [
-    {
-      "name": "Solution",
-      "ctor": {
-        "name": "create",
-        "initialize": [
+  "solution": {
+    "initialize": [
+      {
+        "member": "read4",
+        "value": "inProcr.return"
+      }
+    ],
+    "methods": [
+      {
+        "name": "read",
+        "params": [
           {
-            "read4": "inProcr.return"
+            "name": "buf",
+            "type": "+array[:char]",
+            "pipeTo": "outStream[0]"
+          },
+          {
+            "name": "n",
+            "type": ":int"
           }
         ]
-      },
-      "dtor": {
-        "name": "destroy"
-      },
-      "streamOut": {
-        "type": "+vector<:string>"
-      },
-      "methods": [
-        {
-          "name": "read",
-          "params": [
-            {
-              "name": "buf",
-              "type": "+array[:char]",
-              "classOut": "true"
-            },
-            {
-              "name": "n",
-              "type": ":int"
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "output": "classes[0].streamOut"
+      }
+    ]
+  },
+  "output": "outStream[0]"
 }

@@ -1,50 +1,44 @@
 {
   "input": [
     {
-      "procedure": "classes[0]"
+      "type": "~procedure"
     }
   ],
-  "classes": [
+  "outStream": [
     {
-      "name": "MinStack",
-      "ctor": {
-        "name": "create"
-      },
-      "dtor": {
-        "name": "destroy"
-      },
-      "streamOut": {
-        "type": "+vector<:int>"
-      },
-      "methods": [
-        {
-          "name": "push",
-          "params": [
-            {
-              "name": "x",
-              "type": ":int"
-            }
-          ]
-        },
-        {
-          "name": "pop"
-        },
-        {
-          "name": "top",
-          "return": {
-            "type": ":int",
-            "classOut": "true"
-          }
-        },
-        {
-          "name": "getMin",
-          "return": {
-            "type": ":int",
-            "classOut": "true"
-          }
-        }
-      ]
+      "type": "+vector<:int>>"
     }
   ],
-  "output": "classes[0].streamOut"
+  "solution": {
+    "name": "MinStack",
+    "methods": [
+      {
+        "name": "push",
+        "params": [
+          {
+            "name": "x",
+            "type": ":int"
+          }
+        ]
+      },
+      {
+        "name": "pop"
+      },
+      {
+        "name": "top",
+        "return": {
+          "type": ":int",
+          "pipeTo": "outStream[0]"
+        }
+      },
+      {
+        "name": "getMin",
+        "return": {
+          "type": ":int",
+          "pipeTo": "outStream[0]"
+        }
+      }
+    ]
+  },
+  "output": "outStream[0]"
 }
