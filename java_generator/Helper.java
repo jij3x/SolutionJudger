@@ -109,7 +109,11 @@ public class Helper {
         return "";
     }
 
-    public static void intVectorAppend(List<Integer> vector, int x) {
+    public static void intVectorAppend(List<Integer> vector, int n) {
+        vector.add(n);
+    }
+
+    public static void stringVectorAppend(List<String> vector, String s) {
         vector.add(x);
     }
 

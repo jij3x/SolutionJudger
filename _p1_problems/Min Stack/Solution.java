@@ -1,30 +1,26 @@
-public class Solution {
-    public List<List<Integer>> threeSum(int[] num) {
-        Arrays.sort(num);
-        ArrayList<List<Integer>> ans = new ArrayList<List<Integer>>();
-        int n = num.length;
-        for (int i = 0; i < n-2; ) {
-            int target = -num[i];
-            int j = i+1, k = n-1;
-            while (j < k) {
-                int sum = num[j]+num[k];
-                if (sum < target) {
-                    j++;
-                } else if (sum > target) {
-                    k--;                
-                } else {
-                    ArrayList<Integer> triplets = new ArrayList<Integer>();
-                    triplets.add(new Integer(num[i]));
-                    triplets.add(new Integer(num[j]));
-                    triplets.add(new Integer(num[k]));
-                    ans.add(triplets);
-                    while (j < n && num[j] == triplets.get(1)) j++;
-                    while (k >= 0 && num[k] == triplets.get(2)) k--;
-                }
-            }
-            int prev = num[i];
-            while (i < n-2 && num[i] == prev) i++;
+public class MinStack {
+    private Stack<Integer> stack = new Stack<>();
+    private Stack<Integer> minStack = new Stack<>();
+
+    public void push(int x) {
+        stack.push(x);
+        if (minStack.isEmpty() || x <= minStack.peek()) {
+            minStack.push(x);
         }
-        return ans;
+    }
+
+    public void pop() {
+        if (stack.isEmpty()) throw new RuntimeException();
+        if (stack.pop().equals(minStack.peek())) minStack.pop();
+    }
+
+    public int top() {
+        if (stack.isEmpty()) throw new RuntimeException();
+        return stack.peek();
+    }
+
+    public int getMin() {
+        if (minStack.isEmpty()) throw new RuntimeException();
+        return minStack.peek();
     }
 }

@@ -1,0 +1,58 @@
+{
+  "input": [
+    {
+      "name": "data",
+      "type": ":string"
+    },
+    {
+      "procedure": "classes[0]"
+    }
+  ],
+  "inProcr": [
+    {
+      "actionName": "createRead4Instance",
+      "params": [
+        "input[0]"
+      ],
+      "return": {
+        "type": ":read4"
+      }
+    }
+  ],
+  "classes": [
+    {
+      "name": "Solution",
+      "ctor": {
+        "name": "create",
+        "initialize": [
+          {
+            "read4": "inProcr.return"
+          }
+        ]
+      },
+      "dtor": {
+        "name": "destroy"
+      },
+      "streamOut": {
+        "type": "+vector<:string>"
+      },
+      "methods": [
+        {
+          "name": "read",
+          "params": [
+            {
+              "name": "buf",
+              "type": "+array[:char]",
+              "classOut": "true"
+            },
+            {
+              "name": "n",
+              "type": ":int"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "output": "classes[0].streamOut"
+}
