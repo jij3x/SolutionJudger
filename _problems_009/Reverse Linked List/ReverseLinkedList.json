@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "head",
+      "type": "+sllist<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "reverseList",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+sllist<:int>"
+    }
+  },
+  "output": "solution.return"
+}
