@@ -185,7 +185,7 @@ public class Serializer {
         if (vector == null || vector.size() == 0)
             return "[]";
 
-        StringBuilder r = new StringBuilder("[");
+        StringBuilder r = new StringBuilder();
         for (ListNode node : vector) {
             r.append(",").append(serializeIntSLList(node));
         }
