@@ -143,7 +143,8 @@ type_map = {
     INT_SLLIST_VEC: {
         P_JAVA_T: "List<ListNode>",
         P_SER: "serializeIntSLListVector",
-        P_DES: "deserializeIntSLListVector"
+        P_DES: "deserializeIntSLListVector",
+        P_OFLTR: "sllist_vec_filter"
     },
     INT_SLRLIST: {
         P_JAVA_T: "RandomListNode",

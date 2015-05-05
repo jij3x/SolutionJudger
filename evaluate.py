@@ -27,6 +27,14 @@ def sllist_filter(line):
     return json.dumps(sllist, separators=(",", ":"))
 
 
+def sllist_vec_filter(line):
+    vector = json.loads(line)
+    for sllist in vector:
+        sllist[0:] = sllist[1::2]
+
+    return json.dumps(vector, separators=(",", ":"))
+
+
 def slrlist_filter(line):
     if line == "[]":
         return line
