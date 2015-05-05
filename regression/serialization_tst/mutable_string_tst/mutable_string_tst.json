@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "input",
+      "type": ":mutable_string"
+    }
+  ],
+  "solution": {
+    "actionName": "test",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":mutable_string"
+    }
+  },
+  "output": "solution.return"
+}
