@@ -15,19 +15,19 @@
   ],
   "inProcr": [
     {
-      "actionName": "createRead4Instance",
+      "actionName": "createReader4Instance",
       "params": [
         "input[0]"
       ],
       "return": {
-        "type": ":read4"
+        "type": ":reader4"
       }
     }
   ],
   "solution": {
     "initialize": [
       {
-        "member": "read4",
+        "member": "reader4",
         "value": "inProcr.return"
       }
     ],

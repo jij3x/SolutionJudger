@@ -3,7 +3,21 @@ import java.util.*;
 public class Helper {
 
     /**
-     * "Detect Cycle" input processor
+     * :int stream appender
+     */
+    public static void intVectorAppend(List<Integer> vector, int n) {
+        vector.add(n);
+    }
+
+    /**
+     * :string stream appender
+     */
+    public static void stringVectorAppend(List<String> vector, String s) {
+        vector.add(s);
+    }
+
+    /**
+     * "Detect Cycle II" input processor
      */
     public static ListNode cyclizeIntSLList(ListNode node, int x) {
         if (node == null || x == -1)
@@ -24,7 +38,7 @@ public class Helper {
     }
 
     /**
-     * "Detect Cycle" output processor
+     * "Detect Cycle II" output processor
      */
     public static String findIntSLListNodeIndex(ListNode head, ListNode node) {
         if (node == null)
@@ -68,53 +82,10 @@ public class Helper {
     }
 
     /**
-     * "Clone Graph" output processor
-     *
-     * Returns empty string if two input graphs are deeply cloned.
+     * "Read N Characters Given Read4 II" input processor
      */
-    public static String checkDeepClonedIntUDGraph(UndirectedGraphNode n1, UndirectedGraphNode n2) {
-        if (n1 == null || n2 == null)
-            return "";
-
-        HashSet<UndirectedGraphNode> hash = new HashSet<UndirectedGraphNode>();
-        ArrayList<UndirectedGraphNode> que = new ArrayList<UndirectedGraphNode>();
-        int head = 0;
-        hash.add(n1);
-        que.add(n1);
-        while (head < que.size()) {
-            UndirectedGraphNode now = que.get(head++);
-            for (UndirectedGraphNode neighbor : now.neighbors) {
-                if (hash.add(neighbor)) {
-                    que.add(neighbor);
-                }
-            }
-        }
-
-        HashSet<UndirectedGraphNode> hashB = new HashSet<UndirectedGraphNode>();
-        que.clear();
-        head = 0;
-        hashB.add(n2);
-        que.add(n2);
-        while (head < que.size()) {
-            UndirectedGraphNode now = que.get(head++);
-            if (hash.contains(now))
-                return String.format("Node with label %d was not copied but a reference to the original one.",
-                        now.label);
-            for (UndirectedGraphNode neighbor : now.neighbors) {
-                if (hashB.add(neighbor)) {
-                    que.add(neighbor);
-                }
-            }
-        }
-        return "";
-    }
-
-    public static void intVectorAppend(List<Integer> vector, int n) {
-        vector.add(n);
-    }
-
-    public static void stringVectorAppend(List<String> vector, String s) {
-        vector.add(x);
+    public static Reader4 createReader4Instance(String s) {
+        return new Reader4(s);
     }
 
 }

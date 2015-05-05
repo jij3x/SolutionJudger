@@ -27,6 +27,7 @@ IPOINT = ":ipoint"
 IPOINT_ARR = "+array<:ipoint>"
 IINTERVAL = ":iinterval"
 IINTERVAL_VEC = "+vector<:iinterval>"
+READER4 = ":reader4"
 
 NOCHANGE = "nochange"
 
