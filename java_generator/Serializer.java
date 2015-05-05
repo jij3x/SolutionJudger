@@ -344,7 +344,7 @@ public class Serializer {
         return r.toString();
     }
 
-    public static boolean deserializeBoo(StreamTokenizer tokenizer) throws IOException {
+    public static boolean deserializeBool(StreamTokenizer tokenizer) throws IOException {
         tokenizer.nextToken();
         return tokenizer.sval.equals("true") ? true : false;
     }
