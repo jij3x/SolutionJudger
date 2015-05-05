@@ -144,7 +144,7 @@ type_map = {
         P_JAVA_T: "List<ListNode>",
         P_SER: "serializeIntSLListVector",
         P_DES: "deserializeIntSLListVector",
-        P_OFLTR: "sllist_vec_filter"
+        P_OFLTR: "sllistvector_filter"
     },
     INT_SLRLIST: {
         P_JAVA_T: "RandomListNode",
@@ -195,6 +195,6 @@ type_map = {
         P_JAVA_T: "List<Interval>",
         P_SER: "serializeIIntervalVector",
         P_DES: "deserializeIIntervalVector",
-        P_OFLTR: "iintervalvec_filter"
+        P_OFLTR: "iintervalvector_filter"
     }
 }

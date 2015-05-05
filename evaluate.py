@@ -27,7 +27,7 @@ def sllist_filter(line):
     return json.dumps(sllist, separators=(",", ":"))
 
 
-def sllist_vec_filter(line):
+def sllistvector_filter(line):
     vector = json.loads(line)
     for sllist in vector:
         sllist[0:] = sllist[1::2]
@@ -81,7 +81,7 @@ def binarytreevector_filter(line):
     return "[{}]".format(",".join(trees))
 
 
-def iintervalvec_filter(line):
+def iintervalvector_filter(line):
     intervals = json.loads(line)
     for interval in intervals:
         interval[0:] = interval[1:]
