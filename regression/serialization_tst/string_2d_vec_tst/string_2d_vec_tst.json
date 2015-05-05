@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "input",
+      "type": "+vector<+vector<:string>>"
+    }
+  ],
+  "solution": {
+    "actionName": "test",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<+vector<:string>>"
+    }
+  },
+  "output": "solution.return"
+}

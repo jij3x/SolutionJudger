@@ -1,0 +1,19 @@
+{
+  "input": [
+    {
+      "name": "input",
+      "type": "+set<:string>"
+    }
+  ],
+  "solution": {
+    "actionName": "test",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+set<:string>"
+    }
+  },
+  "output": "solution.return",
+  "grader": "unsorted_vec_grader"
+}

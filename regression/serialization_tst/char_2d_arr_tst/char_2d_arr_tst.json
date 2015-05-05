@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "input",
+      "type": "+array<+array<:char>>"
+    }
+  ],
+  "solution": {
+    "actionName": "test",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+array<+array<:char>>"
+    }
+  },
+  "output": "solution.return"
+}
