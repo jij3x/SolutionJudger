@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "input",
+      "type": "+vector<:iinterval>"
+    }
+  ],
+  "solution": {
+    "actionName": "test",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:iinterval>"
+    }
+  },
+  "output": "solution.return"
+}

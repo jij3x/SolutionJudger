@@ -23,10 +23,10 @@ STRING_SET = "+set<:string>"
 INT_BINARYTREE = "+binarytree<:int>"
 INT_BINARYTREE_VEC = "+vector<+binarytree<:int>>"
 INT_LBINARYTREE = "+lbinarytree<:int>"
-IPOINT = ":ipoint"
-IPOINT_ARR = "+array<:ipoint>"
-IINTERVAL = ":iinterval"
-IINTERVAL_VEC = "+vector<:iinterval>"
+INT_POINT = ":ipoint"
+INT_POINT_ARR = "+array<:ipoint>"
+INT_INTERVAL = ":iinterval"
+INT_INTERVAL_VEC = "+vector<:iinterval>"
 READER4 = ":reader4"
 
 NOCHANGE = "nochange"
@@ -176,25 +176,28 @@ type_map = {
         P_DES: "deserializeIntLinkedBinaryTree",
         P_OFLTR: "binarytree_filter"
     },
-    IPOINT: {
+    INT_POINT: {
         P_JAVA_T: "Point",
         P_SER: "serializeIPoint",
-        P_DES: "deserializeIPoint"
+        P_DES: "deserializeIPoint",
+        P_OFLTR: "pair_filter"
     },
-    IPOINT_ARR: {
+    INT_POINT_ARR: {
         P_JAVA_T: "Point[]",
         P_SER: "serializeIPointArray",
-        P_DES: "deserializeIPointArray"
+        P_DES: "deserializeIPointArray",
+        P_OFLTR: "pairvector_filter"
     },
-    IINTERVAL: {
+    INT_INTERVAL: {
         P_JAVA_T: "Interval",
         P_SER: "serializeIInterval",
-        P_DES: "deserializeIInterval"
+        P_DES: "deserializeIInterval",
+        P_OFLTR: "pair_filter"
     },
-    IINTERVAL_VEC: {
+    INT_INTERVAL_VEC: {
         P_JAVA_T: "List<Interval>",
         P_SER: "serializeIIntervalVector",
         P_DES: "deserializeIIntervalVector",
-        P_OFLTR: "iintervalvector_filter"
+        P_OFLTR: "pairvector_filter"
     }
 }

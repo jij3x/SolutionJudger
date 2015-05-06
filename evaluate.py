@@ -81,12 +81,17 @@ def binarytreevector_filter(line):
     return "[{}]".format(",".join(trees))
 
 
-def iintervalvector_filter(line):
-    intervals = json.loads(line)
-    for interval in intervals:
-        interval[0:] = interval[1:]
+def pair_filter(line):
+    pair = json.loads(line)
+    return json.dumps(pair[1:], separators=(",", ":"))
 
-    return json.dumps(intervals, separators=(",", ":"))
+
+def pairvector_filter(line):
+    pairs = json.loads(line)
+    for pair in pairs:
+        pair[0:] = pair[1:]
+
+    return json.dumps(pairs, separators=(",", ":"))
 
 
 R_RC = "return_code"
