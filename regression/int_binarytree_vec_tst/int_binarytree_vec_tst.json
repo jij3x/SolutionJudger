@@ -1,17 +1,17 @@
 {
   "input": [
     {
-      "name": "n",
-      "type": ":int"
+      "name": "input",
+      "type": "+vector<+binarytree<:int>>"
     }
   ],
   "solution": {
-    "actionName": "generateTrees",
+    "actionName": "test",
     "params": [
       "input[0]"
     ],
     "return": {
-      "type": "+vector<:binarytree>"
+      "type": "+vector<+binarytree<:int>>"
     }
   },
   "output": "solution.return"

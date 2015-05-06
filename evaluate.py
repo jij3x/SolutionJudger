@@ -183,7 +183,9 @@ def copyrandomlist_grader(user_ans, formatted_in, answer):
 def unsorted_vec_grader(user_ans, formatted_in, answer):
     for i in range(len(user_ans[UA_OUT])):
         arr = json.loads(user_ans[UA_OUT][i])
+        print(arr)
         arr.sort()
+        print(arr)
         user_ans[UA_OUT][i] = json.dumps(arr, separators=(",", ":"))
 
     return general_grader(user_ans, formatted_in, answer)

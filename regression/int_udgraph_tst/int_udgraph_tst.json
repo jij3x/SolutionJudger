@@ -1,0 +1,19 @@
+{
+  "input": [
+    {
+      "name": "input",
+      "type": "+udgraph<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "test",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+udgraph<:int>"
+    }
+  },
+  "output": "solution.return",
+  "grader": "unsorted_vec_grader"
+}
