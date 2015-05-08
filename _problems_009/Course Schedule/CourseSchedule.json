@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "numCourses",
+      "type": ":int"
+    },
+    {
+      "name": "prerequisites",
+      "type": "+array<+array<:int>>"
+    }
+  ],
+  "solution": {
+    "actionName": "canFinish",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}
