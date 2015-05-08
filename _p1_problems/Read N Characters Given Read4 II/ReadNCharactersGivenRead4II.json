@@ -25,10 +25,10 @@
     }
   ],
   "solution": {
-    "initialize": [
+    "ctorArgs": [
       {
-        "member": "reader4",
-        "value": "inProcr.return"
+        "name": "reader4",
+        "type": "planets[0]"
       }
     ],
     "methods": [
@@ -48,5 +48,30 @@
       }
     ]
   },
+  "planets": [
+    {
+      "name": "Reader4",
+      "ctorArgs": [
+        {
+          "name": "data",
+          "type": ":string"
+        }
+      ],
+      "methods": [
+        {
+          "name": "read4",
+          "params": [
+            {
+              "name": "buf",
+              "type": "+array[:char]"
+            }
+          ],
+          "return": {
+            "type": ":int"
+          }
+        }
+      ]
+    }
+  ],
   "output": "outStream[0]"
 }
