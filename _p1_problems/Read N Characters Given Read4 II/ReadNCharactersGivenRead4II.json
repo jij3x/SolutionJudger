@@ -24,11 +24,36 @@
       }
     }
   ],
+  "classes": [
+    {
+      "name": "Reader4",
+      "dependent": [
+        {
+          "name": "data",
+          "on": "input[0]"
+        }
+      ],
+      "methods": [
+        {
+          "name": "read4",
+          "params": [
+            {
+              "name": "buf",
+              "type": "+array[:char]"
+            }
+          ],
+          "return": {
+            "type": ":int"
+          }
+        }
+      ]
+    }
+  ],
   "solution": {
-    "ctorArgs": [
+    "dependent": [
       {
         "name": "reader4",
-        "type": "planets[0]"
+        "on": "classes[0]"
       }
     ],
     "methods": [
@@ -48,30 +73,5 @@
       }
     ]
   },
-  "planets": [
-    {
-      "name": "Reader4",
-      "ctorArgs": [
-        {
-          "name": "data",
-          "type": ":string"
-        }
-      ],
-      "methods": [
-        {
-          "name": "read4",
-          "params": [
-            {
-              "name": "buf",
-              "type": "+array[:char]"
-            }
-          ],
-          "return": {
-            "type": ":int"
-          }
-        }
-      ]
-    }
-  ],
   "output": "outStream[0]"
 }
