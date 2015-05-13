@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "s",
+      "type": ":int"
+    },
+    {
+      "name": "nums",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "minSubArrayLen",
+    "params": [
+      "input[1]",
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}
