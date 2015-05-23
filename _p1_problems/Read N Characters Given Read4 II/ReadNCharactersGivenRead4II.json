@@ -27,10 +27,10 @@
   "classes": [
     {
       "name": "Reader4",
-      "dependent": [
+      "dependency": [
         {
           "name": "data",
-          "on": "input[0]"
+          "from": "input[0]"
         }
       ],
       "methods": [
@@ -50,10 +50,10 @@
     }
   ],
   "solution": {
-    "dependent": [
+    "dependency": [
       {
         "name": "reader4",
-        "on": "classes[0]"
+        "from": "classes[0]"
       }
     ],
     "methods": [

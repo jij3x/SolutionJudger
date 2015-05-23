@@ -26,26 +26,26 @@ m.complete_metadata(metadata)
 def gen_invoking_code(fn_ret, fn_name, params, rt_tmpl, fn_tmpl):
     inputs = ""
     for i, par in enumerate(params):
-        inputs += (", " if i > 0 else "") + m.get_prop(metadata, par)[m.VNM]
-    return_par = rt_tmpl.format(tim[fn_ret[m.TYP]][t.P_JAVA_T], fn_ret[m.VNM]) if fn_ret[m.TYP] != t.VOID else ""
+        inputs += (", " if i > 0 else "") + m.get_prop(metadata, par)[m.VARN]
+    return_par = rt_tmpl.format(tim[fn_ret[m.TYPE]][t.P_JAVA_T], fn_ret[m.VARN]) if fn_ret[m.TYPE] != t.VOID else ""
     return fn_tmpl.format(return_par, fn_name, inputs)
 
 
 def gen_output_serlizing_code(output, fn_tmpl):
     param = m.get_prop(metadata, output)
-    serializer = tim[param[m.TYP]][t.P_SER]
-    return fn_tmpl.format(serializer, param[m.VNM])
+    serializer = tim[param[m.TYPE]][t.P_SER]
+    return fn_tmpl.format(serializer, param[m.VARN])
 
 
 def gen_input_serlizing_code(param, fn_tmpl):
-    serializer = tim[param[m.TYP]][t.P_SER]
-    return fn_tmpl.format(serializer, param[m.VNM])
+    serializer = tim[param[m.TYPE]][t.P_SER]
+    return fn_tmpl.format(serializer, param[m.VARN])
 
 
 def gen_input_deserlizing_code(param, fn_tmpl):
-    deser = tim[param[m.TYP]][t.P_DES]
-    rtype = tim[param[m.TYP]][t.P_JAVA_T]
-    return fn_tmpl.format(rtype, param[m.VNM], deser)
+    deser = tim[param[m.TYPE]][t.P_DES]
+    rtype = tim[param[m.TYPE]][t.P_JAVA_T]
+    return fn_tmpl.format(rtype, param[m.VARN], deser)
 
 # Fetch inputs deserialization code
 param_deser_code = ""
@@ -54,18 +54,18 @@ for param in metadata[m.INP]:
 
 # Compose the code to process input
 input_proc_code = ""
-for procr in metadata[m.IPR]:
-    input_proc_code += gen_invoking_code(procr[m.RT], procr[m.FN], procr[m.PAR],
+for procr in metadata[m.PREP]:
+    input_proc_code += gen_invoking_code(procr[m.RET], procr[m.FUNC], procr[m.PARM],
                                          "{} {} = ", "{} Helper.{}({});\n")
 
 # Compose the code to call Solution
-solving_code = gen_invoking_code(metadata[m.SOL][m.RT], metadata[m.SOL][m.FN], metadata[m.SOL][m.PAR],
+solving_code = gen_invoking_code(metadata[m.SOL][m.RET], metadata[m.SOL][m.FUNC], metadata[m.SOL][m.PARM],
                                  "{} {} = ", "{}(new Solution()).{}({});\n")
 
 # Compose the code to process output
 output_proc_code = ""
-for procr in metadata[m.OPR]:
-    output_proc_code += gen_invoking_code(procr[m.RT], procr[m.FN], procr[m.PAR],
+for procr in metadata[m.POSP]:
+    output_proc_code += gen_invoking_code(procr[m.RET], procr[m.FUNC], procr[m.PARM],
                                           "{} {} = ", "{} Helper.{}({});\n")
 
 # Compose the code to serialize the Solution return
@@ -81,9 +81,9 @@ ucvars_s_code = ""
 for param in metadata[m.INP]:
     if not param[m.MC]:
         ucvars_s_code += gen_input_serlizing_code(param, "printWriter.println(Serializer.{}({}));\n")
-for param in metadata[m.IPR]:
-    if not param[m.RT][m.MC]:
-        ucvars_s_code += gen_input_serlizing_code(param[m.RT], "printWriter.println(Serializer.{}({}));\n")
+for param in metadata[m.PREP]:
+    if not param[m.RET][m.MC]:
+        ucvars_s_code += gen_input_serlizing_code(param[m.RET], "printWriter.println(Serializer.{}({}));\n")
 
 # Inject the code into Driver template
 DRVTML_FNM = os.path.join(os.path.dirname(os.path.realpath(__file__)), "java.driver.template")

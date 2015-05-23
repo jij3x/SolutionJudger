@@ -30,70 +30,70 @@ import re
 import metatypes as t
 
 INP = "input"
-NM = "name"
-TYP = "type"
+NAME = "name"
+TYPE = "type"
 SOL = "solution"
-PAR = "params"
-FN = "actionName"
-RT = "return"
+PARM = "params"
+FUNC = "actionName"
+RET = "return"
 OUT = "output"
-IPR = "inProcr"
-OPR = "outProcr"
+PREP = "preProcr"
+POSP = "postProcr"
 ADO = "additionalOutput"
-VNM = "variableName"
-MC = "mutableCollection"
-GDR = "grader"
+VARN = "variableName"
+MCOL = "mutableCollection"
+GRAD = "grader"
 
 tim = t.type_map
 
 
 def add_changeable_flag(param):
-    if param[TYP].find(t.NOCHANGE) == 0:
-        param[TYP] = param[TYP].replace("{} ".format(t.NOCHANGE), "")
-        param[MC] = False
+    if param[TYPE].find(t.NOCHANGE) == 0:
+        param[TYPE] = param[TYPE].replace("{} ".format(t.NOCHANGE), "")
+        param[MCOL] = False
     else:
-        param[MC] = True
+        param[MCOL] = True
 
 
 def complete_metadata(metadata):
     for i in range(len(metadata[INP])):
-        metadata[INP][i][VNM] = "_PARAM_{}_".format(str(i))
+        metadata[INP][i][VARN] = "_PARAM_{}_".format(str(i))
         add_changeable_flag(metadata[INP][i])
 
-    if IPR in metadata:
-        for i in range(len(metadata[IPR])):
-            if RT not in metadata[IPR][i]:
-                metadata[IPR][i][RT] = {TYP: t.VOID}
-            metadata[IPR][i][RT][VNM] = "_IP_RETURN_{}_".format(str(i))
-            add_changeable_flag(metadata[IPR][i][RT])
+    if PREP in metadata:
+        for i in range(len(metadata[PREP])):
+            if RET not in metadata[PREP][i]:
+                metadata[PREP][i][RET] = {TYPE: t.VOID}
+            metadata[PREP][i][RET][VARN] = "_IP_RETURN_{}_".format(str(i))
+            add_changeable_flag(metadata[PREP][i][RET])
     else:
-        metadata[IPR] = []
+        metadata[PREP] = []
 
-    if RT not in metadata[SOL]:
-        metadata[SOL][RT] = {TYP: t.VOID}
-    metadata[SOL][RT][VNM] = "_RETURN_"
+    if RET not in metadata[SOL]:
+        metadata[SOL][RET] = {TYPE: t.VOID}
+    metadata[SOL][RET][VARN] = "_RETURN_"
 
-    if OPR in metadata:
-        for i in range(len(metadata[OPR])):
-            if RT not in metadata[OPR][i]:
-                metadata[OPR][i][RT] = {TYP: t.VOID}
-            metadata[OPR][i][RT][VNM] = "_OP_RETURN_{}_".format(str(i))
+    if POSP in metadata:
+        for i in range(len(metadata[POSP])):
+            if RET not in metadata[POSP][i]:
+                metadata[POSP][i][RET] = {TYPE: t.VOID}
+            metadata[POSP][i][RET][VARN] = "_OP_RETURN_{}_".format(str(i))
     else:
-        metadata[OPR] = []
+        metadata[POSP] = []
 
     if ADO not in metadata:
         metadata[ADO] = []
 
-    if GDR not in metadata:
-        metadata[GDR] = "general_grader"
+    if GRAD not in metadata:
+        metadata[GRAD] = "general_grader"
 
 
 def unchangeable_param_cnt(metadata):
     cnt = 0
     for param in metadata[INP]:
-        cnt += 1 if not param[MC] else 0
-    for param in metadata[IPR]:
-        cnt += 1 if not param[RT][MC] else 0
+        cnt += 1 if not param[MCOL] else 0
+    for param in metadata[PREP]:
+        cnt += 1 if not param[RET][MCOL] else 0
     return cnt
 
 

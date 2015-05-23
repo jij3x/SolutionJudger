@@ -1,12 +1,16 @@
 {
   "input": [
     {
-      "type": "~procedure"
+      "type": "*procedure"
     }
   ],
-  "outStream": [
+  "preProc": [
     {
-      "type": "+vector<:int>>"
+      "actionName": "createIntStream",
+      "params": [],
+      "return": {
+        "type": "+vector<:int>>"
+      }
     }
   ],
   "solution": {
@@ -28,17 +32,17 @@
         "name": "top",
         "return": {
           "type": ":int",
-          "pipeTo": "outStream[0]"
+          "pipeTo": "preProc[0].return"
         }
       },
       {
         "name": "getMin",
         "return": {
           "type": ":int",
-          "pipeTo": "outStream[0]"
+          "pipeTo": "preProc[0].return"
         }
       }
     ]
   },
-  "output": "outStream[0]"
+  "output": "preProc[0].return"
 }
