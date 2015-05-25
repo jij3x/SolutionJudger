@@ -284,7 +284,7 @@ UA_POSTIMVAR = "immutable_var_after_exec"
 
 
 def get_user_ans(sol_out, metadata):
-    out_type = m.get_prop(metadata, metadata[m.OUT])[m.TYP]
+    out_type = m.get_prop(metadata, metadata[m.OUT])[m.TYPE]
     user_ans = {UA_IMVARCNT: m.unchangeable_param_cnt(metadata),
                 UA_ADDOUTCNT: len(metadata[m.ADO]) if m.ADO in metadata else 0,
                 UA_OUTF: tim[out_type][t.P_OFLTR] if t.P_OFLTR in tim[out_type] else "no_filter",
@@ -324,15 +324,16 @@ def eval_java_sol(problem_path):
         metadata = json.load(metadata_file)
         m.complete_metadata(metadata)
 
-    # Compose Solution.java
+    # Compose Solution file
+    sol_fname = metadata[m.SOL][m.NAME] + ".java"
     with open(os.path.join(GENR_PATH, "java.solution.imports"), "r") as sol_imports, \
-            open(os.path.join(problem_path, "Solution.java"), "r") as sol_code, \
-            open("Solution.java", "w") as final_solution:
+            open(os.path.join(problem_path, sol_fname), "r") as sol_code, \
+            open(sol_fname, "w") as final_solution:
         final_solution.write(sol_imports.read())
         final_solution.write(sol_code.read())
 
     # Compile Driver and Solution, then run solution
-    subprocess.call(["javac", "Solution.java"])
+    subprocess.call(["javac", sol_fname])
     subprocess.call(["javac", "Driver.java"])
     with open(os.path.join(problem_path, "user.in"), "r") as test_data, \
             open(os.path.join(problem_path, "user.out"), "r") as answer:
@@ -343,4 +344,4 @@ def eval_java_sol(problem_path):
         user_ans[UA_ERR] = sol_err.decode("utf-8")
 
         formatted_in = len(user_ans[UA_OUT]) * [""]
-        return globals()[metadata[m.GDR]](user_ans, formatted_in, answer.read().splitlines())
+        return globals()[metadata[m.GRAD]](user_ans, formatted_in, answer.read().splitlines())

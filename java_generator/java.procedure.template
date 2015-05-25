@@ -1,0 +1,9 @@
+tokenizer.nextToken();
+int opsCnt = (int) tokenizer.nval;
+for (int j = 0; j < opsCnt; j++) {
+    tokenizer.nextToken();
+    int op = (int) tokenizer.nval;
+    switch (op) {
+    // method cases inject here
+    }
+}

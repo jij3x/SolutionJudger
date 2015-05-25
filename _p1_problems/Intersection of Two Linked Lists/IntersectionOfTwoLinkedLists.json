@@ -17,7 +17,7 @@
       "type": ":int"
     }
   ],
-  "inProcr": [
+  "preProcr": [
     {
       "actionName": "connectIntSLList",
       "params": [
@@ -38,7 +38,7 @@
       "type": "+sllist<:int>"
     }
   },
-  "outProcr": [
+  "postProcr": [
     {
       "actionName": "findIntersectionNode",
       "params": [
@@ -49,5 +49,5 @@
       }
     }
   ],
-  "output": "outProcr[0].return"
+  "output": "postProcr[0].return"
 }

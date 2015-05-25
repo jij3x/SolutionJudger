@@ -1,15 +1,19 @@
 {
-  "input": [
+  "procedure": [
     {
-      "type": "*procedure"
+      "elements": [
+        {
+          "name": "x",
+          "type": ":int"
+        }
+      ]
     }
   ],
-  "preProc": [
+  "preProcr": [
     {
       "actionName": "createIntStream",
-      "params": [],
       "return": {
-        "type": "+vector<:int>>"
+        "type": "+vector<:int>"
       }
     }
   ],
@@ -17,32 +21,29 @@
     "name": "MinStack",
     "methods": [
       {
-        "name": "push",
+        "actionName": "push",
         "params": [
-          {
-            "name": "x",
-            "type": ":int"
-          }
+          "procedure[0].elements[0]"
         ]
       },
       {
-        "name": "pop"
+        "actionName": "pop"
       },
       {
-        "name": "top",
+        "actionName": "top",
         "return": {
           "type": ":int",
-          "pipeTo": "preProc[0].return"
+          "pipeOut": "preProcr[0].return"
         }
       },
       {
-        "name": "getMin",
+        "actionName": "getMin",
         "return": {
           "type": ":int",
-          "pipeTo": "preProc[0].return"
+          "pipeOut": "preProcr[0].return"
         }
       }
     ]
   },
-  "output": "preProc[0].return"
+  "output": "preProcr[0].return"
 }

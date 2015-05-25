@@ -9,7 +9,7 @@
       "type": ":int"
     }
   ],
-  "inProcr": [
+  "preProcr": [
     {
       "actionName": "cyclizeIntSLList",
       "params": [
@@ -24,13 +24,13 @@
   "solution": {
     "actionName": "detectCycle",
     "params": [
-      "inProcr[0].return"
+      "preProcr[0].return"
     ],
     "return": {
       "type": "+sllist<:int>"
     }
   },
-  "outProcr": [
+  "postProcr": [
     {
       "actionName": "findIntSLListNodeIndex",
       "params": [
@@ -42,5 +42,5 @@
       }
     }
   ],
-  "output": "outProcr[0].return"
+  "output": "postProcr[0].return"
 }

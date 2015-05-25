@@ -3,17 +3,17 @@ import java.util.*;
 public class Helper {
 
     /**
+     * create integer stream
+     */
+    public static List<Integer> createIntStream() {
+        return new ArrayList<Integer>();
+    }
+
+    /**
      * :int stream appender
      */
     public static void intVectorAppend(List<Integer> vector, int n) {
         vector.add(n);
-    }
-
-    /**
-     * :string stream appender
-     */
-    public static void stringVectorAppend(List<String> vector, String s) {
-        vector.add(s);
     }
 
     /**

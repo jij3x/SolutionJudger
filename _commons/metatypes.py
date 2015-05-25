@@ -39,7 +39,7 @@ P_CS_T = "csType"
 P_SER = "serializer"
 P_DES = "deserializer"
 P_OFLTR = "outputFilter"
-P_ADD = "append"
+P_ADD = "appender"
 
 type_map = {
     VOID: {

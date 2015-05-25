@@ -18,11 +18,18 @@ import pprint
 PYCMD = "python"
 GENR_PATH = "java_generator"
 
+#sys.argv.append("/Users/jianxioj/SolutionJudger/_p1_problems/Min Stack")
+
 
 def cleanup_gens():
+    gen_files = {"user.out", "user.err"}
+    for fname in os.listdir(GENR_PATH):
+        if fname.endswith(".java"):
+            gen_files.add(fname)
+            gen_files.add(fname.split(".")[0] + ".class")
+
     for fname in os.listdir("."):
-        if fname in ("Driver.java", "Solution.java", "Driver.class", "Solution.class",
-                     "user.out", "user.out.unfiltered", "user.err"):
+        if fname in gen_files:
             os.remove(fname)
 
 
