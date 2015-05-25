@@ -1,0 +1,77 @@
+{
+  "input": [
+    {
+      "name": "data",
+      "type": ":string"
+    },
+    {
+      "type": "~procedure"
+    }
+  ],
+  "outStream": [
+    {
+      "type": "+vector<:string>"
+    }
+  ],
+  "inProcr": [
+    {
+      "actionName": "createReader4Instance",
+      "params": [
+        "input[0]"
+      ],
+      "return": {
+        "type": ":reader4"
+      }
+    }
+  ],
+  "classes": [
+    {
+      "name": "Reader4",
+      "dependency": [
+        {
+          "name": "data",
+          "from": "input[0]"
+        }
+      ],
+      "methods": [
+        {
+          "name": "read4",
+          "params": [
+            {
+              "name": "buf",
+              "type": "+array[:char]"
+            }
+          ],
+          "return": {
+            "type": ":int"
+          }
+        }
+      ]
+    }
+  ],
+  "solution": {
+    "dependency": [
+      {
+        "name": "reader4",
+        "from": "classes[0]"
+      }
+    ],
+    "methods": [
+      {
+        "name": "read",
+        "params": [
+          {
+            "name": "buf",
+            "type": "+array[:char]",
+            "pipeTo": "outStream[0]"
+          },
+          {
+            "name": "n",
+            "type": ":int"
+          }
+        ]
+      }
+    ]
+  },
+  "output": "outStream[0]"
+}
