@@ -10,10 +10,24 @@ public class Helper {
     }
 
     /**
-     * :int stream appender
+     * int stream appender
      */
     public static void intVectorAppend(List<Integer> vector, int n) {
         vector.add(n);
+    }
+
+    /**
+     * create boolean stream
+     */
+    public static List<Boolean> createBoolStream() {
+        return new ArrayList<Boolean>();
+    }
+
+    /**
+     * boolean stream appender
+     */
+    public static void boolVectorAppend(List<Boolean> vector, boolean b) {
+        vector.add(b);
     }
 
     /**

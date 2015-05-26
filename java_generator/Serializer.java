@@ -14,6 +14,19 @@ public class Serializer {
         return b ? "true" : "false";
     }
 
+    public static String serializeBoolVector(List<Boolean> vector) {
+        if (vector == null || vector.size() == 0)
+            return "[]";
+
+        StringBuilder r = new StringBuilder();
+        for (boolean b : vector) {
+            r.append(",").append(b ? "true" : "false");
+        }
+        r.setCharAt(0, '[');
+        r.append("]");
+        return r.toString();
+    }
+
     public static String serializeInt(int n) {
         return Integer.toString(n);
     }
@@ -347,6 +360,17 @@ public class Serializer {
     public static boolean deserializeBool(StreamTokenizer tokenizer) throws IOException {
         tokenizer.nextToken();
         return tokenizer.sval.equals("true") ? true : false;
+    }
+
+    public static List<Boolean> deserializeBoolVector(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        int size = (int) tokenizer.nval;
+        List<Boolean> vector = new ArrayList<Boolean>();
+        for (int i = 0; i < size; i++) {
+            tokenizer.nextToken();
+            vector.add(tokenizer.sval.equals("true") ? true : false);
+        }
+        return vector;
     }
 
     public static int deserializeInt(StreamTokenizer tokenizer) throws IOException {

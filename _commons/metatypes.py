@@ -16,6 +16,7 @@ INT_UDGRAPH = "+udgraph<:int>"
 CHAR_ARR = "+array<:char>"
 CHAR_2D_ARR = "+array<+array<:char>>"
 BOOL = ":bool"
+BOOL_VEC = "+vector<:bool>"
 STRING_ARR = "+array<:string>"
 STRING_VEC = "+vector<:string>"
 STRING_2D_VEC = "+vector<+vector<:string>>"
@@ -82,6 +83,12 @@ type_map = {
         P_JAVA_T: "String",
         P_SER: "serializeString",
         P_DES: "deserializeString"
+    },
+    BOOL_VEC: {
+        P_JAVA_T: "List<Boolean>",
+        P_SER: "serializeBoolVector",
+        P_DES: "deserializeBoolVector",
+        P_ADD: "boolVectorAppend"
     },
     INT_ARR: {
         P_JAVA_T: "int[]",

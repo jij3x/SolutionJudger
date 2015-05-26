@@ -8,7 +8,7 @@ sys.path.append(lib_path)
 import probdesc as m
 import metatypes as t
 
-#sys.stdin = open("/Users/jianxioj/SolutionJudger/_p1_problems/Remove Duplicates from Sorted Array/RemoveDuplicatesFromSortedArray.json", "r")
+#sys.stdin = open("/Users/jianxioj/SolutionJudger/_problems_010/Two Sum III/TwoSumIII.json", "r")
 
 PARAM_DS_POS = "// param deserialization code inject here"
 INPUT_PROCR_POS = "// input processing code inject here"

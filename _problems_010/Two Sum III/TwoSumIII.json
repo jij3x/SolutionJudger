@@ -1,0 +1,46 @@
+{
+  "procedure": [
+    {
+      "elements": [
+        {
+          "name": "x",
+          "type": ":int"
+        },
+        {
+          "name": "y",
+          "type": ":int"
+        }
+      ]
+    }
+  ],
+  "preProcr": [
+    {
+      "actionName": "createBoolStream",
+      "return": {
+        "type": "+vector<:bool>"
+      }
+    }
+  ],
+  "solution": {
+    "name": "TwoSum",
+    "methods": [
+      {
+        "actionName": "add",
+        "params": [
+          "procedure[0].elements[0]"
+        ]
+      },
+      {
+        "actionName": "find",
+        "params": [
+          "procedure[0].elements[1]"
+        ],
+        "return": {
+          "type": ":bool",
+          "pipeOut": "preProcr[0].return"
+        }
+      }
+    ]
+  },
+  "output": "preProcr[0].return"
+}
