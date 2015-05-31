@@ -317,7 +317,7 @@ def eval_java_sol(problem_path):
             metadata_fname = os.path.join(problem_path, file)
             break
 
-    # Generate Driver.java, and load the problem metadata
+    # Generate Driver.java, and related classes java files
     with open("Driver.java", "w") as driver, open(metadata_fname, "r") as metadata_file:
         subprocess.call([PYCMD, os.path.join(GENR_PATH, "gen_java_driver.py")], stdin=metadata_file, stdout=driver)
         metadata_file.seek(0, 0)
@@ -325,20 +325,19 @@ def eval_java_sol(problem_path):
         m.complete_metadata(metadata)
 
     # Compose class files and compile
-    classes = []
+    classes = [metadata[m.SOL][m.NAME] + ".java"]
     if m.CLS in metadata:
-        for cls in reversed(metadata[m.CLS]):
+        for cls in metadata[m.CLS]:
             classes.append(cls[m.NAME] + ".java")
-    classes.append(metadata[m.SOL][m.NAME] + ".java")
     for fname in classes:
         with open(os.path.join(GENR_PATH, "java.imports"), "r") as java_imports, \
                 open(os.path.join(problem_path, fname), "r") as class_code, \
                 open(fname, "w") as final_class:
             final_class.write(java_imports.read())
             final_class.write(class_code.read())
-        subprocess.call(["javac", fname])
 
-    # Compile Driver and Solution, then run solution
+    # Compile Driver, then execute
+    subprocess.call(["javac", "Solution.java"])  # compile the new Solution.java
     subprocess.call(["javac", "Driver.java"])
     with open(os.path.join(problem_path, "user.in"), "r") as test_data, \
             open(os.path.join(problem_path, "user.out"), "r") as answer:
