@@ -1,3 +1,4 @@
+RAW = ":raw"
 VOID = ":void"
 INT = ":int"
 UINT = ":uint"
@@ -41,6 +42,10 @@ P_DES = "deserializer"
 P_OFLTR = "outputFilter"
 
 type_map = {
+    RAW: {
+        P_JAVA_T: "StreamTokenizer",
+        P_DES: "getStreamToken"
+    },
     VOID: {
         P_JAVA_T: "void"
     },

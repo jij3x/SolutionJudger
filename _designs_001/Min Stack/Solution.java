@@ -1,12 +1,18 @@
 public class Solution {
-    public List<Integer> testMinStack(List<Integer> procedure) {
+    private int nextIntFromStream(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        return (int) tokenizer.nval;
+    }
+
+    public List<Integer> testMinStack(StreamTokenizer tokenizer) throws IOException {
         MinStack minStack = new MinStack();
         List<Integer> result = new ArrayList<Integer>();
-        for (int i = 0, idx = 1; i < procedure.get(0); i++) {
-            int op = procedure.get(idx++);
-            switch (op) {
+
+        int opsCnt = nextIntFromStream(tokenizer);
+        for (int i = 0; i < opsCnt; i++) {
+            switch (nextIntFromStream(tokenizer)) {
             case 0:
-                minStack.push(procedure.get(idx++));
+                minStack.push(nextIntFromStream(tokenizer));
                 break;
             case 1:
                 minStack.pop();

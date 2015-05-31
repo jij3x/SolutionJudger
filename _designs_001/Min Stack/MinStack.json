@@ -2,7 +2,7 @@
   "input": [
     {
       "name": "procedure",
-      "type": "+vector<:int>"
+      "type": ":raw"
     }
   ],
   "solution": {

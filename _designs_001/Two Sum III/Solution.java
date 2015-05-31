@@ -1,15 +1,21 @@
 public class Solution {
-    public List<Boolean> testTwoSumIII(List<Integer> procedure) {
+    private int nextIntFromStream(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        return (int) tokenizer.nval;
+    }
+
+    public List<Boolean> testTwoSumIII(StreamTokenizer tokenizer) throws IOException {
         TwoSum twoSum = new TwoSum();
         List<Boolean> result = new ArrayList<Boolean>();
-        for (int i = 0, idx = 1; i < procedure.get(0); i++) {
-            int op = procedure.get(idx++);
-            switch (op) {
+
+        int opsCnt = nextIntFromStream(tokenizer);
+        for (int i = 0; i < opsCnt; i++) {
+            switch (nextIntFromStream(tokenizer)) {
             case 0:
-                twoSum.add(procedure.get(idx++));
+                twoSum.add(nextIntFromStream(tokenizer));
                 break;
             case 1:
-                result.add(twoSum.find(procedure.get(idx++)));
+                result.add(twoSum.find(nextIntFromStream(tokenizer)));
                 break;
             }
         }

@@ -1,18 +1,13 @@
 {  "input": [
     {
-      "name": "capacity",
-      "type": ":int"
-    },
-    {
       "name": "procedure",
-      "type": "+vector<:int>"
+      "type": ":raw"
     }
   ],
   "solution": {
     "actionName": "testLRUCache",
     "params": [
-      "input[0]",
-      "input[1]"
+      "input[0]"
     ],
     "return": {
       "type": "+vector<:int>"
