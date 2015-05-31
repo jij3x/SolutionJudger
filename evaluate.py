@@ -324,16 +324,21 @@ def eval_java_sol(problem_path):
         metadata = json.load(metadata_file)
         m.complete_metadata(metadata)
 
-    # Compose Solution file
-    sol_fname = metadata[m.SOL][m.NAME] + ".java"
-    with open(os.path.join(GENR_PATH, "java.solution.imports"), "r") as sol_imports, \
-            open(os.path.join(problem_path, sol_fname), "r") as sol_code, \
-            open(sol_fname, "w") as final_solution:
-        final_solution.write(sol_imports.read())
-        final_solution.write(sol_code.read())
+    # Compose class files and compile
+    classes = []
+    if m.CLS in metadata:
+        for cls in reversed(metadata[m.CLS]):
+            classes.append(cls[m.NAME] + ".java")
+    classes.append(metadata[m.SOL][m.NAME] + ".java")
+    for fname in classes:
+        with open(os.path.join(GENR_PATH, "java.imports"), "r") as java_imports, \
+                open(os.path.join(problem_path, fname), "r") as class_code, \
+                open(fname, "w") as final_class:
+            final_class.write(java_imports.read())
+            final_class.write(class_code.read())
+        subprocess.call(["javac", fname])
 
     # Compile Driver and Solution, then run solution
-    subprocess.call(["javac", sol_fname])
     subprocess.call(["javac", "Driver.java"])
     with open(os.path.join(problem_path, "user.in"), "r") as test_data, \
             open(os.path.join(problem_path, "user.out"), "r") as answer:

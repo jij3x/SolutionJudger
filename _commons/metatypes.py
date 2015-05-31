@@ -28,7 +28,6 @@ INT_POINT = ":ipoint"
 INT_POINT_ARR = "+array<:ipoint>"
 INT_INTERVAL = ":iinterval"
 INT_INTERVAL_VEC = "+vector<:iinterval>"
-READER4 = ":reader4"
 
 NOCHANGE = "nochange"
 
@@ -40,7 +39,6 @@ P_CS_T = "csType"
 P_SER = "serializer"
 P_DES = "deserializer"
 P_OFLTR = "outputFilter"
-P_ADD = "appender"
 
 type_map = {
     VOID: {
@@ -87,8 +85,7 @@ type_map = {
     BOOL_VEC: {
         P_JAVA_T: "List<Boolean>",
         P_SER: "serializeBoolVector",
-        P_DES: "deserializeBoolVector",
-        P_ADD: "boolVectorAppend"
+        P_DES: "deserializeBoolVector"
     },
     INT_ARR: {
         P_JAVA_T: "int[]",
@@ -103,8 +100,7 @@ type_map = {
     INT_VEC: {
         P_JAVA_T: "List<Integer>",
         P_SER: "serializeIntVector",
-        P_DES: "deserializeIntVector",
-        P_ADD: "intVectorAppend"
+        P_DES: "deserializeIntVector"
     },
     INT_2D_VEC: {
         P_JAVA_T: "List<List<Integer>>",

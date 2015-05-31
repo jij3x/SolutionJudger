@@ -6,37 +6,40 @@
     }
   ],
   "solution": {
-    "actionName": "testTwoSumIII",
+    "actionName": "testMinStack",
     "params": [
       "input[0]"
     ],
     "return": {
-      "type": "+vector<:bool>"
+      "type": "+vector<:int>"
     }
   },
   "classes": [
     {
-      "name": "TwoSum",
+      "name": "MinStack",
       "methods": [
         {
-          "name": "add",
+          "name": "push",
           "input": [
             {
-              "name": "number",
+              "name": "x",
               "type": ":int"
             }
           ]
         },
         {
-          "name": "find",
-          "input": [
-            {
-              "name": "value",
-              "type": ":int"
-            }
-          ],
+          "name": "pop"
+        },
+        {
+          "name": "top",
           "return": {
-            "type": ":bool"
+            "type": ":int"
+          }
+        },
+        {
+          "name": "getMin",
+          "return": {
+            "type": ":int"
           }
         }
       ]

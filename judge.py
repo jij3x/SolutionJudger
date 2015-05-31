@@ -18,7 +18,7 @@ import pprint
 PYCMD = "python"
 GENR_PATH = "java_generator"
 
-#sys.argv.append("/Users/jianxioj/SolutionJudger/_p1_problems/Min Stack")
+#sys.argv.append("/Users/jianxioj/SolutionJudger/_problems_010/Min Stack")
 
 
 def cleanup_gens():

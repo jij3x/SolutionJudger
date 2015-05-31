@@ -8,7 +8,7 @@ sys.path.append(lib_path)
 import probdesc as m
 import metatypes as t
 
-#sys.stdin = open("/Users/jianxioj/SolutionJudger/_problems_010/Two Sum III/TwoSumIII.json", "r")
+#sys.stdin = open("/Users/jianxioj/SolutionJudger/_problems_010/Min Stack/MinStack.json", "r")
 
 PARAM_DS_POS = "// param deserialization code inject here"
 INPUT_PROCR_POS = "// input processing code inject here"
@@ -18,7 +18,6 @@ OUTPUT_S_POS = "// result serialization code inject here"
 ADDOUT_S_POS = "// additional output serialization code inject here"
 UCVARS_BS_POS = "// unchangeable variables serialization code before execution inject here"
 UCVARS_AS_POS = "// unchangeable variables serialization code after execution inject here"
-METHOD_CASES_POS = "// method cases inject here"
 
 tim = t.type_map
 metadata = json.loads(sys.stdin.read())
@@ -44,11 +43,6 @@ def gen_param_deserializing_code(param, fn_tmpl):
     return fn_tmpl.format(rtype, param[m.VARN], deserializer)
 
 
-def gen_streamout_code(ret, fn_tmpl):
-    outstream = m.get_prop(metadata, ret['pipeOut'])
-    return fn_tmpl.format(tim[outstream[m.TYPE]][t.P_ADD], outstream[m.VARN], ret[m.VARN])
-
-
 # Fetch inputs deserialization code
 param_deser_code = ""
 for param in metadata[m.INP]:
@@ -62,27 +56,8 @@ for procr in metadata[m.PREP]:
 
 # Compose the code to call Solution
 solving_code = "{} solution = new {}({});\n".format(metadata[m.SOL][m.NAME], metadata[m.SOL][m.NAME], "")
-if len(metadata[m.PROC]) == 0:
-    solving_code += gen_invoking_code(metadata[m.SOL][m.RET], metadata[m.SOL][m.FUNC], metadata[m.SOL][m.PARM],
-                                      "{} {} = ", "{}solution.{}({});\n")
-else:
-    PROCTML_FNM = os.path.join(os.path.dirname(os.path.realpath(__file__)), "java.procedure.template")
-    with open(PROCTML_FNM) as procedure_template:
-        procedure_code = procedure_template.read()
-
-    all_methods_code = ""
-    for i in range(len(metadata[m.SOL][m.MTDS])):
-        method = metadata[m.SOL][m.MTDS][i]
-        method_invoking_code = "case {}:\n".format(i)
-        for param in method[m.PARM]:
-            inp = m.get_prop(metadata, param)
-            method_invoking_code += gen_param_deserializing_code(inp, "{} {} = Serializer.{}(tokenizer);\n")
-        method_invoking_code += gen_invoking_code(method[m.RET], method[m.FUNC], method[m.PARM],
-                                                  "{} {} = ", "{}solution.{}({});\n")
-        if m.PIPO in method[m.RET]:
-            method_invoking_code += gen_streamout_code(method[m.RET], "Helper.{}({}, {});\n")
-        all_methods_code += method_invoking_code + "break;\n"
-    solving_code += re.sub(re.escape(METHOD_CASES_POS) + r".*?\n", all_methods_code, procedure_code)
+solving_code += gen_invoking_code(metadata[m.SOL][m.RET], metadata[m.SOL][m.FUNC], metadata[m.SOL][m.PARM],
+                                  "{} {} = ", "{}solution.{}({});\n")
 
 # Compose the code to process output
 output_proc_code = ""

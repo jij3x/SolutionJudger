@@ -3,34 +3,6 @@ import java.util.*;
 public class Helper {
 
     /**
-     * create integer stream
-     */
-    public static List<Integer> createIntStream() {
-        return new ArrayList<Integer>();
-    }
-
-    /**
-     * int stream appender
-     */
-    public static void intVectorAppend(List<Integer> vector, int n) {
-        vector.add(n);
-    }
-
-    /**
-     * create boolean stream
-     */
-    public static List<Boolean> createBoolStream() {
-        return new ArrayList<Boolean>();
-    }
-
-    /**
-     * boolean stream appender
-     */
-    public static void boolVectorAppend(List<Boolean> vector, boolean b) {
-        vector.add(b);
-    }
-
-    /**
      * "Detect Cycle II" input processor
      */
     public static ListNode cyclizeIntSLList(ListNode node, int x) {
@@ -93,13 +65,6 @@ public class Helper {
             return "No intersection";
 
         return String.format("Intersected at '%d'", node.val);
-    }
-
-    /**
-     * "Read N Characters Given Read4 II" input processor
-     */
-    public static Reader4 createReader4Instance(String s) {
-        return new Reader4(s);
     }
 
 }

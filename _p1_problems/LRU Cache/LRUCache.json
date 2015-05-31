@@ -1,0 +1,63 @@
+{  "input": [
+    {
+      "name": "capacity",
+      "type": ":int"
+    },
+    {
+      "name": "procedure",
+      "type": "+vector<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "testLRUCache",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": "+vector<:int>"
+    }
+  },
+  "classes": [
+    {
+      "name": "LRUCache",
+      "methods": [
+        {
+          "actionName": "LRUCache",
+          "input": [
+            {
+              "name": "capacity",
+              "type": ":int"
+            }
+          ]
+        },
+        {
+          "actionName": "get",
+          "input": [
+            {
+              "name": "key",
+              "type": ":int"
+            }
+          ],
+          "return": {
+            "type": ":int"
+          }
+        },
+        {
+          "actionName": "set",
+          "input": [
+            {
+              "name": "key",
+              "type": ":int"
+            },
+            {
+              "name": "value",
+              "type": ":int"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "output": "solution.return"
+}

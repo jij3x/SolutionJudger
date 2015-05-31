@@ -30,7 +30,6 @@ import re
 import metatypes as t
 
 INP = "input"
-ELEM = "elements"
 NAME = "name"
 TYPE = "type"
 SOL = "solution"
@@ -45,8 +44,7 @@ VARN = "variableName"
 MTDS = "methods"
 MCOL = "mutableCollection"
 GRAD = "grader"
-PROC = "procedure"
-PIPO = "pipeOut"
+CLS = "classes"
 
 tim = t.type_map
 
@@ -65,12 +63,6 @@ def complete_metadata(metadata):
     for i in range(len(metadata[INP])):
         metadata[INP][i][VARN] = "_PARAM_{}_".format(i)
         add_changeable_flag(metadata[INP][i])
-
-    if PROC not in metadata:
-        metadata[PROC] = []
-    for i in range(len(metadata[PROC])):
-        for j in range(len(metadata[PROC][i][ELEM])):
-            metadata[PROC][i][ELEM][j][VARN] = "_PROC_{}_PARAM_{}_".format(i, j)
 
     if PREP in metadata:
         for i in range(len(metadata[PREP])):
