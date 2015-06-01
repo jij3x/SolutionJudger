@@ -367,12 +367,10 @@ public class Serializer {
     }
 
     public static List<Boolean> deserializeBoolVector(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         List<Boolean> vector = new ArrayList<Boolean>();
         for (int i = 0; i < size; i++) {
-            tokenizer.nextToken();
-            vector.add(tokenizer.sval.equals("true") ? true : false);
+            vector.add(deserializeBool(tokenizer));
         }
         return vector;
     }
@@ -403,30 +401,25 @@ public class Serializer {
     }
 
     public static String[] deserializeStringArray(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         String[] array = new String[size];
         for (int i = 0; i < size; i++) {
-            tokenizer.nextToken();
-            array[i] = tokenizer.sval;
+            array[i] = deserializeString(tokenizer);
         }
         return array;
     }
 
     public static List<String> deserializeStringVector(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         ArrayList<String> array = new ArrayList<String>();
         for (int i = 0; i < size; i++) {
-            tokenizer.nextToken();
-            array.add(tokenizer.sval);
+            array.add(deserializeString(tokenizer));
         }
         return array;
     }
 
     public static List<List<String>> deserializeString2DVector(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         ArrayList<List<String>> array = new ArrayList<List<String>>();
         for (int i = 0; i < size; i++) {
             array.add(deserializeStringVector(tokenizer));
@@ -435,12 +428,10 @@ public class Serializer {
     }
 
     public static Set<String> deserializeStringSet(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         HashSet<String> set = new HashSet<String>();
         for (int i = 0; i < size; i++) {
-            tokenizer.nextToken();
-            set.add(tokenizer.sval);
+            set.add(deserializeString(tokenizer));
         }
         return set;
     }
@@ -450,19 +441,16 @@ public class Serializer {
     }
 
     public static int[] deserializeIntArray(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         int[] array = new int[size];
         for (int i = 0; i < size; i++) {
-            tokenizer.nextToken();
-            array[i] = (int) tokenizer.nval;
+            array[i] = deserializeInt(tokenizer);
         }
         return array;
     }
 
     public static int[][] deserializeInt2DArray(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         int[][] array = new int[size][];
         for (int i = 0; i < size; i++) {
             array[i] = deserializeIntArray(tokenizer);
@@ -471,19 +459,16 @@ public class Serializer {
     }
 
     public static List<Integer> deserializeIntVector(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         List<Integer> vector = new ArrayList<Integer>();
         for (int i = 0; i < size; i++) {
-            tokenizer.nextToken();
-            vector.add((int) tokenizer.nval);
+            vector.add(deserializeInt(tokenizer));
         }
         return vector;
     }
 
     public static List<List<Integer>> deserializeInt2DVector(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         List<List<Integer>> vector = new ArrayList<List<Integer>>();
         for (int i = 0; i < size; i++) {
             vector.add(deserializeIntVector(tokenizer));
@@ -497,8 +482,7 @@ public class Serializer {
     }
 
     public static char[][] deserializeChar2DArray(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
 
         char[][] arr = new char[size][];
         for (int i = 0; i < size; i++) {
@@ -511,11 +495,9 @@ public class Serializer {
         ListNode start = new ListNode(0), tail = start;
 
         int seqNo = 0;
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         for (int i = 0; i < size; i++) {
-            tokenizer.nextToken();
-            ListNode node = new ListNode((int) tokenizer.nval);
+            ListNode node = new ListNode(deserializeInt(tokenizer));
             node._seqNo = seqNo++;
             tail.next = node;
             tail = node;
@@ -526,8 +508,7 @@ public class Serializer {
     public static List<ListNode> deserializeIntSLListVector(StreamTokenizer tokenizer) throws IOException {
         ArrayList<ListNode> vector = new ArrayList<ListNode>();
 
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         for (int i = 0; i < size; i++) {
             vector.add(deserializeIntSLList(tokenizer));
         }
@@ -539,11 +520,9 @@ public class Serializer {
         HashMap<Integer, RandomListNode> memo = new HashMap<Integer, RandomListNode>();
 
         int seqNo = 0;
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         for (int i = 0; i < size / 2; i++) {
-            tokenizer.nextToken();
-            RandomListNode node = new RandomListNode((int) tokenizer.nval);
+            RandomListNode node = new RandomListNode(deserializeInt(tokenizer));
             memo.put(node.label, node);
             node._seqNo = seqNo++;
             tail.next = node;
@@ -560,8 +539,7 @@ public class Serializer {
     }
 
     public static TreeNode deserializeIntBinaryTree(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         if (size == 0)
             return null;
 
@@ -586,8 +564,7 @@ public class Serializer {
     public static List<TreeNode> deserializeIntBinaryTreeVector(StreamTokenizer tokenizer) throws IOException {
         ArrayList<TreeNode> list = new ArrayList<TreeNode>();
 
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         for (int i = 0; i < size; i++) {
             list.add(deserializeIntBinaryTree(tokenizer));
         }
@@ -595,8 +572,7 @@ public class Serializer {
     }
 
     public static TreeLinkNode deserializeIntLinkedBinaryTree(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         if (size == 0)
             return null;
 
@@ -623,11 +599,9 @@ public class Serializer {
         HashMap<Integer, UndirectedGraphNode> memo = new HashMap<Integer, UndirectedGraphNode>();
 
         int seqNo = 0;
-        tokenizer.nextToken();
-        int size = (int) tokenizer.nval;
+        int size = deserializeInt(tokenizer);
         for (int i = 0; i < size; i++) {
-            tokenizer.nextToken();
-            String nodeStr = tokenizer.sval;
+            String nodeStr = deserializeString(tokenizer);
             String[] nodes = nodeStr.split(",");
 
             int nodeLabel = Integer.parseInt(nodes[0]);
@@ -656,17 +630,14 @@ public class Serializer {
     }
 
     public static Point deserializeIPoint(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int x = (int) tokenizer.nval;
-        tokenizer.nextToken();
-        int y = (int) tokenizer.nval;
+        int x = deserializeInt(tokenizer);
+        int y = deserializeInt(tokenizer);
 
         return new Point(x, y);
     }
 
     public static Point[] deserializeIPointArray(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int cnt = (int) tokenizer.nval;
+        int cnt = deserializeInt(tokenizer);
 
         Point[] array = new Point[cnt];
         for (int i = 0; i < cnt; i++) {
@@ -676,17 +647,14 @@ public class Serializer {
     }
 
     public static Interval deserializeIInterval(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int start = (int) tokenizer.nval;
-        tokenizer.nextToken();
-        int end = (int) tokenizer.nval;
+        int start = deserializeInt(tokenizer);
+        int end = deserializeInt(tokenizer);
 
         return new Interval(start, end);
     }
 
     public static List<Interval> deserializeIIntervalVector(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        int cnt = (int) tokenizer.nval;
+        int cnt = deserializeInt(tokenizer);
 
         ArrayList<Interval> vector = new ArrayList<Interval>();
         for (int i = 0; i < cnt; i++) {

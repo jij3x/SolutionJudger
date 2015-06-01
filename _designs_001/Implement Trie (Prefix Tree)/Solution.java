@@ -1,29 +1,19 @@
 public class Solution {
-    private int nextIntFromStream(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        return (int) tokenizer.nval;
-    }
-
-    private String nextStringFromStream(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        return tokenizer.sval;
-    }
-
     public List<Boolean> testTrie(StreamTokenizer tokenizer) throws IOException {
         Trie trie = new Trie();
         List<Boolean> result = new ArrayList<Boolean>();
 
-        int opsCnt = nextIntFromStream(tokenizer);
+        int opsCnt = Serializer.deserializeInt(tokenizer);
         for (int i = 0; i < opsCnt; i++) {
-            switch (nextIntFromStream(tokenizer)) {
+            switch (Serializer.deserializeInt(tokenizer)) {
             case 0:
-                trie.insert(nextStringFromStream(tokenizer));
+                trie.insert(Serializer.deserializeString(tokenizer));
                 break;
             case 1:
-                result.add(trie.search(nextStringFromStream(tokenizer)));
+                result.add(trie.search(Serializer.deserializeString(tokenizer)));
                 break;
             case 2:
-                result.add(trie.startsWith(nextStringFromStream(tokenizer)));
+                result.add(trie.startsWith(Serializer.deserializeString(tokenizer)));
                 break;
             }
         }

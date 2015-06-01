@@ -1,21 +1,16 @@
 public class Solution {
-    private int nextIntFromStream(StreamTokenizer tokenizer) throws IOException {
-        tokenizer.nextToken();
-        return (int) tokenizer.nval;
-    }
-
     public List<Integer> testLRUCache(StreamTokenizer tokenizer) throws IOException {
-        LRUCache cache = new LRUCache(nextIntFromStream(tokenizer));
+        LRUCache cache = new LRUCache(Serializer.deserializeInt(tokenizer));
         List<Integer> result = new ArrayList<Integer>();
 
-        int opsCnt = nextIntFromStream(tokenizer);
+        int opsCnt = Serializer.deserializeInt(tokenizer);
         for (int i = 0; i < opsCnt; i++) {
-            switch (nextIntFromStream(tokenizer)) {
+            switch (Serializer.deserializeInt(tokenizer)) {
             case 0:
-                cache.set(nextIntFromStream(tokenizer), nextIntFromStream(tokenizer));
+                cache.set(Serializer.deserializeInt(tokenizer), Serializer.deserializeInt(tokenizer));
                 break;
             case 1:
-                result.add(cache.get(nextIntFromStream(tokenizer)));
+                result.add(cache.get(Serializer.deserializeInt(tokenizer)));
                 break;
             }
         }
