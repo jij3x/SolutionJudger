@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "numCourses",
+      "type": ":int"
+    },
+    {
+      "name": "prerequisites",
+      "type": "+array<+array<:int>>"
+    }
+  ],
+  "solution": {
+    "actionName": "findOrder",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": "+array<:int>"
+    }
+  },
+  "output": "solution.return"
+}

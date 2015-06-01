@@ -1,0 +1,46 @@
+{
+  "input": [
+    {
+      "name": "procedure",
+      "type": ":raw"
+    }
+  ],
+  "solution": {
+    "actionName": "testTwoSumIII",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:bool>"
+    }
+  },
+  "classes": [
+    {
+      "name": "TwoSum",
+      "methods": [
+        {
+          "name": "add",
+          "input": [
+            {
+              "name": "number",
+              "type": ":int"
+            }
+          ]
+        },
+        {
+          "name": "find",
+          "input": [
+            {
+              "name": "value",
+              "type": ":int"
+            }
+          ],
+          "return": {
+            "type": ":bool"
+          }
+        }
+      ]
+    }
+  ],
+  "output": "solution.return"
+}
