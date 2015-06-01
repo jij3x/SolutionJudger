@@ -1,0 +1,24 @@
+{
+  "input": [
+    {
+      "name": "board",
+      "type": "+array<+array<:char>>"
+    },
+    {
+      "name": "words",
+      "type": "+array<:string>"
+    }
+  ],
+  "solution": {
+    "actionName": "findWords",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": "+vector<:string>"
+    }
+  },
+  "output": "solution.return",
+  "grader": "unsorted_vec_grader"
+}
