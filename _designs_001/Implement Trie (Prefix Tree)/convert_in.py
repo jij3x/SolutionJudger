@@ -10,9 +10,9 @@ for i in range(len(lines) // 4):
     stream = []
     for op in options:
         stream.append(op)
-        if op == "0":
+        if int(op) == 0:
             stream.append(inserts.pop(0))
-        elif op == "1":
+        elif int(op) == 1:
             stream.append(searches.pop(0))
         else:
             stream.append(prefixes.pop(0))

@@ -6,7 +6,7 @@
     }
   ],
   "solution": {
-    "actionName": "testTwoSumIII",
+    "actionName": "testWordDictionary",
     "params": [
       "input[0]"
     ],
@@ -16,23 +16,23 @@
   },
   "classes": [
     {
-      "name": "TwoSum",
+      "name": "WordDictionary",
       "methods": [
         {
-          "name": "add",
+          "name": "addWord",
           "input": [
             {
-              "name": "number",
-              "type": ":int"
+              "name": "word",
+              "type": ":string"
             }
           ]
         },
         {
-          "name": "find",
+          "name": "search",
           "input": [
             {
-              "name": "value",
-              "type": ":int"
+              "name": "word",
+              "type": ":string"
             }
           ],
           "return": {
