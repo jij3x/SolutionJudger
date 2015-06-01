@@ -1,0 +1,81 @@
+{
+  "input": [
+    {
+      "name": "s",
+      "type": ":string"
+    },
+    {
+      "name": "n",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "testReaderN",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":string"
+    }
+  },
+  "classes": [
+    {
+      "name": "Reader4",
+      "methods": [
+        {
+          "name": "Reader4",
+          "params": [
+            {
+              "name": "s",
+              "type": ":string"
+            }
+          ]
+        },
+        {
+          "name": "read",
+          "params": [
+            {
+              "name": "buf",
+              "type": "+array[:char]"
+            }
+          ],
+          "return": {
+            "type": ":int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ReaderN",
+      "methods": [
+        {
+          "name": "ReaderN",
+          "params": [
+            {
+              "name": "reader4",
+              "dependency": "classes[0]"
+            }
+          ]
+        },
+        {
+          "name": "read",
+          "params": [
+            {
+              "name": "buf",
+              "type": "+array[:char]"
+            },
+            {
+              "name": "n",
+              "type": ":int"
+            }
+          ],
+          "return": {
+            "type": ":int"
+          }
+        }
+      ]
+    }
+  ],
+  "output": "solution.return"
+}

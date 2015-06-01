@@ -1,4 +1,5 @@
-{  "input": [
+{
+  "input": [
     {
       "name": "procedure",
       "type": ":raw"
@@ -18,7 +19,7 @@
       "name": "LRUCache",
       "methods": [
         {
-          "actionName": "LRUCache",
+          "name": "LRUCache",
           "input": [
             {
               "name": "capacity",
@@ -27,7 +28,7 @@
           ]
         },
         {
-          "actionName": "get",
+          "name": "get",
           "input": [
             {
               "name": "key",
@@ -39,7 +40,7 @@
           }
         },
         {
-          "actionName": "set",
+          "name": "set",
           "input": [
             {
               "name": "key",

@@ -1,0 +1,46 @@
+{
+  "input": [
+    {
+      "name": "root",
+      "type": "+binarytree<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "testBSTIterator",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:int>"
+    }
+  },
+  "classes": [
+    {
+      "name": "BSTIterator",
+      "methods": [
+        {
+          "name": "BSTIterator",
+          "input": [
+            {
+              "name": "root",
+              "type": "+binarytree<:int>"
+            }
+          ]
+        },
+        {
+          "name": "hasNext",
+          "return": {
+            "type": ":bool"
+          }
+        },
+        {
+          "name": "next",
+          "return": {
+            "type": ":int"
+          }
+        }
+      ]
+    }
+  ],
+  "output": "solution.return"
+}

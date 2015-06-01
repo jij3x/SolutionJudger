@@ -1,0 +1,69 @@
+{
+  "input": [
+    {
+      "name": "procedure",
+      "type": ":raw"
+    }
+  ],
+  "solution": {
+    "actionName": "testTrie",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:bool>"
+    }
+  },
+  "classes": [
+    {
+      "name": "TrieNode",
+      "methods": [
+        {
+          "name": "TrieNode"
+        }
+      ]
+    },
+    {
+      "name": "Trie",
+      "methods": [
+        {
+          "name": "Trie"
+        },
+        {
+          "name": "insert",
+          "input": [
+            {
+              "name": "word",
+              "type": ":string"
+            }
+          ]
+        },
+        {
+          "name": "search",
+          "input": [
+            {
+              "name": "word",
+              "type": ":string"
+            }
+          ],
+          "return": {
+            "type": ":bool"
+          }
+        },
+        {
+          "name": "startsWith",
+          "input": [
+            {
+              "name": "prefix",
+              "type": ":string"
+            }
+          ],
+          "return": {
+            "type": ":bool"
+          }
+        }
+      ]
+    }
+  ],
+  "output": "solution.return"
+}

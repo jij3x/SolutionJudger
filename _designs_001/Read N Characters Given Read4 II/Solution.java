@@ -1,22 +1,21 @@
 public class Solution {
-    private Read4 read4;
+    private static final int MAX_LEN = 512;
 
-    public Solution(Read4 read4) {
-        this.read4 = read4
+    private int nextIntFromStream(StreamTokenizer tokenizer) throws IOException {
+        tokenizer.nextToken();
+        return (int) tokenizer.nval;
     }
 
-    public int read(char[] buf, int n) {
-        int readBytes = 0;
-        boolean eof = false;
-        while (!eof && readBytes < n) {
-            int sz = (bufsize > 0) ? bufsize : read4(buffer);
-            if (bufsize == 0 && sz < 4) eof = true;
-            int bytes = Math.min(n - readBytes, sz);
-            System.arraycopy(buffer, offset, buf, readBytes, bytes);
-            offset = (offset + bytes) % 4;
-            bufsize = sz - bytes;
-            readBytes += bytes;
+    public List<String> testReaderN(String s, StreamTokenizer tokenizer) throws IOException {
+        ReaderN readerN = new ReaderN(new Reader4(s));
+        List<String> result = new ArrayList<String>();
+
+        int cnt = nextIntFromStream(tokenizer);
+        for (int i = 0; i < cnt; i++) {
+            char[] buffer = new char[MAX_LEN];
+            int size = readerN.read(buffer, nextIntFromStream(tokenizer));
+            result.add(new String(buffer, 0, size));
         }
-        return readBytes;
+        return result;
     }
 }
