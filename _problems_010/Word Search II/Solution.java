@@ -1,5 +1,5 @@
 public class Solution {
-    public List<String> findWords(char[][] board, String[] words) {
+    public List<String> boggle(char[][] board, String[] words) {
         Node root = new Node();
         for (String word : words) {
             int len = word.length();

@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "s",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "shortestPalindrome",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":string"
+    }
+  },
+  "output": "solution.return"
+}

@@ -1,22 +1,22 @@
 {
   "input": [
     {
-      "name": "board",
-      "type": "+array<+array<:char>>"
+      "name": "k",
+      "type": ":int"
     },
     {
-      "name": "words",
-      "type": "+array<:string>"
+      "name": "n",
+      "type": ":int"
     }
   ],
   "solution": {
-    "actionName": "boggle",
+    "actionName": "combinationSum3",
     "params": [
       "input[0]",
       "input[1]"
     ],
     "return": {
-      "type": "+vector<:string>"
+      "type": "+vector<+vector<:int>>"
     }
   },
   "output": "solution.return",

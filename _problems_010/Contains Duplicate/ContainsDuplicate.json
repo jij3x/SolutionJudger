@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "nums",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "containsDuplicate",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}

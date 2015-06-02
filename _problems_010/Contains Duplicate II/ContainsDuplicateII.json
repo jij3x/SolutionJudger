@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "nums",
+      "type": "+array<:int>"
+    },
+    {
+      "name": "k",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "containsNearbyDuplicate",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}

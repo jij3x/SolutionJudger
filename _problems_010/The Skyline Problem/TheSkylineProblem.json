@@ -1,0 +1,19 @@
+{
+  "input": [
+    {
+      "name": "buildings",
+      "type": "+array<+array<:int>>"
+    }
+  ],
+  "solution": {
+    "actionName": "getSkyline",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<+vector<:int>>"
+    }
+  },
+  "output": "solution.return",
+  "grader": "unsorted_vec_grader"
+}
