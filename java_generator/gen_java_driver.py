@@ -24,8 +24,9 @@ metadata = json.loads(sys.stdin.read())
 m.complete_metadata(metadata)
 
 
-def gen_invoking_code(fn_ret, fn_name, params, rt_tmpl, fn_tmpl):
-    inputs = ""
+def gen_invoking_code(func, fn_tmpl):
+    fn_ret, fn_name, params = func[m.RET], func[m.FUNC], func[m.PARM]
+    rt_tmpl, inputs = "{} {} = ", ""
     for i, par in enumerate(params):
         inputs += (", " if i > 0 else "") + m.get_prop(metadata, par)[m.VARN]
     return_par = rt_tmpl.format(tim[fn_ret[m.TYPE]][t.P_JAVA_T], fn_ret[m.VARN]) if fn_ret[m.TYPE] != t.VOID else ""
@@ -51,19 +52,16 @@ for param in metadata[m.INP]:
 # Compose the code to process input
 input_proc_code = ""
 for procr in metadata[m.PREP]:
-    input_proc_code += gen_invoking_code(procr[m.RET], procr[m.FUNC], procr[m.PARM],
-                                         "{} {} = ", "{}Helper.{}({});\n")
+    input_proc_code += gen_invoking_code(procr, "{}Helper.{}({});\n")
 
 # Compose the code to call Solution
 solving_code = "{} solution = new {}({});\n".format(metadata[m.SOL][m.NAME], metadata[m.SOL][m.NAME], "")
-solving_code += gen_invoking_code(metadata[m.SOL][m.RET], metadata[m.SOL][m.FUNC], metadata[m.SOL][m.PARM],
-                                  "{} {} = ", "{}solution.{}({});\n")
+solving_code += gen_invoking_code(metadata[m.SOL], "{}solution.{}({});\n")
 
 # Compose the code to process output
 output_proc_code = ""
 for procr in metadata[m.POSP]:
-    output_proc_code += gen_invoking_code(procr[m.RET], procr[m.FUNC], procr[m.PARM],
-                                          "{} {} = ", "{}Helper.{}({});\n")
+    output_proc_code += gen_invoking_code(procr, "{}Helper.{}({});\n")
 
 # Compose the code to serialize the Solution return
 outp = m.get_prop(metadata, metadata[m.OUT])
