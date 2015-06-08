@@ -78,9 +78,9 @@ ucvars_s_code = ""
 for param in metadata[m.INP]:
     if not param[m.MCOL]:
         ucvars_s_code += gen_param_serializing_code(param, "printWriter.println(Serializer.{}({}));\n")
-for param in metadata[m.PREP]:
-    if not param[m.RET][m.MCOL]:
-        ucvars_s_code += gen_param_serializing_code(param[m.RET], "printWriter.println(Serializer.{}({}));\n")
+for procr in metadata[m.PREP]:
+    if not procr[m.RET][m.MCOL]:
+        ucvars_s_code += gen_param_serializing_code(procr[m.RET], "printWriter.println(Serializer.{}({}));\n")
 
 # Inject the code into Driver template
 DRVTML_FNM = os.path.join(os.path.dirname(os.path.realpath(__file__)), "java.driver.template")
