@@ -20,7 +20,7 @@ public class Serializer {
 
         StringBuilder r = new StringBuilder();
         for (boolean b : vector) {
-            r.append(",").append(b ? "true" : "false");
+            r.append(",").append(serializeBool(b));
         }
         r.setCharAt(0, '[');
         r.append("]");
@@ -44,7 +44,7 @@ public class Serializer {
     }
 
     public static String serializeMutableString(StringBuilder s) {
-        return s.insert(0, "\"").append("\"").toString();
+        return serializeString(s.toString());
     }
 
     public static String serializeStringArray(String[] array) {
@@ -53,7 +53,7 @@ public class Serializer {
 
         StringBuilder r = new StringBuilder("[");
         for (int i = 0; i < array.length; i++) {
-            r.append(i > 0 ? ",\"" : "\"").append(array[i]).append("\"");
+            r.append(i > 0 ? "," : "").append(serializeString(array[i]));
         }
         r.append("]");
         return r.toString();
@@ -65,7 +65,7 @@ public class Serializer {
 
         StringBuilder r = new StringBuilder();
         for (String str : vector) {
-            r.append(",\"").append(str).append("\"");
+            r.append(",").append(serializeString(str));
         }
         r.setCharAt(0, '[');
         r.append("]");
