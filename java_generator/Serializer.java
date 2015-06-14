@@ -93,7 +93,6 @@ public class Serializer {
         for (String str : set) {
             words.add(str);
         }
-        Collections.sort(words);
 
         StringBuilder r = new StringBuilder("[");
         int i = 0;
