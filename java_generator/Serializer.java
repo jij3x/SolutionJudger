@@ -555,7 +555,7 @@ public class Serializer {
             }
             list.get(ptr).left = (f == 0) ? newNode : list.get(ptr).left;
             list.get(ptr).right = (f == 1) ? newNode : list.get(ptr).right;
-            ptr += (f = f ^ 1) == 0 ? 1 : 0;
+            ptr += (f ^= 1) == 0 ? 1 : 0;
         }
         return list.get(1);
     }
@@ -588,7 +588,7 @@ public class Serializer {
             }
             list.get(ptr).left = (f == 0) ? newNode : list.get(ptr).left;
             list.get(ptr).right = (f == 1) ? newNode : list.get(ptr).right;
-            ptr += (f = f ^ 1) == 0 ? 1 : 0;
+            ptr += (f ^= 1) == 0 ? 1 : 0;
         }
         return list.get(1);
     }
@@ -600,26 +600,22 @@ public class Serializer {
         int seqNo = 0;
         int size = deserializeInt(tokenizer);
         for (int i = 0; i < size; i++) {
-            String nodeStr = deserializeString(tokenizer);
-            String[] nodes = nodeStr.split(",");
-
-            int nodeLabel = Integer.parseInt(nodes[0]);
-            UndirectedGraphNode node = memo.get(nodeLabel);
+        	int[] nodes = deserializeIntArray(tokenizer);
+            UndirectedGraphNode node = memo.get(nodes[0]);
             if (node == null) {
-                node = new UndirectedGraphNode(nodeLabel);
+                node = new UndirectedGraphNode(nodes[0]);
                 node._seqNo = seqNo++;
-                memo.put(nodeLabel, node);
+                memo.put(nodes[0], node);
             }
             if (i == 0)
                 graph = node;
 
             for (int j = 1; j < nodes.length; j++) {
-                nodeLabel = Integer.parseInt(nodes[j]);
-                UndirectedGraphNode neighbor = memo.get(nodeLabel);
+                UndirectedGraphNode neighbor = memo.get(nodes[j]);
                 if (neighbor == null) {
-                    neighbor = new UndirectedGraphNode(nodeLabel);
+                    neighbor = new UndirectedGraphNode(nodes[j]);
                     neighbor._seqNo = seqNo++;
-                    memo.put(nodeLabel, neighbor);
+                    memo.put(nodes[j], neighbor);
                 }
 
                 node.neighbors.add(neighbor);
