@@ -297,12 +297,12 @@ class Serializer
     start.next
   end
 
-  def deserializeIntBinaryTree
-    list, seq_no, f, ptr = [TreeNode.new(0)], 0, 1, 0
+  def deserialize_bt(bt_class)
+    list, seq_no, f, ptr = [bt_class.new(0)], 0, 1, 0
     deserializeInt.times do
       new_node, v_raw = nil, scanf('%s')
       unless v_raw == '#'
-        new_node = TreeNode.new(v_raw.to_i)
+        new_node = bt_class.new(v_raw.to_i)
         new_node._seq_no = (seq_no += 1)
         list << new_node
       end
@@ -311,6 +311,10 @@ class Serializer
       ptr += (f ^= 1) == 0 ? 1 : 0
     end
     list[1]
+  end
+
+  def deserializeIntBinaryTree
+    deserialize_bt(TreeNode)
   end
 
   def deserializeIntBinaryTreeVector
@@ -320,19 +324,7 @@ class Serializer
   end
 
   def deserializeIntLinkedBinaryTree
-    list, seq_no, f, ptr = [TreeLinkNode.new(0)], 0, 1, 0
-    deserializeInt.times do
-      new_node, v_raw = nil, scanf('%s')
-      unless v_raw == '#'
-        new_node = TreeLinkNode.new(v_raw.to_i)
-        new_node._seq_no = (seq_no += 1)
-        list << new_node
-      end
-      list[ptr].left = (f == 0) ? new_node : list[ptr].left
-      list[ptr].right = (f == 1) ? new_node : list[ptr].right
-      ptr += (f ^= 1) == 0 ? 1 : 0
-    end
-    list[1]
+    deserialize_bt(TreeLinkNode)
   end
 
   def deserializeIntUDGraph
@@ -378,5 +370,7 @@ class Serializer
     deserializeInt.times { vector << deserializeIInterval }
     vector
   end
+
+  private :deserialize_bt
 
 end
