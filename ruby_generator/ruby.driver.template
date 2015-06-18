@@ -1,0 +1,31 @@
+$LOAD_PATH << '.'
+
+require 'benchmark'
+require 'data_structures'
+require 'solution'
+require 'scanf'
+
+solution = Solution.new
+scanf('%d').first.times do
+
+  # param deserialization code inject here
+
+  # input processing code inject here
+
+  # unchangeable variables serialization code before execution inject here
+
+
+  start_time = Time.now
+  # solution invoking code inject here
+  finish_time = Time.now
+  puts (finish_time - start_time) * 1000
+
+  # output processing code inject here
+
+  # result serialization code inject here
+
+  # additional output serialization code inject here
+
+  # unchangeable variables serialization code after execution inject here
+
+end

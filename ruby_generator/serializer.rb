@@ -291,7 +291,7 @@ class Serializer
 
     tail = start.next
     until tail.nil? do
-      r_raw = scanf('%s')
+      r_raw = scanf('%s').first
       tail.random = memo[r_raw.to_i] unless r_raw == '#'
     end
     start.next
@@ -300,7 +300,7 @@ class Serializer
   def deserialize_bt(bt_class)
     list, seq_no, f, ptr = [bt_class.new(0)], 0, 1, 0
     deserializeInt.times do
-      new_node, v_raw = nil, scanf('%s')
+      new_node, v_raw = nil, scanf('%s').first
       unless v_raw == '#'
         new_node = bt_class.new(v_raw.to_i)
         new_node._seq_no = (seq_no += 1)
