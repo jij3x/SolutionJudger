@@ -55,7 +55,7 @@ for procr in metadata[m.PREP]:
     input_proc_code += gen_invoking_code(procr, "{}Helper.{}({});\n")
 
 # Compose the code to call Solution
-solving_code = "{} solution = new {}({});\n".format(metadata[m.SOL][m.NAME], metadata[m.SOL][m.NAME], "")
+solving_code = "{} solution = new {}();\n".format(metadata[m.SOL][m.NAME], metadata[m.SOL][m.NAME])
 solving_code += gen_invoking_code(metadata[m.SOL], "{}solution.{}({});\n")
 
 # Compose the code to process output
