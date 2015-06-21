@@ -18,7 +18,7 @@ class TreeNode
   attr_accessor :_seq_no, :val, :left, :right
 
   def initialize(val)
-    @_seq_no, @val, @left, @right = 0, val, nil, nil
+    @_seq_no, @val, @left, @right = -1, val, nil, nil
   end
 end
 
@@ -26,30 +26,30 @@ class TreeLinkNode
   attr_accessor :_seq_no, :val, :left, :right, :next
 
   def initialize(val)
-    @_seq_no, @val, @left, @right, @next = 0, val, nil, nil, nil
+    @_seq_no, @val, @left, @right, @next = -1, val, nil, nil, nil
   end
 end
 
 class Point
-  attr_accessor :x, :y
+  attr_accessor :_seq_no, :x, :y
 
   def initialize(x = 0, y = 0)
-    @x, @y = x, y
+    @_seq_no, @x, @y = -1, x, y
   end
 end
 
 class Interval
-  attr_accessor :start, :end
+  attr_accessor :_seq_no, :start, :end
 
   def initialize(s = 0, e = 0)
-    @start, @end = s, e
+    @_seq_no, @start, @end = -1, s, e
   end
 end
 
 class UndirectedGraphNode
-  attr_accessor :label, :neighbors
+  attr_accessor :_seq_no, :label, :neighbors
 
   def initialize(label)
-    @label, @neighbors = label, []
+    @_seq_no, @label, @neighbors = -1, label, []
   end
 end

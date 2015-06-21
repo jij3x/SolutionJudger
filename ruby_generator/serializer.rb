@@ -19,7 +19,7 @@ class Serializer
     end
 
     def serializeUnsignedInt(n)
-      (n + 0x1_0000_0000).to_s
+      (n < 0 ? n + 0x1_0000_0000 : n).to_s
     end
 
     def serializeDouble(d)
@@ -139,11 +139,12 @@ class Serializer
       return '[]' if node.nil?
 
       visited, que = Set.new, [node]
-      until node.nil?
+      until que.empty?
         curr = que.shift
+        visited.add(curr)
         curr.neighbors.each do |neighbor|
           unless visited.include?(neighbor)
-            visited.push(neighbor)
+            visited.add(neighbor)
             que.push(neighbor)
           end
         end
@@ -338,7 +339,7 @@ class Serializer
 
     def deserializeIntUDGraph(inp)
       graph, memo, seq_no = nil, Hash.new, 0
-      deserializeInt(inp).times do
+      deserializeInt(inp).times do |i|
         nodes = deserializeIntArray(inp)
         node = memo[nodes[0]]
         if node.nil?
@@ -355,6 +356,7 @@ class Serializer
             neighbor._seq_no = (seq_no += 1)
             memo[n] = neighbor
           end
+          node.neighbors << neighbor
         end
       end
       graph
