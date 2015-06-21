@@ -1,19 +1,20 @@
 $LOAD_PATH << '.'
 
-require 'benchmark'
 require 'data_structures'
-require 'solution'
+require 'serializer'
 require 'scanf'
 
+# classes inject here
+
+inp = $stdin
 solution = Solution.new
-scanf('%d').first.times do
+inp.scanf('%d').first.times do
 
   # param deserialization code inject here
 
   # input processing code inject here
 
   # unchangeable variables serialization code before execution inject here
-
 
   start_time = Time.now
   # solution invoking code inject here

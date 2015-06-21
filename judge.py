@@ -1,73 +1,85 @@
-"""
--d Clear the stage. All java related files will be deleted.
--c Cleanup generated files (Driver, Solution). All other java files and class files will stay.
--s Reset the stage. Prepare all java files, and compile them.
-
--quick Use existing compiled class, instead of starting from scratch.
--debug Leave Driver, and, Solution.
-"""
-
 import subprocess
-import sys
 import os
 import os.path
 import shutil
 import evaluate
 import pprint
+import argparse
+from environment import *
 
-PYCMD = "python"
-GENR_PATH = "java_generator"
-
-#sys.argv.append("/Users/jianxioj/SolutionJudger/_problems_010/Min Stack")
-
+parser = argparse.ArgumentParser()
+parser.add_argument("lang", metavar="language", type=str, nargs="?", default="ruby", help="programming language")
+parser.add_argument("dir", metavar="directory", type=str, nargs="?",
+                    default="/home/jjx/PycharmProjects/SolutionJudger/ser_regr/bool_tst", help="problem directory")
+parser.add_argument("-e", "--erase", help="erase the stage", action="store_true")
+parser.add_argument("-c", "--clean", help="cleanup generated files", action="store_true")
+parser.add_argument("-s", "--setup", help="setup the stage - copy all necessary files, and compile accordingly",
+                    action="store_true")
+parser.add_argument("-q", "--quick", help="use existing generated files, instead of starting from scratch",
+                    action="store_true")
+parser.add_argument("-d", "--debug", help="leave all generated files", action="store_true")
+args = parser.parse_args()
+lang = args.lang
 
 def cleanup_gens():
-    gen_files = {"user.out", "user.err"}
-    for fname in os.listdir(GENR_PATH):
+    keep_files = {".gitignore", "evaluate.py", "judge.py", "test_runner.py"}
+
+    for fname in os.listdir(GENR_PATH["java"]):
         if fname.endswith(".java"):
-            gen_files.add(fname)
-            gen_files.add(fname.split(".")[0] + ".class")
+            keep_files.add(fname)
+            keep_files.add(fname.split(".")[0] + ".class")
+
+    for fname in os.listdir(GENR_PATH["ruby"]):
+        if fname.endswith(".rb"):
+            keep_files.add(fname)
 
     for fname in os.listdir("."):
-        if fname in gen_files:
+        if os.path.isfile(fname) and fname not in keep_files:
             os.remove(fname)
 
 
 def clear_stage():
-    cleanup_gens()
+    keep_files = {".gitignore", "evaluate.py", "judge.py", "test_runner.py"}
+
     for fname in os.listdir("."):
-        if fname.endswith(".class") or fname.endswith(".java"):
+        if fname not in keep_files and \
+                (fname.endswith(".java") or fname.endswith(".class") or
+                     fname.endswith(".rb")):
             os.remove(fname)
 
 
-def setup_stage():
+def setup_stage(lang):
     clear_stage()
-    for fname in os.listdir(GENR_PATH):
-        if fname.endswith(".java"):
-            shutil.copy(os.path.join(GENR_PATH, fname), ".")
-    for fname in os.listdir("."):
-        if fname.endswith(".java"):
-            subprocess.call(["javac", fname])
+
+    if lang == "java":
+        for fname in os.listdir(GENR_PATH[lang]):
+            if fname.endswith(".java"):
+                shutil.copy(os.path.join(GENR_PATH[lang], fname), ".")
+        for fname in os.listdir("."):
+            if fname.endswith(".java"):
+                subprocess.call(["javac", fname])
+    elif lang == "ruby":
+        for fname in os.listdir(GENR_PATH[lang]):
+            if fname.endswith(".rb"):
+                shutil.copy(os.path.join(GENR_PATH[lang], fname), ".")
 
 
-if "-c" in sys.argv:
+if args.clean:
     cleanup_gens()
     exit()
 
-if "-d" in sys.argv:
+if args.erase:
     clear_stage()
     exit()
 
-if "-s" in sys.argv:
-    setup_stage()
+if args.setup:
+    setup_stage(lang)
     exit()
 
-if "-quick" not in sys.argv:
-    setup_stage()
+if not args.quick:
+    setup_stage(lang)
 
-problems = [p for p in sys.argv[1:] if p not in ["-all", "-quick", "-debug"]]
-for problem_path in problems:
-    pprint.pprint(evaluate.eval_java_sol(problem_path))
+pprint.pprint(evaluate.eval_sol[lang](args.dir))
 
-if "-debug" not in sys.argv:
+if not args.debug:
     cleanup_gens()

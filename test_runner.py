@@ -1,18 +1,22 @@
 import subprocess
-import sys
 import os
 import os.path
 import evaluate as ev
+from environment import *
+import argparse
 
-PYCMD = "python"
-GENR_PATH = "java_generator"
-JUDGE = "judge.py"
+parser = argparse.ArgumentParser()
+parser.add_argument("lang", metavar="language", type=str, nargs="?", default="ruby", help="programming language")
+parser.add_argument("dir", metavar="directory", type=str, nargs="*", default=["."], help="problem directory")
+args = parser.parse_args()
+lang = args.lang
 
 
 class Runner:
-    def __init__(self):
+    def __init__(self, lang):
         self.total = 0
         self.failed = 0
+        self.lang = lang
 
     def evaluate(self, problem_path):
         filenames = os.listdir(problem_path)
@@ -26,7 +30,7 @@ class Runner:
                     contains_userin = True
 
             if contains_json and contains_userin:
-                result = ev.eval_java_sol(problem_path)
+                result = ev.eval_sol[self.lang](problem_path)
 
                 passed = "\033[92m" + "Passed" + "\033[0m"
                 failed = "\033[91m" + "Failed" + "\033[0m"
@@ -45,12 +49,12 @@ class Runner:
         print("all passed" if self.failed == 0 else "{} failed".format(self.failed))
 
 
-subprocess.call([PYCMD, JUDGE, "-d"])
-subprocess.call([PYCMD, JUDGE, "-s"])
+subprocess.call([PYCMD, "judge.py", "-e"])
+subprocess.call([PYCMD, "judge.py", lang, "-s"])
 
-runner = Runner()
-for path in sys.argv[1:]:
+runner = Runner(lang)
+for path in args.dir:
     runner.evaluate(path)
 runner.print_summary()
 
-subprocess.call([PYCMD, JUDGE, "-d"])
+subprocess.call([PYCMD, "judge.py", "-e"])

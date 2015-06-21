@@ -1,31 +1,3 @@
-"""
-{
-  "input":[
-    {
-      "name":"numbers",
-      "type":":array<:int>"
-    },
-    {
-      "name":"target",
-      "type":":int"
-    }
-  ],
-  "solution":{
-    "actionName":"twoSum",
-    "params":[
-      "input[0]",
-      "input[1]"
-    ],
-    "return":{
-      "type":":array<:int>"
-    }
-  },
-  "output":[
-    "solution.return"
-  ]
-}
-"""
-
 import re
 import metatypes as t
 

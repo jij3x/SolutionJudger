@@ -1,6 +1,7 @@
 import subprocess
 import sys
 import os
+import re
 import os.path
 import json
 import functools
@@ -9,11 +10,9 @@ lib_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file_
 sys.path.append(lib_path)
 import probdesc as m
 import metatypes as t
-
+from environment import *
 
 tim = t.type_map
-PYCMD = "python"
-GENR_PATH = "java_generator"
 
 
 def no_filter(line):
@@ -309,17 +308,29 @@ def get_user_ans(sol_out, metadata):
     return user_ans
 
 
-def eval_java_sol(problem_path):
-    # Find problem metadata
+def get_metadata_fname(problem_path):
     metadata_fname = ""
     for file in os.listdir(problem_path):
         if file.endswith(".json"):
             metadata_fname = os.path.join(problem_path, file)
-            break
+            return metadata_fname
 
-    # Generate Driver.java, and related classes java files
+
+def get_grade(metadata, sol_out, sol_err, answer):
+    user_ans = get_user_ans(sol_out.decode("utf-8").splitlines(), metadata)
+    user_ans[UA_ERR] = sol_err.decode("utf-8")
+
+    formatted_in = len(user_ans[UA_OUT]) * [""]
+    return globals()[metadata[m.GRAD]](user_ans, formatted_in, answer.read().splitlines())
+
+
+def eval_java_sol(problem_path):
+    metadata_fname = get_metadata_fname(problem_path)
+
+    # Generate Driver.java
     with open("Driver.java", "w") as driver, open(metadata_fname, "r") as metadata_file:
-        subprocess.call([PYCMD, os.path.join(GENR_PATH, "gen_java_driver.py")], stdin=metadata_file, stdout=driver)
+        subprocess.call([PYCMD, os.path.join(GENR_PATH["java"], "gen_java_driver.py")],
+                        stdin=metadata_file, stdout=driver)
         metadata_file.seek(0, 0)
         metadata = json.load(metadata_file)
         m.complete_metadata(metadata)
@@ -330,9 +341,8 @@ def eval_java_sol(problem_path):
         for cls in metadata[m.CLS]:
             classes.append(cls[m.NAME] + ".java")
     for fname in classes:
-        with open(os.path.join(GENR_PATH, "java.imports"), "r") as java_imports, \
-                open(os.path.join(problem_path, fname), "r") as class_code, \
-                open(fname, "w") as final_class:
+        with open(os.path.join(GENR_PATH["java"], "java.imports"), "r") as java_imports, \
+                open(os.path.join(problem_path, fname), "r") as class_code, open(fname, "w") as final_class:
             final_class.write(java_imports.read())
             final_class.write(class_code.read())
 
@@ -343,9 +353,39 @@ def eval_java_sol(problem_path):
             open(os.path.join(problem_path, "user.out"), "r") as answer:
         sp = subprocess.Popen(["java", "Driver"], stdin=test_data, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         sol_out, sol_err = sp.communicate()
+        return get_grade(metadata, sol_out, sol_err, answer)
 
-        user_ans = get_user_ans(sol_out.decode("utf-8").splitlines(), metadata)
-        user_ans[UA_ERR] = sol_err.decode("utf-8")
 
-        formatted_in = len(user_ans[UA_OUT]) * [""]
-        return globals()[metadata[m.GRAD]](user_ans, formatted_in, answer.read().splitlines())
+def eval_ruby_sol(problem_path):
+    metadata_fname = get_metadata_fname(problem_path)
+
+    # Generate driver.rb
+    with open("driver.rb", "w") as driver, open(metadata_fname, "r") as metadata_file:
+        sp = subprocess.Popen([PYCMD, os.path.join(GENR_PATH["ruby"], "gen_ruby_driver.py")],
+                              stdin=metadata_file, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        drv_out, drv_err = sp.communicate()
+        metadata_file.seek(0, 0)
+        metadata = json.load(metadata_file)
+        m.complete_metadata(metadata)
+
+        classes = [metadata[m.SOL][m.NAME] + ".rb"]
+        if m.CLS in metadata:
+            for cls in metadata[m.CLS]:
+                classes.append(cls[m.NAME] + ".rb")
+
+        classes_pos = "# classes inject here"
+        classes_code = ""
+        for fname in classes:
+            with open(os.path.join(problem_path, fname), "r") as class_code:
+                classes_code += class_code.read()
+        driver.write(re.sub(re.escape(classes_pos) + r".*?\n", classes_code, drv_out.decode("utf-8")))
+
+    # Run driver.rb
+    with open(os.path.join(problem_path, "user.in"), "r") as test_data, \
+            open(os.path.join(problem_path, "user.out"), "r") as answer:
+        sp = subprocess.Popen(["ruby", "driver.rb"], stdin=test_data, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        sol_out, sol_err = sp.communicate()
+        return get_grade(metadata, sol_out, sol_err, answer)
+
+
+eval_sol = {"java": eval_java_sol, "ruby": eval_ruby_sol}

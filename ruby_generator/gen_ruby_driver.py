@@ -45,7 +45,7 @@ def gen_param_deserializing_code(param, fn_tmpl):
 # Fetch inputs deserialization code
 param_deser_code = ""
 for param in metadata[m.INP]:
-    param_deser_code += gen_param_deserializing_code(param, "{} = Serializer.{}\n")
+    param_deser_code += gen_param_deserializing_code(param, "{} = Serializer.{}(inp)\n")
 
 # Compose the code to process input
 input_proc_code = ""
