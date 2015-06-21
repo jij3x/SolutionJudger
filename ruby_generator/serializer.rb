@@ -95,7 +95,7 @@ class Serializer
       parts1, parts2 = [], []
       until node.nil?
         parts1 << node._seq_no << node.label
-        parts2 << node.random.nil? ? '#' : node.random.label
+        parts2 << (node.random.nil? ? '#' : node.random.label)
         node = node.next
       end
       "[#{parts1.concat(parts2).join(',')}]"

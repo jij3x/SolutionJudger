@@ -19,6 +19,8 @@ class Runner:
         self.lang = lang
 
     def evaluate(self, problem_path):
+        print("jason says: problem path is " + problem_path)
+
         filenames = os.listdir(problem_path)
         contains_json = False
         contains_userin = False
