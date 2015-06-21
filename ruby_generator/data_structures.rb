@@ -15,18 +15,18 @@ class RandomListNode
 end
 
 class TreeNode
-  attr_accessor :val, :left, :right
+  attr_accessor :_seq_no, :val, :left, :right
 
   def initialize(val)
-    @val, @left, @right = val, nil, nil
+    @_seq_no, @val, @left, @right = 0, val, nil, nil
   end
 end
 
 class TreeLinkNode
-  attr_accessor :val, :left, :right, :next
+  attr_accessor :_seq_no, :val, :left, :right, :next
 
   def initialize(val)
-    @val, @left, @right, @next = val, nil, nil, nil
+    @_seq_no, @val, @left, @right, @next = 0, val, nil, nil, nil
   end
 end
 

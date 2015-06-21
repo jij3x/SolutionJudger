@@ -23,7 +23,7 @@ class Serializer
     end
 
     def serializeDouble(d)
-      d.round(5).to_s
+      "#{format('%.5f', d)}"
     end
 
     def serializeString(s)
@@ -102,7 +102,7 @@ class Serializer
     end
 
     def serializeIntBinaryTree(node)
-      r, q = [], [node]
+      r, q = node.nil? ? ['#'] : [node._seq_no, node.val], [node]
       until q.empty?
         curr = q.shift
         next if curr.nil?
@@ -111,7 +111,7 @@ class Serializer
         r.concat(curr.left.nil? ? ['#'] : [curr.left._seq_no, curr.left.val])
         r.concat(curr.right.nil? ? ['#'] : [curr.right._seq_no, curr.right.val])
       end
-      '[' + r.join(',').gsub(/(,#)*$/, '') + ']'
+      '[' + r.join(',').gsub(/(,#)*$/, '').gsub(/(#)$/, '') + ']'
     end
 
     def serializeIntBinaryTreeVector(v)
@@ -201,16 +201,22 @@ class Serializer
     end
 
     def deserializeString(inp)
-      inp.scanf('%s').first[1..-2]
+      s, cnt = '', 0
+      while cnt < 2 do
+        char = inp.scanf('%c').first
+        cnt += 1 if char == '"'
+        s << char if cnt == 1 and char != '"'
+      end
+      return s
     end
 
     def deserializeMutableString(inp)
-      inp.scanf('%s').first[1..-2]
+      deserializeString(inp)
     end
 
     def deserializeStringArray(inp)
       array = []
-      deserializeInt.times { array << deserializeString(inp) }
+      deserializeInt(inp).times { array << deserializeString(inp) }
       array
     end
 
@@ -220,13 +226,13 @@ class Serializer
 
     def deserializeString2DVector(inp)
       array = []
-      deserializeInt.times { array << deserializeStringVector(inp) }
+      deserializeInt(inp).times { array << deserializeStringVector(inp) }
       array
     end
 
     def deserializeStringSet(inp)
       set = Set.new
-      deserializeInt.times { set.add(deserializeString(inp)) }
+      deserializeInt(inp).times { set.add(deserializeString(inp)) }
       set
     end
 
@@ -236,13 +242,13 @@ class Serializer
 
     def deserializeIntArray(inp)
       array = []
-      deserializeInt.times { array << deserializeInt(inp) }
+      deserializeInt(inp).times { array << deserializeInt(inp) }
       array
     end
 
     def deserializeInt2DArray(inp)
       array = []
-      deserializeInt.times { array << deserializeIntArray(inp) }
+      deserializeInt(inp).times { array << deserializeIntArray(inp) }
       array
     end
 
@@ -260,14 +266,14 @@ class Serializer
 
     def deserializeChar2DArray(inp)
       array = []
-      deserializeInt.times { array << deserializeCharArray(inp) }
+      deserializeInt(inp).times { array << deserializeCharArray(inp) }
       array
     end
 
     def deserializeIntSLList(inp)
       start = ListNode.new(0)
       tail, seq_no = start, 0
-      deserializeInt.times do
+      deserializeInt(inp).times do
         tail.next = ListNode.new(deserializeInt(inp))
         tail = tail.next
         tail._seq_no = (seq_no += 1)
@@ -277,7 +283,7 @@ class Serializer
 
     def deserializeIntSLListVector(inp)
       vector = []
-      deserializeInt.times { vector << deserializeIntSLList(inp) }
+      deserializeInt(inp).times { vector << deserializeIntSLList(inp) }
       vector
     end
 
@@ -302,7 +308,7 @@ class Serializer
 
     def deserialize_bt(inp, bt_class)
       list, seq_no, f, ptr = [bt_class.new(0)], 0, 1, 0
-      deserializeInt.times do
+      deserializeInt(inp).times do
         new_node, v_raw = nil, inp.scanf('%s').first
         unless v_raw == '#'
           new_node = bt_class.new(v_raw.to_i)
@@ -322,7 +328,7 @@ class Serializer
 
     def deserializeIntBinaryTreeVector(inp)
       vector = []
-      deserializeInt.times { vector << deserializeIntBinaryTree(inp) }
+      deserializeInt(inp).times { vector << deserializeIntBinaryTree(inp) }
       vector
     end
 
@@ -332,7 +338,7 @@ class Serializer
 
     def deserializeIntUDGraph(inp)
       graph, memo, seq_no = nil, Hash.new, 0
-      deserializeInt.times do
+      deserializeInt(inp).times do
         nodes = deserializeIntArray(inp)
         node = memo[nodes[0]]
         if node.nil?
@@ -360,7 +366,7 @@ class Serializer
 
     def deserializeIPointArray(inp)
       array = []
-      deserializeInt.times { array << deserializeIPoint(inp) }
+      deserializeInt(inp).times { array << deserializeIPoint(inp) }
       array
     end
 
@@ -370,7 +376,7 @@ class Serializer
 
     def deserializeIIntervalVector(inp)
       vector = []
-      deserializeInt.times { vector << deserializeIInterval(inp) }
+      deserializeInt(inp).times { vector << deserializeIInterval(inp) }
       vector
     end
 
