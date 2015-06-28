@@ -8,7 +8,7 @@ import argparse
 from environment import *
 
 parser = argparse.ArgumentParser()
-parser.add_argument("lang", metavar="language", type=str, nargs="?", default="ruby", help="programming language")
+parser.add_argument("lang", metavar="language", type=str, nargs="?", default="java", help="programming language")
 parser.add_argument("dir", metavar="directory", type=str, nargs="?",
                     default="/home/jjx/PycharmProjects/SolutionJudger/ser_regr/bool_tst", help="problem directory")
 parser.add_argument("-e", "--erase", help="erase the stage", action="store_true")

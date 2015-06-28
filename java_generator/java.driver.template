@@ -10,26 +10,42 @@ public class Driver {
         tokenizer.nextToken();
         int totalCases = (int) tokenizer.nval;
         for (int i = 0; i < totalCases; i++) {
+            long startTime;
 
+            startTime = System.nanoTime();
             // param deserialization code inject here
+            double deserDur = (double) (System.nanoTime() - startTime) / 1000000L;
 
+            startTime = System.nanoTime();
             // input processing code inject here
+            double inprocDur = (double) (System.nanoTime() - startTime) / 1000000L;
 
+            startTime = System.nanoTime();
             // unchangeable variables serialization code before execution inject here
+            double imvbDur = (double) (System.nanoTime() - startTime) / 1000000L;
 
-            long startTime = System.nanoTime();
+            startTime = System.nanoTime();
             // solution invoking code inject here
-            long stopTime = System.nanoTime();
-            System.out.format("%f%n", (double) (stopTime - startTime) / 1000000L);
+            double solDur = (double) (System.nanoTime() - startTime) / 1000000L;
 
+            startTime = System.nanoTime();
             // output processing code inject here
+            double outprocDur = (double) (System.nanoTime() - startTime) / 1000000L;
 
+            startTime = System.nanoTime();
             // result serialization code inject here
+            double serDur = (double) (System.nanoTime() - startTime) / 1000000L;
 
+            startTime = System.nanoTime();
             // additional output serialization code inject here
+            double adoserDur = (double) (System.nanoTime() - startTime) / 1000000L;
 
+            startTime = System.nanoTime();
             // unchangeable variables serialization code after execution inject here
+            double imvaDur = (double) (System.nanoTime() - startTime) / 1000000L;
 
+            System.out.format("%f %f %f %f %f %f %f %f%n",
+                   deserDur, inprocDur, imvbDur, solDur, outprocDur, serDur, adoserDur, imvaDur);
         }
         printWriter.close();
     }

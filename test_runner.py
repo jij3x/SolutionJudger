@@ -6,8 +6,9 @@ from environment import *
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("lang", metavar="language", type=str, nargs="?", default="ruby", help="programming language")
-parser.add_argument("dir", metavar="directory", type=str, nargs="*", default=["."], help="problem directory")
+parser.add_argument("lang", metavar="language", type=str, nargs="?", default="java", help="programming language")
+parser.add_argument("dir", metavar="directory", type=str, nargs="*",
+                    default=["/home/jjx/PycharmProjects/SolutionJudger/ser_regr/bool_tst"], help="problem directory")
 args = parser.parse_args()
 lang = args.lang
 
@@ -34,8 +35,9 @@ class Runner:
 
                 passed = "\033[92m" + "Passed" + "\033[0m"
                 failed = "\033[91m" + "Failed" + "\033[0m"
-                print("%s - runtime: %.5fms %s" %
-                      (problem_path, result[ev.R_EXECTIME], passed if result[ev.R_RC] == ev.AC else failed))
+                print("%s - %s \n\truntime: %.5fms; desertime: %.5fms; sertime: %.5fms " %
+                      (problem_path, passed if result[ev.R_RC] == ev.AC else failed,
+                       result[ev.R_EXECTIME][3], result[ev.R_EXECTIME][0], result[ev.R_EXECTIME][5]))
                 self.total += 1
                 self.failed += 1 if result[ev.R_RC] != ev.AC else 0
                 return

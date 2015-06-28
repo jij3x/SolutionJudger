@@ -139,7 +139,9 @@ def general_grader(user_ans, formatted_in, answer):
                 result[R_RC] = IC
                 return result
 
-    result[R_EXECTIME] = functools.reduce(lambda x, y: x + float(y), user_ans[UA_EXECTIME], 0)
+    result[R_EXECTIME] = [float(t) for t in functools.reduce(
+        lambda x, y: " ".join([str(sum(map(float, t))) for t in zip(x.split(), y.split())]),
+        user_ans[UA_EXECTIME], "0 " * len(user_ans[UA_EXECTIME][0])).split()]
 
     result[R_RC] = AC
     return result
@@ -300,10 +302,10 @@ def get_user_ans(sol_out, metadata):
         sol_out += [""] * (segment - len(sol_out) % segment)
     for i in range(0, len(sol_out), segment):
         user_ans[UA_PREIMVAR].extend(sol_out[i: i + iv_cnt])
-        user_ans[UA_EXECTIME].extend(sol_out[i + iv_cnt: i + iv_cnt + 1])
-        user_ans[UA_OUT].extend(sol_out[i + iv_cnt + 1: i + iv_cnt + 2])
-        user_ans[UA_ADDOUT].extend(sol_out[i + iv_cnt + 2: i + iv_cnt + 2 + ao_cnt])
-        user_ans[UA_POSTIMVAR].extend(sol_out[i + iv_cnt + 2 + ao_cnt: i + segment])
+        user_ans[UA_OUT].extend(sol_out[i + iv_cnt: i + iv_cnt + 1])
+        user_ans[UA_ADDOUT].extend(sol_out[i + iv_cnt + 1: i + iv_cnt + 1 + ao_cnt])
+        user_ans[UA_POSTIMVAR].extend(sol_out[i + iv_cnt + 1 + ao_cnt: i + segment - 1])
+        user_ans[UA_EXECTIME].extend(sol_out[i + segment - 1: i + segment])
 
     return user_ans
 

@@ -11,23 +11,39 @@ inp = $stdin
 solution = Solution.new
 inp.scanf('%d').first.times do
 
+  start_time = Time.now
   # param deserialization code inject here
+  deser_dur = (Time.now - start_time) * 1000
 
+  start_time = Time.now
   # input processing code inject here
+  inproc_dur = (Time.now - start_time) * 1000
 
+  start_time = Time.now
   # unchangeable variables serialization code before execution inject here
+  imvb_dur = (Time.now - start_time) * 1000
 
   start_time = Time.now
   # solution invoking code inject here
-  finish_time = Time.now
-  puts (finish_time - start_time) * 1000
+  sol_dur = (Time.now - start_time) * 1000
 
+  start_time = Time.now
   # output processing code inject here
+  outproc_dur = (Time.now - start_time) * 1000
 
+  start_time = Time.now
   # result serialization code inject here
+  ser_dur = (Time.now - start_time) * 1000
 
+  start_time = Time.now
   # additional output serialization code inject here
+  adoser_dur = (Time.now - start_time) * 1000
 
+  start_time = Time.now
   # unchangeable variables serialization code after execution inject here
+  imvb_dur = (Time.now - start_time) * 1000
+
+  puts '%s %s %s %s %s %s %s %s' %
+   [deser_dur, inproc_dur, imvb_dur, sol_dur, outproc_dur, ser_dur, adoser_dur, imvb_dur]
 
 end
