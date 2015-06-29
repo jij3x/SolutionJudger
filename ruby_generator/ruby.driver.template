@@ -3,13 +3,13 @@ $LOAD_PATH << '.'
 require 'data_structures'
 require 'serializer'
 require 'helper'
-require 'scanf'
+require 'instream'
 
 # classes inject here
 
-inp = $stdin
+inp = InStream.new($stdin)
 solution = Solution.new
-inp.scanf('%d').first.times do
+Serializer.deserializeInt(inp).times do
 
   start_time = Time.now
   # param deserialization code inject here
@@ -44,6 +44,6 @@ inp.scanf('%d').first.times do
   imvb_dur = (Time.now - start_time) * 1000
 
   puts '%s %s %s %s %s %s %s %s' %
-   [deser_dur, inproc_dur, imvb_dur, sol_dur, outproc_dur, ser_dur, adoser_dur, imvb_dur]
+           [deser_dur, inproc_dur, imvb_dur, sol_dur, outproc_dur, ser_dur, adoser_dur, imvb_dur]
 
 end

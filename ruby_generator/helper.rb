@@ -6,7 +6,7 @@ class Helper
     def cyclizeIntSLList(node, x)
       return node if node.nil? or x == -1
 
-      tail, ptr = node, node
+      tail = ptr = node
       tail = tail.next until tail.next.nil?
       x.times { ptr = ptr.next }
       tail.next = ptr
@@ -20,6 +20,7 @@ class Helper
       i = 0
       until head.nil? do
         return "tail connects to node index #{i}" if head == node
+        head = head.next
         i += 1
       end
       'output node is not in the linked list'

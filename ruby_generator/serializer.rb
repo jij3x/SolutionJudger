@@ -1,5 +1,4 @@
 require 'set'
-require 'scanf'
 require 'data_structures'
 
 class Serializer
@@ -180,17 +179,17 @@ class Serializer
     end
 
     def deserializeBool(inp)
-      inp.scanf('%s').first == 'true' ? true : false
+      inp.get_token == 'true' ? true : false
     end
 
     def deserializeBoolVector(inp)
       vector = []
-      inp.scanf('%d').first.times { vector << deserializeBool(inp) }
+      inp.get_token.to_i.times { vector << deserializeBool(inp) }
       vector
     end
 
     def deserializeInt(inp)
-      inp.scanf('%d').first
+      inp.get_token.to_i
     end
 
     def deserializeUnsignedInt(inp)
@@ -198,17 +197,11 @@ class Serializer
     end
 
     def deserializeDouble(inp)
-      inp.scanf('%f').first
+      inp.get_token.to_f
     end
 
     def deserializeString(inp)
-      s, cnt = '', 0
-      while cnt < 2 do
-        char = inp.scanf('%c').first
-        cnt += 1 if char == '"'
-        s << char if cnt == 1 and char != '"'
-      end
-      return s
+      return inp.get_qtoken
     end
 
     def deserializeMutableString(inp)
@@ -300,7 +293,7 @@ class Serializer
 
       tail = start.next
       until tail.nil? do
-        r_raw = inp.scanf('%s').first
+        r_raw = inp.get_token
         tail.random = memo[r_raw.to_i] unless r_raw == '#'
         tail = tail.next
       end
@@ -310,7 +303,7 @@ class Serializer
     def deserialize_bt(inp, bt_class)
       list, seq_no, f, ptr = [bt_class.new(0)], 0, 1, 0
       deserializeInt(inp).times do
-        new_node, v_raw = nil, inp.scanf('%s').first
+        new_node, v_raw = nil, inp.get_token
         unless v_raw == '#'
           new_node = bt_class.new(v_raw.to_i)
           new_node._seq_no = (seq_no += 1)
