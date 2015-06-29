@@ -3,6 +3,7 @@ import sys
 import os
 import re
 import os.path
+import shutil
 import json
 import functools
 
@@ -370,17 +371,17 @@ def eval_ruby_sol(problem_path):
         metadata = json.load(metadata_file)
         m.complete_metadata(metadata)
 
-        classes = [metadata[m.SOL][m.NAME] + ".rb"]
+        classes = [metadata[m.SOL][m.NAME]]
         if m.CLS in metadata:
             for cls in metadata[m.CLS]:
-                classes.append(cls[m.NAME] + ".rb")
+                classes.append(cls[m.NAME])
 
-        classes_pos = "# classes inject here"
-        classes_code = ""
-        for fname in classes:
-            with open(os.path.join(problem_path, fname), "r") as class_code:
-                classes_code += class_code.read()
-        driver.write(re.sub(re.escape(classes_pos) + r".*?\n", classes_code, drv_out.decode("utf-8")))
+        classes_pos = "# class requires inject here"
+        class_requires = ""
+        for clazz in classes:
+            class_requires += "require '{}'\n".format(clazz)
+            shutil.copy(os.path.join(problem_path, clazz + ".rb"), ".")
+        driver.write(re.sub(re.escape(classes_pos) + r".*?\n", class_requires, drv_out.decode("utf-8")))
 
     # Run driver.rb
     with open(os.path.join(problem_path, "user.in"), "r") as test_data, \

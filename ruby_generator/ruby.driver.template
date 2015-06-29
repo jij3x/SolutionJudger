@@ -1,11 +1,11 @@
 $LOAD_PATH << '.'
 
+require 'set'
 require 'data_structures'
 require 'serializer'
 require 'helper'
 require 'instream'
-
-# classes inject here
+# class requires inject here
 
 inp = InStream.new($stdin)
 solution = Solution.new
