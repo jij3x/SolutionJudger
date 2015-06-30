@@ -8,41 +8,55 @@ class InStream
     @idx = 0
   end
 
-  def step
-    if (@buffer.length - @idx < @@bin_size && !@inp.eof?)
-      @buffer << @inp.read(@@bin_size)
-      @buffer << ' ' if @inp.eof?
-    end
-    @idx += 1
-  end
-
   def get_token
-    step while (@buffer[@idx] == ' ' || @buffer[@idx] == "\n")
-    s = @idx
-    step while (@buffer[@idx] != ' ' && @buffer[@idx] != "\n")
+    start =  -1
+    loop do
+      if (@buffer.length - @idx < @@bin_size && !@inp.eof?)
+        @buffer << @inp.read(@@bin_size)
+        @buffer << ' ' if @inp.eof?
 
-    r = @buffer[s...@idx]
-    if @idx > @@bin_size
-      @buffer = @buffer[@idx..-1]
-      @idx = 0
+        if @idx > @@bin_size
+          @buffer = @buffer[@idx..-1]
+          @idx = 0
+        end
+      end
+
+      (@idx...@buffer.length).each do |i|
+        if (@buffer[i] == ' ' || @buffer[i] == "\n")
+          next if start == -1
+
+          @idx = i
+          return @buffer[start...i]
+        end
+        start = i if start == -1
+      end
     end
-    r
   end
 
   def get_qtoken
-    step while (@buffer[@idx] != '"')
-    s = (@idx += 1)
-    step while (@buffer[@idx] != '"')
+    start =  -1
+    loop do
+      if (@buffer.length - @idx < @@bin_size && !@inp.eof?)
+        @buffer << @inp.read(@@bin_size)
+        @buffer << ' ' if @inp.eof?
 
-    r = @buffer[s...@idx]
-    @idx += 1
-    if @idx > @@bin_size
-      @buffer = @buffer[@idx..-1]
-      @idx = 0
+        if @idx > @@bin_size
+          @buffer = @buffer[@idx..-1]
+          @idx = 0
+        end
+      end
+
+      (@idx...@buffer.length).each do |i|
+        if (@buffer[i] == '"')
+          if start == -1
+            start = i + 1
+          else
+            @idx = i + 1
+            return @buffer[start...i]
+          end
+        end
+      end
     end
-    r
   end
-
-  private :step
 
 end
