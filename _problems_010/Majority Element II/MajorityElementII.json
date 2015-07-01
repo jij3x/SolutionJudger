@@ -1,0 +1,19 @@
+{
+  "input": [
+    {
+      "name": "nums",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "majorityElement",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:int>"
+    }
+  },
+  "output": "solution.return",
+  "grader": "unsorted_vec_grader"
+}
