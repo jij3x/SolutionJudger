@@ -1,0 +1,49 @@
+{
+  "input": [
+    {
+      "name": "procedure",
+      "type": ":raw"
+    }
+  ],
+  "solution": {
+    "actionName": "testMyStack",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:int>"
+    }
+  },
+  "classes": [
+    {
+      "name": "MyStack",
+      "methods": [
+        {
+          "name": "push",
+          "input": [
+            {
+              "name": "x",
+              "type": ":int"
+            }
+          ]
+        },
+        {
+          "name": "pop"
+        },
+        {
+          "name": "top",
+          "return": {
+            "type": ":int"
+          }
+        },
+        {
+          "name": "empty",
+          "return": {
+            "type": ":bool"
+          }
+        }
+      ]
+    }
+  ],
+  "output": "solution.return"
+}
