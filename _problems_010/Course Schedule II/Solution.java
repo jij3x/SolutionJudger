@@ -2,7 +2,7 @@ public class Solution {
     public int[] findOrder(int courses, int[][] dependencies) {
         List<List<Integer>> graph = new ArrayList<List<Integer>>();
         for (int i = 0; i < courses; i++)
-            graph.add(new ArrayList<>());
+            graph.add(new ArrayList<Integer>());
         for (int i = 0; i < dependencies.length; i++) {
             int s = dependencies[i][1],
                 e = dependencies[i][0];
@@ -12,7 +12,7 @@ public class Solution {
     }
     private int currentLabel;
     private int[] DFS(List<List<Integer>> graph) {
-        Set<Integer> explored = new HashSet<>();
+        Set<Integer> explored = new HashSet<Integer>();
         currentLabel = graph.size();
         int[] f = new int[graph.size()];
         for (int i = 0; i < graph.size(); i++)
