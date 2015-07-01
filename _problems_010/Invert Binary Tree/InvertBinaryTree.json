@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "root",
+      "type": "+binarytree<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "invertTree",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+binarytree<:int>"
+    }
+  },
+  "output": "solution.return"
+}
