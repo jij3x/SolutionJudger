@@ -1,4 +1,6 @@
 class TrieNode
+  attr_accessor :children, :value
+
   def initialize
     @children, @value = Hash.new, false
   end
@@ -30,7 +32,7 @@ class WordDictionary
   def search_trie(node, word, start)
     word[start..-1].split('').each do |c|
       if c == '.'
-        node.children.each { |child| return true if search_trie(child, word, i + 1) }
+        node.children.each { |child| return true if search_trie(child, word, start + 1) }
       else
         node = node.getChild(c)
         return false if node.nil?
