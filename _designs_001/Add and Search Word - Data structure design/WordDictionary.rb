@@ -12,6 +12,7 @@ class TrieNode
   def getOrCreateChild(c)
     child = @children[c]
     @children[c] = TrieNode.new if child.nil?
+    @children[c]
   end
 end
 
@@ -23,6 +24,7 @@ class WordDictionary
   def addWord(word)
     node = @root
     word.split('').each { |c| node = node.getOrCreateChild(c) }
+    node.value = true
   end
 
   def search(word)
@@ -30,9 +32,10 @@ class WordDictionary
   end
 
   def search_trie(node, word, start)
-    word[start..-1].split('').each do |c|
+    word[start..-1].split('').each_with_index do |c, i|
       if c == '.'
-        node.children.each { |child| return true if search_trie(child, word, start + 1) }
+        node.children.each_value { |child| return true if search_trie(child, word, start + i + 1) }
+        return false
       else
         node = node.getChild(c)
         return false if node.nil?
