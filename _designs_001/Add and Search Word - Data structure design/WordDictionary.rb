@@ -23,7 +23,7 @@ class WordDictionary
 
   def addWord(word)
     node = @root
-    word.split('').each { |c| node = node.getOrCreateChild(c) }
+    (0...word.length).each { |i| node = node.getOrCreateChild(word[i]) }
     node.value = true
   end
 
@@ -32,9 +32,10 @@ class WordDictionary
   end
 
   def search_trie(node, word, start)
-    word[start..-1].split('').each_with_index do |c, i|
+    (start...word.length).each do |i|
+      c = word[i]
       if c == '.'
-        node.children.each_value { |child| return true if search_trie(child, word, start + i + 1) }
+        node.children.each_value { |child| return true if search_trie(child, word, i + 1) }
         return false
       else
         node = node.getChild(c)
