@@ -25,6 +25,10 @@ class Serializer
       "#{format('%.5f', d)}"
     end
 
+    def serializeDoubleVector(vec)
+      (vec.nil? || vec.empty?) ? '[]' : '[' + vec.map { |s| serializeDouble(s) }.join(',') + ']'
+    end
+
     def serializeString(s)
       "\"#{s}\""
     end
@@ -198,6 +202,12 @@ class Serializer
 
     def deserializeDouble(inp)
       inp.get_token.to_f
+    end
+
+    def deserializeDoubleVector(inp)
+      vec = []
+      deserializeInt(inp).times { vec << deserializeDouble(inp) }
+      vec
     end
 
     def deserializeString(inp)

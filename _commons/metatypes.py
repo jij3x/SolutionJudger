@@ -3,6 +3,7 @@ VOID = ":void"
 INT = ":int"
 UINT = ":uint"
 DOUBLE = ":double"
+DOUBLE_VEC = "+vector<:double>"
 TEXT = ":text"
 STRING = ":string"
 MUTABLE_STRING = ":mutable_string"
@@ -68,6 +69,11 @@ type_map = {
         P_JAVA_T: "double",
         P_SER: "serializeDouble",
         P_DES: "deserializeDouble"
+    },
+    DOUBLE_VEC: {
+        P_JAVA_T: "List<Double>",
+        P_SER: "serializeDoubleVector",
+        P_DES: "deserializeDoubleVector"
     },
     TEXT: {
         P_JAVA_T: "String",

@@ -67,4 +67,11 @@ public class Helper {
         return String.format("Intersected at '%d'", node.val);
     }
 
+    public static List<Double> newMetrics() {
+        ArrayList<Double> r = new ArrayList<Double>();
+        for (int i = 0; i < 10; i++)
+            r.add(0.0);
+        return r;
+    }
+
 }

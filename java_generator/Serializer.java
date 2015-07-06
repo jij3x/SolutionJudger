@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.io.StreamTokenizer;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -37,6 +36,19 @@ public class Serializer {
 
     public static String serializeDouble(double n) {
         return String.format("%.5f", n);
+    }
+
+    public static String serializeDoubleVector(List<Double> vector) {
+        if (vector == null || vector.size() == 0)
+            return "[]";
+
+        StringBuilder r = new StringBuilder();
+        for (Double d : vector) {
+            r.append(",").append(serializeDouble(d));
+        }
+        r.setCharAt(0, '[');
+        r.append("]");
+        return r.toString();
     }
 
     public static String serializeString(String s) {
@@ -389,6 +401,15 @@ public class Serializer {
         return tokenizer.nval;
     }
 
+    public static List<Double> deserializeDoubleVector(StreamTokenizer tokenizer) throws IOException {
+        int size = deserializeInt(tokenizer);
+        ArrayList<Double> vector = new ArrayList<Double>();
+        for (int i = 0; i < size; i++) {
+            vector.add(deserializeDouble(tokenizer));
+        }
+        return vector;
+    }
+
     public static String deserializeString(StreamTokenizer tokenizer) throws IOException {
         tokenizer.nextToken();
         return tokenizer.sval;
@@ -600,7 +621,7 @@ public class Serializer {
         int seqNo = 0;
         int size = deserializeInt(tokenizer);
         for (int i = 0; i < size; i++) {
-        	int[] nodes = deserializeIntArray(tokenizer);
+            int[] nodes = deserializeIntArray(tokenizer);
             UndirectedGraphNode node = memo.get(nodes[0]);
             if (node == null) {
                 node = new UndirectedGraphNode(nodes[0]);

@@ -274,6 +274,17 @@ def balancedbst_grader(user_ans, formatted_in, answer):
     return general_grader(user_ans, formatted_in, answer)
 
 
+def metrics_reorg_grader(user_ans, formatted_in, answer):
+    for i in range(len(user_ans[UA_ADDOUT])):
+        exec_dur = float(user_ans[UA_ADDOUT][i][1:-1].split(",")[0])
+        metrics = user_ans[UA_EXECTIME][i].split()
+        metrics[0] = str(float(metrics[0]) + (float(metrics[3]) - exec_dur))
+        metrics[3] = str(exec_dur)
+        user_ans[UA_EXECTIME][i] = " ".join(metrics)
+
+    return general_grader(user_ans, formatted_in, answer)
+
+
 UA_OUT = "user_out"
 UA_ERR = "user_err"
 UA_IMVARCNT = "immutable_var_cnt"

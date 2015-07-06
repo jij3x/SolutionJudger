@@ -46,6 +46,10 @@ class Helper
       (node.nil? ? 'No intersection' : "Intersected at '#{node.val}'")
     end
 
+    def newMetrics()
+      []
+    end
+
   end
 
 end

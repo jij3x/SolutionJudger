@@ -10,7 +10,8 @@ from environment import *
 parser = argparse.ArgumentParser()
 parser.add_argument("lang", metavar="language", type=str, nargs="?", default="ruby", help="programming language")
 parser.add_argument("dir", metavar="directory", type=str, nargs="?",
-                    default="/home/jjx/PycharmProjects/SolutionJudger/ser_regr/bool_tst", help="problem directory")
+                    default="/Users/jianxioj/SolutionJudger/_designs_001/Add and Search Word - Data structure design/",
+                    help="problem directory")
 parser.add_argument("-e", "--erase", help="erase the stage", action="store_true")
 parser.add_argument("-c", "--clean", help="cleanup generated files", action="store_true")
 parser.add_argument("-s", "--setup", help="setup the stage - copy all necessary files, and compile accordingly",
