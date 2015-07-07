@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "n",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "isPowerOfTwo",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}

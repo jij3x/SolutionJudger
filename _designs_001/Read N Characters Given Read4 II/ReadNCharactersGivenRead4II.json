@@ -9,11 +9,20 @@
       "type": ":raw"
     }
   ],
+  "preProcr": [
+    {
+      "actionName": "newMetrics",
+      "return": {
+        "type": "+vector<:double>"
+      }
+    }
+  ],
   "solution": {
     "actionName": "testReaderN",
     "params": [
       "input[0]",
-      "input[1]"
+      "input[1]",
+      "preProcr[0].return"
     ],
     "return": {
       "type": "+vector<:string>"
@@ -77,5 +86,9 @@
       ]
     }
   ],
-  "output": "solution.return"
+  "output": "solution.return",
+  "additionalOutput": [
+    "preProcr[0].return"
+  ],
+  "grader": "metrics_reorg_grader"
 }

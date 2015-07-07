@@ -1,6 +1,6 @@
 public class Solution {
-    public List<Integer> testMinStack(StreamTokenizer tokenizer, List<Double> metrics) throws IOException {
-        MinStack minStack = new MinStack();
+    public List<Integer> testMyQueue(StreamTokenizer tokenizer, List<Double> metrics) throws IOException {
+        MyQueue myQueue = new MyQueue();
         List<Integer> result = new ArrayList<Integer>();
 
         int opsCnt = Serializer.deserializeInt(tokenizer);
@@ -11,22 +11,22 @@ public class Solution {
             case 0:
                 n = Serializer.deserializeInt(tokenizer);
                 startTime = System.nanoTime();
-                minStack.push(n);
+                myQueue.push(n);
                 metrics.set(0, metrics.get(0) + (double) (System.nanoTime() - startTime) / 1000000L);
                 break;
             case 1:
                 startTime = System.nanoTime();
-                minStack.pop();
+                myQueue.pop();
                 metrics.set(0, metrics.get(0) + (double) (System.nanoTime() - startTime) / 1000000L);
                 break;
             case 2:
                 startTime = System.nanoTime();
-                result.add(minStack.top());
+                result.add(myQueue.peek());
                 metrics.set(0, metrics.get(0) + (double) (System.nanoTime() - startTime) / 1000000L);
                 break;
             case 3:
                 startTime = System.nanoTime();
-                result.add(minStack.getMin());
+                result.add(myQueue.empty() ? 1 : 0);
                 metrics.set(0, metrics.get(0) + (double) (System.nanoTime() - startTime) / 1000000L);
                 break;
             }

@@ -5,10 +5,19 @@
       "type": ":raw"
     }
   ],
+  "preProcr": [
+    {
+      "actionName": "newMetrics",
+      "return": {
+        "type": "+vector<:double>"
+      }
+    }
+  ],
   "solution": {
     "actionName": "testTrie",
     "params": [
-      "input[0]"
+      "input[0]",
+      "preProcr[0].return"
     ],
     "return": {
       "type": "+vector<:bool>"
@@ -65,5 +74,9 @@
       ]
     }
   ],
-  "output": "solution.return"
+  "output": "solution.return",
+  "additionalOutput": [
+    "preProcr[0].return"
+  ],
+  "grader": "metrics_reorg_grader"
 }
