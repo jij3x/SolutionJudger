@@ -431,20 +431,20 @@ public class Serializer {
 
     public static List<String> deserializeStringVector(StreamTokenizer tokenizer) throws IOException {
         int size = deserializeInt(tokenizer);
-        ArrayList<String> array = new ArrayList<String>();
+        ArrayList<String> vector = new ArrayList<String>();
         for (int i = 0; i < size; i++) {
-            array.add(deserializeString(tokenizer));
+            vector.add(deserializeString(tokenizer));
         }
-        return array;
+        return vector;
     }
 
     public static List<List<String>> deserializeString2DVector(StreamTokenizer tokenizer) throws IOException {
         int size = deserializeInt(tokenizer);
-        ArrayList<List<String>> array = new ArrayList<List<String>>();
+        ArrayList<List<String>> vector = new ArrayList<List<String>>();
         for (int i = 0; i < size; i++) {
-            array.add(deserializeStringVector(tokenizer));
+            vector.add(deserializeStringVector(tokenizer));
         }
-        return array;
+        return vector;
     }
 
     public static Set<String> deserializeStringSet(StreamTokenizer tokenizer) throws IOException {
