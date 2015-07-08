@@ -13,12 +13,6 @@ class LRUCache
   def set(k, v)
     @h.delete(k)
     @h[k] = v
-
-    if (@h.size > @cap)
-      @h.reverse_each do |k, v|
-        @h.delete(k)
-        break
-      end
-    end
+    @h.delete(@h.first[0]) if (@h.size > @cap)
   end
 end
