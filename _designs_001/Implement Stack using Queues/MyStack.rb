@@ -5,19 +5,19 @@ class MyStack
 
   def push(x)
     @que_in.push(x)
+    @que_in.push @que_out.shift until @que_out.empty?
+    @que_in, @que_out = @que_out, @que_in
   end
 
   def pop
-    top
     @que_out.shift
   end
 
   def top
-    @que_out.push @que_in.pop until @que_in.empty? if @que_out.empty?
     @que_out.first
   end
 
   def empty
-    @que_in.empty? and @que_out.empty?
+    @que_out.empty?
   end
 end
