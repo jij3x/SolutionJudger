@@ -4,36 +4,26 @@ class Solution
     left, right = 0, nums.length - 1
     loop do
       pos = partition(nums, left, right)
-      if pos == k
-        return nums[k]
-      elsif pos > k
+      if pos > k
         right = pos - 1
-      else
+      elsif pos < k
         left = pos + 1
+      else
+        return nums[k]
       end
     end
   end
 
-  def partition(arr, lo, hi)
-    pivot_idx, mid = 0, (lo + hi) / 2
-    if arr[lo] <= arr[mid] and arr[mid] <= arr[hi]
-      pivot_idx = mid
-    elsif arr[mid] <= arr[lo] and arr[lo] <= arr[hi]
-      pivot_idx = lo
-    else
-      pivot_idx = hi
+  def partition(nums, lo, hi)
+    pivot_idx = lo
+    while lo <= hi
+      lo += 1 while lo <= hi and nums[lo] <= nums[pivot_idx]
+      hi -= 1 while lo <= hi and nums[hi] > nums[pivot_idx]
+      break if (lo > hi)
+      nums[lo], nums[hi] = nums[hi], nums[lo]
     end
-
-    pivot_val, store_idx = arr[pivot_idx], lo
-    arr[pivot_idx], arr[hi] = arr[hi], arr[pivot_idx]
-    (lo...hi).each do |i|
-      if arr[i] < pivot_val
-        arr[i], arr[store_idx] = arr[store_idx], arr[i]
-        store_idx += 1
-      end
-    end
-    arr[store_idx], arr[hi] = arr[hi], arr[store_idx]
-    store_idx
+    nums[hi], nums[pivot_idx] = nums[pivot_idx], nums[hi]
+    hi
   end
 
   private :partition
