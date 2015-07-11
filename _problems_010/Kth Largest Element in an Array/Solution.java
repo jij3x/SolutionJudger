@@ -13,7 +13,7 @@ public class Solution {
 		return nums[k];
 	}
 
-    private int partition1(int[] nums, int start, int end) {
+    private int partition(int[] nums, int start, int end) {
         int pivot = start, temp;
         while (start <= end) {
             while (start <= end && nums[start] <= nums[pivot]) start++;
