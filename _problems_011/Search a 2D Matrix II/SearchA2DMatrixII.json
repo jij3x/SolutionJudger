@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "matrix",
+      "type": "+array<+array<:int>>"
+    },
+    {
+      "name": "target",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "searchMatrix",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}

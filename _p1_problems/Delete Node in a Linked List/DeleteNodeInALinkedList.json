@@ -1,0 +1,31 @@
+{
+  "input": [
+    {
+      "name": "head",
+      "type": "+sllist<:int>"
+    },
+    {
+      "name": "n",
+      "type": ":int"
+    }
+  ],
+  "preProcr": [
+    {
+      "actionName": "getNthNode",
+      "params": [
+        "input[0]",
+        "input[1]"
+      ],
+      "return": {
+        "type": "+sllist<:int>"
+      }
+    }
+  ],
+  "solution": {
+    "actionName": "deleteNode",
+    "params": [
+      "preProcr[0].return"
+    ]
+  },
+  "output": "input[0]"
+}

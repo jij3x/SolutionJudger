@@ -46,6 +46,13 @@ class Helper
       (node.nil? ? 'No intersection' : "Intersected at '#{node.val}'")
     end
 
+    # "Delete Node in a Linked List" input processor
+    def getNthNode(head, n)
+      ptr = head
+      (0...n).each { |i| ptr = ptr.next }
+      ptr
+    end
+
     def newMetrics()
       []
     end

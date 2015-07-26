@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "nums",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "productExceptSelf",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+array<:int>"
+    }
+  },
+  "output": "solution.return"
+}

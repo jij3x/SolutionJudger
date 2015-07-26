@@ -1,0 +1,15 @@
+{
+  "input": [
+    {
+      "name": "head",
+      "type": "+sllist<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "reorderList",
+    "params": [
+      "input[0]"
+    ]
+  },
+  "output": "input[0]"
+}

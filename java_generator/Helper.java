@@ -67,6 +67,16 @@ public class Helper {
         return String.format("Intersected at '%d'", node.val);
     }
 
+    /**
+     * "Delete Node in a Linked List" input processor
+     */
+    public static ListNode getNthNode(ListNode head, int n) {
+        ListNode ptr = head;
+        for (int i = 0; i < n; i++)
+            ptr = ptr.next;
+        return ptr;
+    }
+
     public static List<Double> newMetrics() {
         ArrayList<Double> r = new ArrayList<Double>();
         for (int i = 0; i < 10; i++)
