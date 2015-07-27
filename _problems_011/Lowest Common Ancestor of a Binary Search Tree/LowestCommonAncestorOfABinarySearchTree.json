@@ -1,0 +1,61 @@
+{
+  "input": [
+    {
+      "name": "root",
+      "type": "+binarytree<:int>"
+    },
+    {
+      "name": "idxP",
+      "type": ":int"
+    },
+    {
+      "name": "idxQ",
+      "type": ":int"
+    }
+  ],
+  "preProcr": [
+    {
+      "actionName": "getNthBTNode",
+      "params": [
+        "input[0]",
+        "input[1]"
+      ],
+      "return": {
+        "type": "+binarytree<:int>"
+      }
+    },
+    {
+      "actionName": "getNthBTNode",
+      "params": [
+        "input[0]",
+        "input[2]"
+      ],
+      "return": {
+        "type": "+binarytree<:int>"
+      }
+    }
+  ],
+  "solution": {
+    "actionName": "lowestCommonAncestor",
+    "params": [
+      "input[0]",
+      "preProcr[0].return",
+      "preProcr[1].return"
+    ],
+    "return": {
+      "type": "+binarytree<:int>"
+    }
+  },
+  "postProcr": [
+    {
+      "actionName": "getBTNodeVal",
+      "params": [
+        "solution.return"
+      ],
+      "return": {
+        "type": ":int"
+      }
+    }
+  ],
+  "output": "postProcr[0].return"
+}

@@ -1,17 +1,17 @@
 {
   "input": [
     {
-      "name": "n",
-      "type": ":int"
+      "name": "head",
+      "type": "+sllist<:int>"
     }
   ],
   "solution": {
-    "actionName": "numTrees",
+    "actionName": "isPalindrome",
     "params": [
       "input[0]"
     ],
     "return": {
-      "type": ":int"
+      "type": ":bool"
     }
   },
   "output": "solution.return"

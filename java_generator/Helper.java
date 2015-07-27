@@ -77,6 +77,32 @@ public class Helper {
         return ptr;
     }
 
+    /**
+     * "Lowest Common Ancestor of a Binary Tree" input processor
+     */
+    public static TreeNode getNthBTNode(TreeNode root, int n) {
+        ArrayList<TreeNode> que = new ArrayList<TreeNode>();
+        que.add(root);
+        int top = 0;
+        while (top < que.size()) {
+            TreeNode curr = que.get(top++);
+            if (curr == null)
+                continue;
+            que.add(curr.left);
+            que.add(curr.right);
+            if (que.size() > n)
+                return que.get(n);
+        }
+        return null;
+    }
+
+    /**
+     * "Lowest Common Ancestor of a Binary Tree" output processor
+     */
+    public static int getBTNodeVal(TreeNode root) {
+        return root.val;
+    }
+
     public static List<Double> newMetrics() {
         ArrayList<Double> r = new ArrayList<Double>();
         for (int i = 0; i < 10; i++)

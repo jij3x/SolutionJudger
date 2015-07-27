@@ -53,6 +53,24 @@ class Helper
       ptr
     end
 
+    # "Lowest Common Ancestor of a Binary Tree" input processor
+    def getNthBTNode(root, n)
+      que, top = [root], 0
+      while top < que.size()
+        curr = que[top]
+        top += 1
+        next if curr.nil?
+        que << curr.left
+        que << curr.right
+        return que[n] if que.size() > n
+      end
+    end
+
+    # "Lowest Common Ancestor of a Binary Tree" output processor
+    def getBTNodeVal(root)
+      root.val
+    end
+
     def newMetrics()
       []
     end
