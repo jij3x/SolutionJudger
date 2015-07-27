@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "input",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "diffWaysToCompute",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:int>"
+    }
+  },
+  "output": "solution.return"
+}
