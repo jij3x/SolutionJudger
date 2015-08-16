@@ -1,0 +1,28 @@
+{
+  "input": [
+    {
+      "name": "words",
+      "type": "+array<:string>"
+    },
+    {
+      "name": "word1",
+      "type": ":string"
+    },
+    {
+      "name": "word2",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "shortestDistance",
+    "params": [
+      "input[0]",
+      "input[1]",
+      "input[2]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}
