@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "intervals",
+      "type": "+vector<:iinterval>"
+    }
+  ],
+  "solution": {
+    "actionName": "minMeetingRooms",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}

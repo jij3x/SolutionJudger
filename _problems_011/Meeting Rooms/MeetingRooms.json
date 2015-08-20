@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "intervals",
+      "type": "+vector<:iinterval>"
+    }
+  ],
+  "solution": {
+    "actionName": "canAttendMeetings",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}
