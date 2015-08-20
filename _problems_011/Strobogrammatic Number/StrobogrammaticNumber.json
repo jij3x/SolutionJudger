@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "num",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "isStrobogrammatic",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}

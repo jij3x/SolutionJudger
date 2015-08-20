@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "low",
+      "type": ":string"
+    },
+    {
+      "name": "high",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "strobogrammaticInRange",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}
