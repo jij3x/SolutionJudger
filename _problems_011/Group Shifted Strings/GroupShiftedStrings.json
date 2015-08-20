@@ -1,0 +1,19 @@
+{
+  "input": [
+    {
+      "name": "strings",
+      "type": "+array<:string>"
+    }
+  ],
+  "solution": {
+    "actionName": "groupStrings",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<+vector<:string>>"
+    }
+  },
+  "output": "solution.return",
+  "grader": "unsorted_vec_grader"
+}
