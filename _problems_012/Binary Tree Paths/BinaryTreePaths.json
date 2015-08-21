@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "root",
+      "type": "+binarytree<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "binaryTreePaths",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:string>"
+    }
+  },
+  "output": "solution.return"
+}
