@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "preorder",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "verifyPreorder",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}
