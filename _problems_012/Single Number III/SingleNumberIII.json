@@ -1,0 +1,19 @@
+{
+  "input": [
+    {
+      "name": "nums",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "singleNumber",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+array<:int>"
+    }
+  },
+  "output": "solution.return",
+  "grader": "unsorted_vec_grader"
+}
