@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "costs",
+      "type": "+array<+array<:int>>"
+    }
+  ],
+  "solution": {
+    "actionName": "minCostII",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}

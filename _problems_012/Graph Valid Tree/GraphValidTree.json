@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "n",
+      "type": ":int"
+    },
+    {
+      "name": "edges",
+      "type": "+array<+array<:int>>"
+    }
+  ],
+  "solution": {
+    "actionName": "validTree",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":bool"
+    }
+  },
+  "output": "solution.return"
+}
