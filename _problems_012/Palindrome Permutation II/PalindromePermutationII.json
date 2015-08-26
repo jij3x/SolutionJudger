@@ -1,0 +1,19 @@
+{
+  "input": [
+    {
+      "name": "s",
+      "type": ":string"
+    }
+  ],
+  "solution": {
+    "actionName": "generatePalindromes",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": "+vector<:string>"
+    }
+  },
+  "output": "solution.return",
+  "grader": "unsorted_vec_grader"
+}
