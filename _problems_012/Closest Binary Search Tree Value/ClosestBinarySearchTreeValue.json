@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "root",
+      "type": "+binarytree<:int>"
+    },
+    {
+      "name": "target",
+      "type": ":double"
+    }
+  ],
+  "solution": {
+    "actionName": "closestValue",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}
