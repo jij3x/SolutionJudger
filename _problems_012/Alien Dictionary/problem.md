@@ -1,13 +1,21 @@
-There’s a new language which uses the latin alphabet. However, you don’t know the order among letters. You receive a list of words , letters in each word are sorted by the rules of this new language. From this list, derive one valid particular ordering of letters in this language. e.g. dictionary:
-
- {"ze", "yf", "xd", "wd", "vd", "ua", "tt", "sz", "rd",
-  "qd", "pz", "op", "nw", "mt", "ln", "ko", "jm", "il",
-  "ho", "gk", "fa", "ed", "dg", "ct", "bb", "ba"}
+There is a new aline language which uses the latin alphabet. However, the order among letters are unknown to you. You receive a list of words from the dictionary, where words are sorted lexicographically by the rules of this new language. Derive the order of letters in this language.
 
 For example,
 
 Given the following words in dictionary,
 
-    {"wrt", "wrf", "er", "ett", "rftt"}
+[
+  "wrt",
+  "wrf",
+  "er",
+  "ett",
+  "rftt"
+]
 
-The correct order is: w,e,r,t,f.
+The correct order is: "wertf".
+
+Note:
+
+1. You may assume all letters are in lowercase.
+2. If the order is invalid, return an empty string.
+3. There may be multiple valid order of letters, return any one of them is fine.

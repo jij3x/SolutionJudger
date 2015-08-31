@@ -1,0 +1,29 @@
+{
+  "input": [
+    {
+      "name": "root",
+      "type": "+binarytree<:int>"
+    },
+    {
+      "name": "target",
+      "type": ":double"
+    },
+    {
+      "name": "k",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "closestKValues",
+    "params": [
+      "input[0]",
+      "input[1]",
+      "input[2]"
+    ],
+    "return": {
+      "type": "+vector<:int>"
+    }
+  },
+  "output": "solution.return",
+  "grader": "unsorted_vec_grader"
+}

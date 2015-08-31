@@ -1,0 +1,18 @@
+{
+  "input": [
+    {
+      "name": "num",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "numberToWords",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":string"
+    }
+  },
+  "output": "solution.return"
+}
