@@ -192,9 +192,6 @@ def unsorted_vec_grader(user_ans, formatted_in, answer):
         arr = json.loads(user_ans[UA_OUT][i])
         arr.sort()
         user_ans[UA_OUT][i] = json.dumps(arr, separators=(",", ":"))
-        arr = json.loads(answer[i])
-        arr.sort()
-        answer[i] = json.dumps(arr, separators=(",", ":"))
 
     return general_grader(user_ans, formatted_in, answer)
 
