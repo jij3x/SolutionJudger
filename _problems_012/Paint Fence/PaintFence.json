@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "name": "n",
+      "type": ":int"
+    },
+    {
+      "name": "k",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "numWays",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "output": "solution.return"
+}
