@@ -1,8 +1,8 @@
-Given an array of integers nums and a target, find the number of triplets that satisfy the condition nums[i] + nums[j] + nums[k] < target, where i != j != k.
+Given a string that contains only digits 0-9 and a target value, return all possibilities to add operators +, -, or * between the digits so they evaluate to the target value.
 
-For example, given nums = [-2, 0, 1, 3], and target = 2.
+Examples:
 
-Return 2. Because there are two triplets which sums are less than 2:
-
-[-2, 0, 1]
-[-2, 0, 3]
+"123", 6 -> ["1+2+3", "1*2*3"] 
+"232", 8 -> ["2*3+2", "2+3*2"]
+"00", 0 -> ["0+0", "0-0", "0*0"]
+"3456237490", 9191 -> []
