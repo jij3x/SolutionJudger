@@ -1,0 +1,24 @@
+{
+  "input": [
+    {
+      "name": "num",
+      "type": ":string"
+    },
+    {
+      "name": "target",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "addOperators",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": "+vector<:string>"
+    }
+  },
+  "output": "solution.return",
+  "grader": "unsorted_vec_grader"
+}

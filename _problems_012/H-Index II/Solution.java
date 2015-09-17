@@ -1,11 +1,13 @@
 public class Solution {
     public int hIndex(int[] citations) {
-        int[] memo1 = new int[citations.length + 1];
-        for (int num : citations)
-            memo1[Math.min(num, citations.length)]++;
-        for (int i = citations.length, t = 0; i > 0; i--) {
-            if ((t += memo1[i]) >= i)
-                return i;
+        for (int s = 0, e = citations.length - 1; s <= e;) {
+            int m = (s + e) / 2, h = citations.length - m;
+            if (citations[m] >= h && (m == 0 || citations[m - 1] < h + 1))
+                return h;
+            else if (citations[m] < h)
+                s = m + 1;
+            else
+                e = m - 1;
         }
         return 0;
     }
