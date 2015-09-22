@@ -1,0 +1,81 @@
+{
+  "input": [
+    {
+      "name": "n",
+      "type": ":int"
+    },
+    {
+      "name": "firstBadVersion",
+      "type": ":int"
+    }
+  ],
+  "solution": {
+    "actionName": "testBadVersion",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "classes": [
+    {
+      "name": "VersionControl",
+      "methods": [
+        {
+          "name": "VersionControl",
+          "params": [
+            {
+              "name": "n",
+              "type": ":int"
+            },
+            {
+              "name": "firstBadVersion",
+              "type": ":int"
+            }
+          ]
+        },
+        {
+          "name": "isBadVersion",
+          "params": [
+            {
+              "name": "version",
+              "type": ":int"
+            }
+          ],
+          "return": {
+            "type": ":bool"
+          }
+        }
+      ]
+    },
+    {
+      "name": "BadVersion",
+      "methods": [
+        {
+          "name": "BadVersion",
+          "params": [
+            {
+              "name": "versionControl",
+              "dependency": "classes[0]"
+            }
+          ]
+        },
+        {
+          "name": "firstBadVersion",
+          "params": [
+            {
+              "name": "n",
+              "type": ":int"
+            }
+          ],
+          "return": {
+            "type": ":int"
+          }
+        }
+      ]
+    }
+  ],
+  "output": "solution.return"
+}
