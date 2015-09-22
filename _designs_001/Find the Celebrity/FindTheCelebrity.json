@@ -1,0 +1,80 @@
+{
+  "input": [
+    {
+      "name": "relationship",
+      "type": ":array<:array<:int>>"
+    }
+  ],
+  "solution": {
+    "actionName": "testCelebrity",
+    "params": [
+      "input[0]"
+    ],
+    "return": {
+      "type": ":int"
+    }
+  },
+  "classes": [
+    {
+      "name": "Relationship",
+      "methods": [
+        {
+          "name": "Relationship",
+          "params": [
+            {
+              "name": "matrix",
+              "type": ":array<:array<:int>>"
+            }
+          ]
+        },
+        {
+          "name": "knows",
+          "params": [
+            {
+              "name": "a",
+              "type": ":int"
+            },
+            {
+              "name": "b",
+              "type": ":int"
+            }
+          ],
+          "return": {
+            "type": ":int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ReaderN",
+      "methods": [
+        {
+          "name": "ReaderN",
+          "params": [
+            {
+              "name": "reader4",
+              "dependency": "classes[0]"
+            }
+          ]
+        },
+        {
+          "name": "read",
+          "params": [
+            {
+              "name": "buf",
+              "type": "+array[:char]"
+            },
+            {
+              "name": "n",
+              "type": ":int"
+            }
+          ],
+          "return": {
+            "type": ":int"
+          }
+        }
+      ]
+    }
+  ],
+  "output": "solution.return"
+}

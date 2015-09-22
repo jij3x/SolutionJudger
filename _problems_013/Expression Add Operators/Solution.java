@@ -1,37 +1,31 @@
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
 public class Solution {
+    private ScriptEngine engine = (new ScriptEngineManager()).getEngineByName("js");
+
     public List<String> addOperators(String num, int target) {
-        long t = target;
-        List<String> r;
-        if(num.length() == 0) r = new ArrayList<String>();
-        else r = helper(num, t, 0, 1);
-        return r;
-    }
-    public List<String> helper(String num, long target, int from, long left){
         ArrayList<String> result = new ArrayList<String>();
-        List<String> temp;
-        long a = 0, t;
-        int to = num.length() - 1;
-        if(num.charAt(from) == '0') to = Math.min(to, from+1);
-        for(int i = from; i < to; i++){
-            a = a*10 + (num.charAt(i)-'0');
-            t = left * a;
-            temp = helper(num, target, i+1, t);            
-            for(String s: temp){
-                result.add(num.substring(from, i+1) + "*" + s);
-            }
-            temp = helper(num, target-t, i+1, 1);
-            for(String s: temp){
-                result.add(num.substring(from, i+1) + "+" + s);
-            }
-            temp = helper(num, target-t, i+1, -1);
-            for(String s: temp){
-                result.add(num.substring(from, i+1) + "-" + s);
-            }
-        }
-        if(num.charAt(from) != '0' || num.length() == from+1){
-            a = a * 10 + (num.charAt(num.length()-1)-'0');
-            if(left * a == target) result.add(num.substring(from));
-        }
+        if (!num.isEmpty())
+            doAdd(result, num.substring(0, 1), num, 1, target);
         return result;
+    }
+
+    private void doAdd(List<String> result, String path, String num, int start, int target) {
+        if (start == num.length()) {
+            try {
+                if ((Long) engine.eval(path) == target)
+                    result.add(path);
+            } catch (ScriptException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+
+        doAdd(result, path +  num.charAt(start), num, start + 1, target);
+        doAdd(result, path + '+' + num.charAt(start), num, start + 1, target);
+        doAdd(result, path + '-' + num.charAt(start), num, start + 1, target);
+        doAdd(result, path + '*' + num.charAt(start), num, start + 1, target);
     }
 }
