@@ -1,12 +1,14 @@
 import sys
+import json
 
 lines = sys.stdin.readlines()
 print(len(lines))
 for line in lines:
-    parts = line.split()
-    if parts[0] == "0":
-        print('""')
-        print(parts[1])
-    else:
-        print('"{}"'.format(parts[1]))
-        print(parts[2])
+    arr = json.loads(line)
+    print(len(arr), end="")
+    for row in arr:
+        if len(row) == 0:
+            print(" 0", end="")
+        else:
+            print(" {} {}".format(str(len(row)), " ".join(str(x) for x in row)), end="")
+    print()

@@ -2,7 +2,7 @@
   "input": [
     {
       "name": "relationship",
-      "type": ":array<:array<:int>>"
+      "type": "+array<+array<:int>>"
     }
   ],
   "solution": {
@@ -22,8 +22,8 @@
           "name": "Relationship",
           "params": [
             {
-              "name": "matrix",
-              "type": ":array<:array<:int>>"
+              "name": "relationship",
+              "type": "+array<+array<:int>>"
             }
           ]
         },
@@ -46,24 +46,20 @@
       ]
     },
     {
-      "name": "ReaderN",
+      "name": "Celebrity",
       "methods": [
         {
-          "name": "ReaderN",
+          "name": "Celebrity",
           "params": [
             {
-              "name": "reader4",
+              "name": "relationship",
               "dependency": "classes[0]"
             }
           ]
         },
         {
-          "name": "read",
+          "name": "findCelebrity",
           "params": [
-            {
-              "name": "buf",
-              "type": "+array[:char]"
-            },
             {
               "name": "n",
               "type": ":int"

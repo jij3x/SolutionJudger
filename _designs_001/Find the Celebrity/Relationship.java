@@ -1,7 +1,7 @@
 public class Relationship {
     private int[][] relationship;
 
-    Reader4(int[][] relationship) {
+    Relationship(int[][] relationship) {
         this.relationship = relationship;
     }
 
