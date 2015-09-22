@@ -11,5 +11,6 @@
       "input[0]"
     ]
   },
-  "output": "input[0]"
+  "output": "input[0]",
+  "grader": "wigglesort_grader"
 }
