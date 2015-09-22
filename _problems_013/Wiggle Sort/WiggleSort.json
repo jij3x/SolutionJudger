@@ -1,0 +1,15 @@
+{
+  "input": [
+    {
+      "name": "nums",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "wiggleSort",
+    "params": [
+      "input[0]"
+    ]
+  },
+  "output": "input[0]"
+}
