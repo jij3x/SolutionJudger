@@ -1,0 +1,55 @@
+{
+  "input": [
+    {
+      "name": "v1",
+      "type": "+vector<:int>"
+    },
+    {
+      "name": "v2",
+      "type": "+vector<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "testZigzagIterator",
+    "params": [
+      "input[0]",
+      "input[1]"
+    ],
+    "return": {
+      "type": "+vector<:int>"
+    }
+  },
+  "classes": [
+    {
+      "name": "ZigzagIterator",
+      "methods": [
+        {
+          "name": "ZigzagIterator",
+          "input": [
+            {
+              "name": "v1",
+              "type": "+vector<:int>"
+            },
+            {
+              "name": "v2",
+              "type": "+vector<:int>"
+            }
+          ]
+        },
+        {
+          "name": "hasNext",
+          "return": {
+            "type": ":bool"
+          }
+        },
+        {
+          "name": "next",
+          "return": {
+            "type": ":int"
+          }
+        }
+      ]
+    }
+  ],
+  "output": "solution.return"
+}
