@@ -1,0 +1,15 @@
+{
+  "input": [
+    {
+      "name": "nums",
+      "type": "+array<:int>"
+    }
+  ],
+  "solution": {
+    "actionName": "moveZeroes",
+    "params": [
+      "input[0]"
+    ]
+  },
+  "output": "input[0]"
+}
